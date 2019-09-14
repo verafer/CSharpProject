@@ -6,7 +6,7 @@ namespace ClasesInscripcion
     {
         public void Saludar(string nombre)
         {
-            Console.WriteLine($"Hola {nombre}! :D \n Presiona una tecla para finalizar");
+            Console.WriteLine($"Hola {nombre}! :D \n\n Presiona una tecla para finalizar");
             Console.ReadKey();
         }
     }
