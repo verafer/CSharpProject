@@ -6,6 +6,7 @@ namespace ClasesInscripcion
 {
     public class Alumno : Persona
     {
+
         public Alumno() { }
 
         public Alumno(string nroDocumento, string tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
