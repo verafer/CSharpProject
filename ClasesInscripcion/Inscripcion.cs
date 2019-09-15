@@ -14,6 +14,11 @@ namespace ClasesInscripcion
 
         public Inscripcion() { }
 
-        public Inscripcion(Alumno alumno, Carrera carrera, DateTime fechaInscripcion) { }
+        public Inscripcion(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
+        {
+            this.Alumno = alumno;
+            this.Carrera = carrera;
+            this.FechaInscripcion = fechaInscripcion;
+        }
     }
 }

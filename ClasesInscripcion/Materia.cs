@@ -8,6 +8,8 @@ namespace ClasesInscripcion
     {
         public string Descripcion { get; set; }
         public Profesor Profesor { get; set; }
+        public int creditosClases { get; set; }
+        public int creditosPractica { get; set; }
 
         public Materia(int id,string descripcion, Profesor profesor ) {
             this.Id = id;

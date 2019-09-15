@@ -16,6 +16,8 @@ namespace ClasesInscripcion
 
         public int Matricula { get; set; }
 
+        public Carrera() { }
+
         public void agregarCarrera() { }
     }
 }
