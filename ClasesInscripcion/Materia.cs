@@ -15,5 +15,6 @@ namespace ClasesInscripcion
             this.Profesor = profesor;
         }
 
+        public void obtenerDatosMateria() { }
     }
 }
