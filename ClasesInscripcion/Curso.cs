@@ -8,6 +8,7 @@ namespace ClasesInscripcion
     {  
         public Materia Materia { get; set; }
         public Turno Turno { get; set; }
+        public Profesor Profesor { get; set; }
         public string Modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
