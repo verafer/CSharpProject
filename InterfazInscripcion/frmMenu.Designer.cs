@@ -29,15 +29,71 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alumnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profesorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inscripciónACursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inscripciónAExamenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mantenimientoToolStripMenuItem,
+            this.procesosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // mantenimientoToolStripMenuItem
+            // 
+            this.mantenimientoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alumnoToolStripMenuItem,
+            this.profesorToolStripMenuItem});
+            this.mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
+            this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
+            this.mantenimientoToolStripMenuItem.Text = "Mantenimiento";
+            // 
+            // alumnoToolStripMenuItem
+            // 
+            this.alumnoToolStripMenuItem.Name = "alumnoToolStripMenuItem";
+            this.alumnoToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.alumnoToolStripMenuItem.Text = "Alumno";
+            this.alumnoToolStripMenuItem.Click += new System.EventHandler(this.alumnoToolStripMenuItem_Click);
+            // 
+            // profesorToolStripMenuItem
+            // 
+            this.profesorToolStripMenuItem.Name = "profesorToolStripMenuItem";
+            this.profesorToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.profesorToolStripMenuItem.Text = "Profesor";
+            this.profesorToolStripMenuItem.Click += new System.EventHandler(this.profesorToolStripMenuItem_Click);
+            // 
+            // procesosToolStripMenuItem
+            // 
+            this.procesosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.inscripciónACursoToolStripMenuItem,
+            this.inscripciónAExamenToolStripMenuItem});
+            this.procesosToolStripMenuItem.Name = "procesosToolStripMenuItem";
+            this.procesosToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.procesosToolStripMenuItem.Text = "Procesos";
+            // 
+            // inscripciónACursoToolStripMenuItem
+            // 
+            this.inscripciónACursoToolStripMenuItem.Name = "inscripciónACursoToolStripMenuItem";
+            this.inscripciónACursoToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.inscripciónACursoToolStripMenuItem.Text = "Inscripción a Curso";
+            this.inscripciónACursoToolStripMenuItem.Click += new System.EventHandler(this.inscripciónACursoToolStripMenuItem_Click);
+            // 
+            // inscripciónAExamenToolStripMenuItem
+            // 
+            this.inscripciónAExamenToolStripMenuItem.Name = "inscripciónAExamenToolStripMenuItem";
+            this.inscripciónAExamenToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.inscripciónAExamenToolStripMenuItem.Text = "Inscripción a Examen Extraordinario";
+            this.inscripciónAExamenToolStripMenuItem.Click += new System.EventHandler(this.inscripciónAExamenToolStripMenuItem_Click);
             // 
             // frmMenu
             // 
@@ -49,6 +105,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMenu";
             this.Text = "frmMenu";
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -57,5 +115,11 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem mantenimientoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alumnoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem profesorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem procesosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inscripciónACursoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inscripciónAExamenToolStripMenuItem;
     }
 }

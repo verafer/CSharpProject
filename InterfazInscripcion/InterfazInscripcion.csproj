@@ -62,11 +62,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="frmAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="frmAlumno.Designer.cs">
+      <DependentUpon>frmAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCurso.Designer.cs">
+      <DependentUpon>frmCurso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInscripcionCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInscripcionCurso.Designer.cs">
+      <DependentUpon>frmInscripcionCurso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInscripcionExamenExt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInscripcionExamenExt.Designer.cs">
+      <DependentUpon>frmInscripcionExamenExt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMateria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMateria.Designer.cs">
+      <DependentUpon>frmMateria.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMenu.cs">
       <SubType>Form</SubType>
@@ -74,10 +98,22 @@
     <Compile Include="frmMenu.Designer.cs">
       <DependentUpon>frmMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmProfesor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProfesor.Designer.cs">
+      <DependentUpon>frmProfesor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAlumno.resx">
+      <DependentUpon>frmAlumno.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProfesor.resx">
+      <DependentUpon>frmProfesor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

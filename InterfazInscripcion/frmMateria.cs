@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InterfazInscripcion
 {
-    public partial class Form1 : Form
+    public partial class frmMateria : Form
     {
-        public Form1()
+        public frmMateria()
         {
             InitializeComponent();
         }

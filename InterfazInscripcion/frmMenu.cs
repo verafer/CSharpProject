@@ -16,5 +16,29 @@ namespace InterfazInscripcion
         {
             InitializeComponent();
         }
+
+        private void alumnoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAlumno frmAlumno = new frmAlumno();
+            frmAlumno.Show();
+        }
+
+        private void profesorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProfesor frmProfesor = new frmProfesor();
+            frmProfesor.Show();
+        }
+
+        private void inscripciónACursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInscripcionCurso frmInscripcionCurso = new frmInscripcionCurso();
+            frmInscripcionCurso.Show();
+        }
+
+        private void inscripciónAExamenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInscripcionExamenExt frmInscripcionExamenExt = new frmInscripcionExamenExt();
+            frmInscripcionExamenExt.Show();
+        }
     }
 }
