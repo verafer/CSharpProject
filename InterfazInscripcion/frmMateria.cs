@@ -16,5 +16,10 @@ namespace InterfazInscripcion
         {
             InitializeComponent();
         }
+
+        private void LblNumeroCurso_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

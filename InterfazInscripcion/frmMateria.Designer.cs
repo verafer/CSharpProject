@@ -28,12 +28,156 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.lstMateria = new System.Windows.Forms.ListBox();
+            this.cboProfesor = new System.Windows.Forms.ComboBox();
+            this.lblPofesor = new System.Windows.Forms.Label();
+            this.lblNombreM = new System.Windows.Forms.Label();
+            this.txtNombreM = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(148, 274);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(52, 21);
+            this.btnLimpiar.TabIndex = 73;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(85, 274);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(57, 21);
+            this.btnCancelar.TabIndex = 72;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(27, 274);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(52, 21);
+            this.btnGuardar.TabIndex = 71;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.Black;
+            this.btnEliminar.Location = new System.Drawing.Point(402, 289);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(84, 35);
+            this.btnEliminar.TabIndex = 70;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.Black;
+            this.btnEditar.Location = new System.Drawing.Point(312, 289);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(84, 35);
+            this.btnEditar.TabIndex = 69;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.ForeColor = System.Drawing.Color.Black;
+            this.btnAgregar.Location = new System.Drawing.Point(222, 289);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(84, 35);
+            this.btnAgregar.TabIndex = 68;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            // 
+            // lstMateria
+            // 
+            this.lstMateria.FormattingEnabled = true;
+            this.lstMateria.Location = new System.Drawing.Point(253, 12);
+            this.lstMateria.Name = "lstMateria";
+            this.lstMateria.Size = new System.Drawing.Size(233, 251);
+            this.lstMateria.TabIndex = 67;
+            // 
+            // cboProfesor
+            // 
+            this.cboProfesor.FormattingEnabled = true;
+            this.cboProfesor.Location = new System.Drawing.Point(99, 134);
+            this.cboProfesor.Name = "cboProfesor";
+            this.cboProfesor.Size = new System.Drawing.Size(138, 21);
+            this.cboProfesor.TabIndex = 77;
+            // 
+            // lblPofesor
+            // 
+            this.lblPofesor.AutoSize = true;
+            this.lblPofesor.Location = new System.Drawing.Point(12, 137);
+            this.lblPofesor.Name = "lblPofesor";
+            this.lblPofesor.Size = new System.Drawing.Size(46, 13);
+            this.lblPofesor.TabIndex = 76;
+            this.lblPofesor.Text = "Profesor";
+            // 
+            // lblNombreM
+            // 
+            this.lblNombreM.AutoSize = true;
+            this.lblNombreM.Location = new System.Drawing.Point(12, 79);
+            this.lblNombreM.Name = "lblNombreM";
+            this.lblNombreM.Size = new System.Drawing.Size(82, 13);
+            this.lblNombreM.TabIndex = 75;
+            this.lblNombreM.Text = "Nombre Materia";
+            this.lblNombreM.Click += new System.EventHandler(this.LblNumeroCurso_Click);
+            // 
+            // txtNombreM
+            // 
+            this.txtNombreM.Location = new System.Drawing.Point(99, 76);
+            this.txtNombreM.Name = "txtNombreM";
+            this.txtNombreM.Size = new System.Drawing.Size(138, 20);
+            this.txtNombreM.TabIndex = 74;
+            // 
+            // frmMateria
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "frmMateria";
+            this.ClientSize = new System.Drawing.Size(495, 351);
+            this.Controls.Add(this.cboProfesor);
+            this.Controls.Add(this.lblPofesor);
+            this.Controls.Add(this.lblNombreM);
+            this.Controls.Add(this.txtNombreM);
+            this.Controls.Add(this.btnLimpiar);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.lstMateria);
+            this.Name = "frmMateria";
+            this.Text = "Materia";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.ListBox lstMateria;
+        private System.Windows.Forms.ComboBox cboProfesor;
+        private System.Windows.Forms.Label lblPofesor;
+        private System.Windows.Forms.Label lblNombreM;
+        private System.Windows.Forms.TextBox txtNombreM;
     }
 }
