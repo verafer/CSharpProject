@@ -44,8 +44,12 @@
             this.cboMateria = new System.Windows.Forms.ComboBox();
             this.cboProfesor = new System.Windows.Forms.ComboBox();
             this.cboTurno = new System.Windows.Forms.ComboBox();
-            this.robPresencial = new System.Windows.Forms.RadioButton();
-            this.robDistancia = new System.Windows.Forms.RadioButton();
+            this.rbuPresencial = new System.Windows.Forms.RadioButton();
+            this.rbuDistancia = new System.Windows.Forms.RadioButton();
+            this.lblFechaInicio = new System.Windows.Forms.Label();
+            this.lblFechaFin = new System.Windows.Forms.Label();
+            this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // lstCurso
@@ -91,7 +95,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(167, 268);
+            this.btnLimpiar.Location = new System.Drawing.Point(167, 279);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(52, 21);
             this.btnLimpiar.TabIndex = 66;
@@ -100,7 +104,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(104, 268);
+            this.btnCancelar.Location = new System.Drawing.Point(104, 279);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(57, 21);
             this.btnCancelar.TabIndex = 65;
@@ -109,7 +113,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(46, 268);
+            this.btnGuardar.Location = new System.Drawing.Point(46, 279);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(52, 21);
             this.btnGuardar.TabIndex = 64;
@@ -119,15 +123,16 @@
             // lblNumeroCurso
             // 
             this.lblNumeroCurso.AutoSize = true;
-            this.lblNumeroCurso.Location = new System.Drawing.Point(12, 42);
+            this.lblNumeroCurso.Location = new System.Drawing.Point(7, 28);
             this.lblNumeroCurso.Name = "lblNumeroCurso";
             this.lblNumeroCurso.Size = new System.Drawing.Size(91, 13);
             this.lblNumeroCurso.TabIndex = 68;
             this.lblNumeroCurso.Text = "Número del Curso";
+            this.lblNumeroCurso.Click += new System.EventHandler(this.LblNumeroCurso_Click);
             // 
             // txtNumeroCurso
             // 
-            this.txtNumeroCurso.Location = new System.Drawing.Point(109, 39);
+            this.txtNumeroCurso.Location = new System.Drawing.Point(109, 25);
             this.txtNumeroCurso.Name = "txtNumeroCurso";
             this.txtNumeroCurso.Size = new System.Drawing.Size(148, 20);
             this.txtNumeroCurso.TabIndex = 67;
@@ -135,7 +140,7 @@
             // lblProfesor
             // 
             this.lblProfesor.AutoSize = true;
-            this.lblProfesor.Location = new System.Drawing.Point(13, 122);
+            this.lblProfesor.Location = new System.Drawing.Point(12, 101);
             this.lblProfesor.Name = "lblProfesor";
             this.lblProfesor.Size = new System.Drawing.Size(49, 13);
             this.lblProfesor.TabIndex = 69;
@@ -144,7 +149,7 @@
             // lblMateria
             // 
             this.lblMateria.AutoSize = true;
-            this.lblMateria.Location = new System.Drawing.Point(13, 80);
+            this.lblMateria.Location = new System.Drawing.Point(12, 65);
             this.lblMateria.Name = "lblMateria";
             this.lblMateria.Size = new System.Drawing.Size(42, 13);
             this.lblMateria.TabIndex = 70;
@@ -153,7 +158,7 @@
             // lblTurno
             // 
             this.lblTurno.AutoSize = true;
-            this.lblTurno.Location = new System.Drawing.Point(13, 165);
+            this.lblTurno.Location = new System.Drawing.Point(13, 138);
             this.lblTurno.Name = "lblTurno";
             this.lblTurno.Size = new System.Drawing.Size(35, 13);
             this.lblTurno.TabIndex = 71;
@@ -162,7 +167,7 @@
             // lblModalidad
             // 
             this.lblModalidad.AutoSize = true;
-            this.lblModalidad.Location = new System.Drawing.Point(13, 208);
+            this.lblModalidad.Location = new System.Drawing.Point(13, 175);
             this.lblModalidad.Name = "lblModalidad";
             this.lblModalidad.Size = new System.Drawing.Size(56, 13);
             this.lblModalidad.TabIndex = 72;
@@ -171,7 +176,7 @@
             // cboMateria
             // 
             this.cboMateria.FormattingEnabled = true;
-            this.cboMateria.Location = new System.Drawing.Point(109, 77);
+            this.cboMateria.Location = new System.Drawing.Point(109, 62);
             this.cboMateria.Name = "cboMateria";
             this.cboMateria.Size = new System.Drawing.Size(148, 21);
             this.cboMateria.TabIndex = 73;
@@ -179,7 +184,7 @@
             // cboProfesor
             // 
             this.cboProfesor.FormattingEnabled = true;
-            this.cboProfesor.Location = new System.Drawing.Point(109, 119);
+            this.cboProfesor.Location = new System.Drawing.Point(109, 98);
             this.cboProfesor.Name = "cboProfesor";
             this.cboProfesor.Size = new System.Drawing.Size(148, 21);
             this.cboProfesor.TabIndex = 74;
@@ -187,40 +192,78 @@
             // cboTurno
             // 
             this.cboTurno.FormattingEnabled = true;
-            this.cboTurno.Location = new System.Drawing.Point(109, 165);
+            this.cboTurno.Location = new System.Drawing.Point(109, 135);
             this.cboTurno.Name = "cboTurno";
             this.cboTurno.Size = new System.Drawing.Size(148, 21);
             this.cboTurno.TabIndex = 75;
             // 
-            // robPresencial
+            // rbuPresencial
             // 
-            this.robPresencial.AutoSize = true;
-            this.robPresencial.Location = new System.Drawing.Point(92, 208);
-            this.robPresencial.Name = "robPresencial";
-            this.robPresencial.Size = new System.Drawing.Size(74, 17);
-            this.robPresencial.TabIndex = 76;
-            this.robPresencial.TabStop = true;
-            this.robPresencial.Text = "Presencial";
-            this.robPresencial.UseVisualStyleBackColor = true;
+            this.rbuPresencial.AutoSize = true;
+            this.rbuPresencial.Location = new System.Drawing.Point(98, 175);
+            this.rbuPresencial.Name = "rbuPresencial";
+            this.rbuPresencial.Size = new System.Drawing.Size(74, 17);
+            this.rbuPresencial.TabIndex = 76;
+            this.rbuPresencial.TabStop = true;
+            this.rbuPresencial.Text = "Presencial";
+            this.rbuPresencial.UseVisualStyleBackColor = true;
             // 
-            // robDistancia
+            // rbuDistancia
             // 
-            this.robDistancia.AutoSize = true;
-            this.robDistancia.Location = new System.Drawing.Point(195, 208);
-            this.robDistancia.Name = "robDistancia";
-            this.robDistancia.Size = new System.Drawing.Size(79, 17);
-            this.robDistancia.TabIndex = 77;
-            this.robDistancia.TabStop = true;
-            this.robDistancia.Text = "A Distancia";
-            this.robDistancia.UseVisualStyleBackColor = true;
+            this.rbuDistancia.AutoSize = true;
+            this.rbuDistancia.Location = new System.Drawing.Point(178, 175);
+            this.rbuDistancia.Name = "rbuDistancia";
+            this.rbuDistancia.Size = new System.Drawing.Size(79, 17);
+            this.rbuDistancia.TabIndex = 77;
+            this.rbuDistancia.TabStop = true;
+            this.rbuDistancia.Text = "A Distancia";
+            this.rbuDistancia.UseVisualStyleBackColor = true;
+            // 
+            // lblFechaInicio
+            // 
+            this.lblFechaInicio.AutoSize = true;
+            this.lblFechaInicio.Location = new System.Drawing.Point(12, 212);
+            this.lblFechaInicio.Name = "lblFechaInicio";
+            this.lblFechaInicio.Size = new System.Drawing.Size(80, 13);
+            this.lblFechaInicio.TabIndex = 78;
+            this.lblFechaInicio.Text = "Fecha de Inicio";
+            // 
+            // lblFechaFin
+            // 
+            this.lblFechaFin.AutoSize = true;
+            this.lblFechaFin.Location = new System.Drawing.Point(13, 247);
+            this.lblFechaFin.Name = "lblFechaFin";
+            this.lblFechaFin.Size = new System.Drawing.Size(54, 13);
+            this.lblFechaFin.TabIndex = 79;
+            this.lblFechaFin.Text = "Fecha Fin";
+            // 
+            // dtpFechaInicio
+            // 
+            this.dtpFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaInicio.Location = new System.Drawing.Point(109, 212);
+            this.dtpFechaInicio.Name = "dtpFechaInicio";
+            this.dtpFechaInicio.Size = new System.Drawing.Size(106, 20);
+            this.dtpFechaInicio.TabIndex = 80;
+            // 
+            // dtpFechaFin
+            // 
+            this.dtpFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaFin.Location = new System.Drawing.Point(109, 247);
+            this.dtpFechaFin.Name = "dtpFechaFin";
+            this.dtpFechaFin.Size = new System.Drawing.Size(106, 20);
+            this.dtpFechaFin.TabIndex = 81;
             // 
             // frmCurso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 362);
-            this.Controls.Add(this.robDistancia);
-            this.Controls.Add(this.robPresencial);
+            this.Controls.Add(this.dtpFechaFin);
+            this.Controls.Add(this.dtpFechaInicio);
+            this.Controls.Add(this.lblFechaFin);
+            this.Controls.Add(this.lblFechaInicio);
+            this.Controls.Add(this.rbuDistancia);
+            this.Controls.Add(this.rbuPresencial);
             this.Controls.Add(this.cboTurno);
             this.Controls.Add(this.cboProfesor);
             this.Controls.Add(this.cboMateria);
@@ -262,7 +305,11 @@
         private System.Windows.Forms.ComboBox cboMateria;
         private System.Windows.Forms.ComboBox cboProfesor;
         private System.Windows.Forms.ComboBox cboTurno;
-        private System.Windows.Forms.RadioButton robPresencial;
-        private System.Windows.Forms.RadioButton robDistancia;
+        private System.Windows.Forms.RadioButton rbuPresencial;
+        private System.Windows.Forms.RadioButton rbuDistancia;
+        private System.Windows.Forms.Label lblFechaInicio;
+        private System.Windows.Forms.Label lblFechaFin;
+        private System.Windows.Forms.DateTimePicker dtpFechaInicio;
+        private System.Windows.Forms.DateTimePicker dtpFechaFin;
     }
 }

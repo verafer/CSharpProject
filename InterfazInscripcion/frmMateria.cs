@@ -21,5 +21,15 @@ namespace InterfazInscripcion
         {
 
         }
+
+        private void Label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NumericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

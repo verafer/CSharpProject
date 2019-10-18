@@ -39,11 +39,17 @@
             this.lblPofesor = new System.Windows.Forms.Label();
             this.lblNombreM = new System.Windows.Forms.Label();
             this.txtNombreM = new System.Windows.Forms.TextBox();
+            this.lblCreditoParcial = new System.Windows.Forms.Label();
+            this.lblCreditosClase = new System.Windows.Forms.Label();
+            this.nudCreditoClase = new System.Windows.Forms.NumericUpDown();
+            this.nudCreditoParcial = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCreditoClase)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCreditoParcial)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(148, 274);
+            this.btnLimpiar.Location = new System.Drawing.Point(148, 243);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(52, 21);
             this.btnLimpiar.TabIndex = 73;
@@ -52,7 +58,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(85, 274);
+            this.btnCancelar.Location = new System.Drawing.Point(85, 243);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(57, 21);
             this.btnCancelar.TabIndex = 72;
@@ -61,7 +67,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(27, 274);
+            this.btnGuardar.Location = new System.Drawing.Point(27, 243);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(52, 21);
             this.btnGuardar.TabIndex = 71;
@@ -112,7 +118,7 @@
             // cboProfesor
             // 
             this.cboProfesor.FormattingEnabled = true;
-            this.cboProfesor.Location = new System.Drawing.Point(99, 134);
+            this.cboProfesor.Location = new System.Drawing.Point(107, 77);
             this.cboProfesor.Name = "cboProfesor";
             this.cboProfesor.Size = new System.Drawing.Size(138, 21);
             this.cboProfesor.TabIndex = 77;
@@ -120,7 +126,7 @@
             // lblPofesor
             // 
             this.lblPofesor.AutoSize = true;
-            this.lblPofesor.Location = new System.Drawing.Point(12, 137);
+            this.lblPofesor.Location = new System.Drawing.Point(12, 80);
             this.lblPofesor.Name = "lblPofesor";
             this.lblPofesor.Size = new System.Drawing.Size(46, 13);
             this.lblPofesor.TabIndex = 76;
@@ -129,7 +135,7 @@
             // lblNombreM
             // 
             this.lblNombreM.AutoSize = true;
-            this.lblNombreM.Location = new System.Drawing.Point(12, 79);
+            this.lblNombreM.Location = new System.Drawing.Point(12, 37);
             this.lblNombreM.Name = "lblNombreM";
             this.lblNombreM.Size = new System.Drawing.Size(82, 13);
             this.lblNombreM.TabIndex = 75;
@@ -138,16 +144,53 @@
             // 
             // txtNombreM
             // 
-            this.txtNombreM.Location = new System.Drawing.Point(99, 76);
+            this.txtNombreM.Location = new System.Drawing.Point(107, 34);
             this.txtNombreM.Name = "txtNombreM";
             this.txtNombreM.Size = new System.Drawing.Size(138, 20);
             this.txtNombreM.TabIndex = 74;
+            // 
+            // lblCreditoParcial
+            // 
+            this.lblCreditoParcial.AutoSize = true;
+            this.lblCreditoParcial.Location = new System.Drawing.Point(12, 168);
+            this.lblCreditoParcial.Name = "lblCreditoParcial";
+            this.lblCreditoParcial.Size = new System.Drawing.Size(95, 13);
+            this.lblCreditoParcial.TabIndex = 78;
+            this.lblCreditoParcial.Text = "Creditos de Parcial";
+            // 
+            // lblCreditosClase
+            // 
+            this.lblCreditosClase.AutoSize = true;
+            this.lblCreditosClase.Location = new System.Drawing.Point(12, 125);
+            this.lblCreditosClase.Name = "lblCreditosClase";
+            this.lblCreditosClase.Size = new System.Drawing.Size(89, 13);
+            this.lblCreditosClase.TabIndex = 79;
+            this.lblCreditosClase.Text = "Creditos de Clase";
+            // 
+            // nudCreditoClase
+            // 
+            this.nudCreditoClase.Location = new System.Drawing.Point(107, 123);
+            this.nudCreditoClase.Name = "nudCreditoClase";
+            this.nudCreditoClase.Size = new System.Drawing.Size(79, 20);
+            this.nudCreditoClase.TabIndex = 80;
+            this.nudCreditoClase.ValueChanged += new System.EventHandler(this.NumericUpDown1_ValueChanged);
+            // 
+            // nudCreditoParcial
+            // 
+            this.nudCreditoParcial.Location = new System.Drawing.Point(107, 161);
+            this.nudCreditoParcial.Name = "nudCreditoParcial";
+            this.nudCreditoParcial.Size = new System.Drawing.Size(79, 20);
+            this.nudCreditoParcial.TabIndex = 81;
             // 
             // frmMateria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(495, 351);
+            this.Controls.Add(this.nudCreditoParcial);
+            this.Controls.Add(this.nudCreditoClase);
+            this.Controls.Add(this.lblCreditosClase);
+            this.Controls.Add(this.lblCreditoParcial);
             this.Controls.Add(this.cboProfesor);
             this.Controls.Add(this.lblPofesor);
             this.Controls.Add(this.lblNombreM);
@@ -161,6 +204,8 @@
             this.Controls.Add(this.lstMateria);
             this.Name = "frmMateria";
             this.Text = "Materia";
+            ((System.ComponentModel.ISupportInitialize)(this.nudCreditoClase)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCreditoParcial)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,5 +224,9 @@
         private System.Windows.Forms.Label lblPofesor;
         private System.Windows.Forms.Label lblNombreM;
         private System.Windows.Forms.TextBox txtNombreM;
+        private System.Windows.Forms.Label lblCreditoParcial;
+        private System.Windows.Forms.Label lblCreditosClase;
+        private System.Windows.Forms.NumericUpDown nudCreditoClase;
+        private System.Windows.Forms.NumericUpDown nudCreditoParcial;
     }
 }
