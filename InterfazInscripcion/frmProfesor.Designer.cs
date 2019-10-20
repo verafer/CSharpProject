@@ -163,6 +163,7 @@
             this.btnEliminar.TabIndex = 57;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -174,6 +175,7 @@
             this.btnEditar.TabIndex = 56;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnAgregar
             // 
@@ -185,6 +187,7 @@
             this.btnAgregar.TabIndex = 55;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // lstProfesor
             // 
@@ -193,6 +196,7 @@
             this.lstProfesor.Name = "lstProfesor";
             this.lstProfesor.Size = new System.Drawing.Size(248, 342);
             this.lstProfesor.TabIndex = 54;
+            this.lstProfesor.Click += new System.EventHandler(this.lstProfesor_Click);
             // 
             // btnLimpiar
             // 
@@ -202,6 +206,7 @@
             this.btnLimpiar.TabIndex = 53;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCancelar
             // 
@@ -211,6 +216,7 @@
             this.btnCancelar.TabIndex = 52;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -374,7 +380,8 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtNroDocumento);
             this.Name = "frmProfesor";
-            this.Text = "frmProfesor";
+            this.Text = "Profesor";
+            this.Load += new System.EventHandler(this.frmProfesor_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

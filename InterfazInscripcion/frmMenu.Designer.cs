@@ -104,7 +104,6 @@
             this.cursoToolStripMenuItem.Name = "cursoToolStripMenuItem";
             this.cursoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cursoToolStripMenuItem.Text = "Curso";
-            this.cursoToolStripMenuItem.Click += new System.EventHandler(this.CursoToolStripMenuItem_Click);
             // 
             // materiaToolStripMenuItem
             // 
@@ -121,7 +120,9 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMenu";
-            this.Text = "frmMenu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Menú Principal";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

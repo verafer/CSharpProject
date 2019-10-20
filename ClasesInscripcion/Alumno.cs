@@ -9,7 +9,7 @@ namespace ClasesInscripcion
         public static List<Alumno> listaAlumno = new List<Alumno>();
         public Alumno() { }
 
-        public Alumno(string nroDocumento, string tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
+        public Alumno(string nroDocumento, TipoDocumento tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
         {
             this.NroDocumento = nroDocumento;
             this.TipoDocumento = tipoDocumento;
@@ -35,6 +35,11 @@ namespace ClasesInscripcion
         public static List<Alumno> ObtenerAlumno()
         {
             return listaAlumno;
+        }
+
+        public override string ToString()
+        {
+            return this.Nombre + " " + this.Apellido;
         }
     }
 }

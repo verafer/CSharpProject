@@ -6,14 +6,14 @@ namespace ClasesInscripcion
 {
     public class Profesor : Persona
     {
-        public int NroMatricula { get; set; }
+        public string NroMatricula { get; set; }
         public string TituloObtenido { get; set; }
         public DateTime FechaIngreso { get; set; }
         public static List<Profesor> listaProfesor = new List<Profesor>();
 
         public Profesor() { }
 
-        public Profesor(string nroDocumento, string tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
+        public Profesor(string nroDocumento, TipoDocumento tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
         {
             this.NroDocumento = nroDocumento;
             this.TipoDocumento = tipoDocumento;
@@ -22,10 +22,6 @@ namespace ClasesInscripcion
             this.Apellido = apellido;
         }
 
-        public override string ToString()
-        {
-            return $"Nro Matricula: {NroMatricula} \nTitulo: {TituloObtenido} \nFecha de Ingreso: {FechaIngreso}\n";
-        }
         public static void AgregarProfesor(Profesor p)
         {
             listaProfesor.Add(p);
@@ -44,6 +40,16 @@ namespace ClasesInscripcion
         public static List<Profesor> ObtenerProfesor()
         {
             return listaProfesor;
+        }
+
+        /*public override string ToString()
+        {
+            return $"Nro Matricula: {NroMatricula} \nTitulo: {TituloObtenido} \nFecha de Ingreso: {FechaIngreso}\n";
+        }*/
+
+        public override string ToString()
+        {
+            return this.Nombre + " " + this.Apellido;
         }
     }
 }
