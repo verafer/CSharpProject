@@ -37,6 +37,14 @@ namespace ClasesInscripcion
         {
             return listaMateria;
         }
-        public void obtenerDatosMateria() { }
+
+        public override string ToString()
+        {
+            return this.Descripcion ;
+        }
+
+        public string  ObtenerDatosMateria() {
+            return Descripcion;
+        }
     }
 }

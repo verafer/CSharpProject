@@ -89,7 +89,7 @@ namespace InterfazInscripcion
             lstCurso.DataSource = Curso.ObtenerCursos();
         }
 
-        private void BtnAgregar_Click(object sender, EventArgs e)
+        private void btnAgregar_Click(object sender, EventArgs e)
         {
             modo = "AGREGAR";
             LimpiarFormulario();
@@ -98,21 +98,35 @@ namespace InterfazInscripcion
 
         }
 
-        private void BtnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)
         {
+            var c = ObtenerCursoFormulario();
+
             if (modo == "AGREGAR")
             {
-                Curso curso = ObtenerCursoFormulario();
-                Curso.AgregarCurso(curso);
+               Curso.AgregarCurso(c);
             }
             else if (modo == "EDITAR")
             {
-                int index = lstCurso.SelectedIndex;
-                Curso.listaCurso[index] = ObtenerCursoFormulario();
 
+                if (this.lstCurso.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Favor seleccione una fila");
+                }
+
+                else
+                {
+                    int indice = lstCurso.SelectedIndex;
+                    Curso.EditarCurso(c, indice);
+                    ActualizarListaCurso();
+                }
 
 
             }
+
+            LimpiarFormulario();
+            ActualizarListaCurso();
+            BloquearFormulario();
 
         }
         private Curso ObtenerCursoFormulario()
@@ -135,14 +149,14 @@ namespace InterfazInscripcion
             return cur;
         }
 
-        private void BtnEditar_Click(object sender, EventArgs e)
+        private void btnEditar_Click(object sender, EventArgs e)
         {
             modo = "EDITAR";
             DesbloquearFormulario();
             txtNumeroCurso.Focus();
         }
 
-        private void BtnEliminar_Click(object sender, EventArgs e)
+        private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (lstCurso.SelectedItems.Count > 0)
             {
@@ -162,7 +176,7 @@ namespace InterfazInscripcion
 
         }
 
-        private void LstCurso_Click(object sender, EventArgs e)
+        private void lstCurso_Click(object sender, EventArgs e)
         {
             Curso curso = (Curso)lstCurso.SelectedItem;
 
@@ -186,5 +200,15 @@ namespace InterfazInscripcion
             }
         }
 
+        private void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            BloquearFormulario();
+        }
+
+        private void BtnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+        }
     }
 }
