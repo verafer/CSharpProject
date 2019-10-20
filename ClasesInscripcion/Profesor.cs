@@ -6,7 +6,7 @@ namespace ClasesInscripcion
 {
     public class Profesor : Persona
     {
-        public int NroMatricula { get; set; }
+        public string NroMatricula { get; set; }
         public string TituloObtenido { get; set; }
         public DateTime FechaIngreso { get; set; }
         public static List<Profesor> listaProfesor = new List<Profesor>();
