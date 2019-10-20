@@ -11,6 +11,7 @@ namespace ClasesInscripcion
     }
     public class Curso : Objeto
     {  
+        public string numeroCurso { get; set; }
         public Materia Materia { get; set; }
         public Turno Turno { get; set; }
         public Profesor Profesor { get; set; }
@@ -24,11 +25,11 @@ namespace ClasesInscripcion
         }
         public override string ToString()
         {
-            return $"Nro Curso: {Id} Materia: {Materia.Descripcion} Profesor: {Materia.Profesor} Turno: {Turno}";
+            return numeroCurso ;
         }
         public string ObtenerDatosCurso()
         {
-            return $"nro curso{Id} {Materia.Descripcion} Profesor: {Materia.Profesor} Turno: {Turno} {modalidad} Fecha Inicio: {FechaInicio} Fecha Fin:{FechaFin} ";
+            return numeroCurso;
         }
         public static void AgregarCurso(Curso c)
         {

@@ -40,5 +40,11 @@ namespace InterfazInscripcion
             frmInscripcionExamenExt frmInscripcionExamenExt = new frmInscripcionExamenExt();
             frmInscripcionExamenExt.Show();
         }
+
+        private void CursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCurso frmCurso = new frmCurso();
+            frmCurso.Show();
+        }
     }
 }
