@@ -11,7 +11,7 @@ namespace ClasesInscripcion
 
         public Funcionario() { }
 
-        public Funcionario(string nroDocumento, string tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
+        public Funcionario(string nroDocumento, TipoDocumento tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
         {
             this.NroDocumento = nroDocumento;
             this.TipoDocumento = tipoDocumento;

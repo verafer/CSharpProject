@@ -4,10 +4,16 @@ using System.Text;
 
 namespace ClasesInscripcion
 {
+    public enum TipoDocumento
+    {
+        CI,
+        Pasaporte
+    }
+
     public class Persona : Objeto
     {
         public string NroDocumento { get; set; }
-        public string TipoDocumento { get; set; }
+        public TipoDocumento TipoDocumento { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public DateTime FechaNacimiento { get; set; }

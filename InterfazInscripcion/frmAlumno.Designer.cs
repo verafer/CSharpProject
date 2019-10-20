@@ -62,6 +62,7 @@
             this.lstAlumno.Name = "lstAlumno";
             this.lstAlumno.Size = new System.Drawing.Size(256, 212);
             this.lstAlumno.TabIndex = 26;
+            this.lstAlumno.Click += new System.EventHandler(this.lstAlumno_Click);
             // 
             // btnLimpiar
             // 
@@ -71,6 +72,7 @@
             this.btnLimpiar.TabIndex = 25;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnCancelar
             // 
@@ -80,6 +82,7 @@
             this.btnCancelar.TabIndex = 24;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -248,6 +251,7 @@
             this.btnEliminar.TabIndex = 60;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -259,6 +263,7 @@
             this.btnEditar.TabIndex = 59;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnAgregar
             // 
@@ -270,6 +275,7 @@
             this.btnAgregar.TabIndex = 58;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // frmAlumno
             // 
@@ -302,7 +308,8 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtNroDocumento);
             this.Name = "frmAlumno";
-            this.Text = "frmAlumno";
+            this.Text = "Alumno";
+            this.Load += new System.EventHandler(this.frmAlumno_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

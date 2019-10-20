@@ -374,7 +374,7 @@
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtNroDocumento);
             this.Name = "frmProfesor";
-            this.Text = "frmProfesor";
+            this.Text = "Profesor";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
