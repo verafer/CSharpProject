@@ -46,5 +46,17 @@ namespace InterfazInscripcion
             frmCiudad frmCiudad = new frmCiudad();
             frmCiudad.Show();
         }
+
+        private void cursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCurso frmCurso = new frmCurso();
+            frmCurso.Show();
+        }
+
+        private void materiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMateria frmMateria = new frmMateria();
+            frmMateria.Show();
+        }
     }
 }
