@@ -59,6 +59,8 @@
             this.lstCurso.Name = "lstCurso";
             this.lstCurso.Size = new System.Drawing.Size(256, 251);
             this.lstCurso.TabIndex = 27;
+            this.lstCurso.Click += new System.EventHandler(this.LstCurso_Click);
+            this.lstCurso.SelectedIndexChanged += new System.EventHandler(this.LstCurso_SelectedIndexChanged);
             // 
             // btnEliminar
             // 
@@ -70,6 +72,7 @@
             this.btnEliminar.TabIndex = 63;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -81,6 +84,7 @@
             this.btnEditar.TabIndex = 62;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
             // btnAgregar
             // 
@@ -92,6 +96,7 @@
             this.btnAgregar.TabIndex = 61;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // btnLimpiar
             // 
@@ -119,6 +124,7 @@
             this.btnGuardar.TabIndex = 64;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // lblNumeroCurso
             // 
@@ -282,6 +288,7 @@
             this.Controls.Add(this.lstCurso);
             this.Name = "frmCurso";
             this.Text = "Curso";
+            this.Load += new System.EventHandler(this.FrmCurso_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
