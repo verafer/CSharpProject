@@ -178,7 +178,7 @@ namespace InterfazInscripcion
 
         private void LstMateria_Click(object sender, EventArgs e)
         {
-            Materia materia = new Materia();
+            Materia materia = (Materia)lstMateria.SelectedItem;
             if (materia != null)
             {
                 txtNombreM.Text = materia.Descripcion;

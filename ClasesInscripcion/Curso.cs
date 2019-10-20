@@ -9,11 +9,17 @@ namespace ClasesInscripcion
         Presencial, 
         Distancia
     }
+    public enum Turnos
+    {
+        Mañana,
+        Tarde,
+       Noche
+    }
     public class Curso : Objeto
     {  
         public string numeroCurso { get; set; }
         public Materia Materia { get; set; }
-        public Turno Turno { get; set; }
+        public Turnos Turno { get; set; }
         public Profesor Profesor { get; set; }
         public Modalidad modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
@@ -25,7 +31,7 @@ namespace ClasesInscripcion
         }
         public override string ToString()
         {
-            return numeroCurso ;
+            return this.numeroCurso + " " + this.Materia; 
         }
         public string ObtenerDatosCurso()
         {

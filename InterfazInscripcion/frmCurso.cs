@@ -76,7 +76,7 @@ namespace InterfazInscripcion
             ActualizarListaCurso();
             cboMateria.DataSource = Materia.ObtenerMateria();
             cboProfesor.DataSource = Profesor.ObtenerProfesor();
-            cboTurno.DataSource = Turno.ObtenerTurno();
+            cboTurno.DataSource = Enum.GetValues(typeof(Turnos));
             cboMateria.SelectedItem = null;
             cboProfesor.SelectedItem = null;
             cboTurno.SelectedItem = null;
@@ -135,7 +135,7 @@ namespace InterfazInscripcion
             cur.numeroCurso = txtNumeroCurso.Text;
             cur.Materia = (Materia)cboMateria.SelectedItem;
             cur.Profesor = (Profesor)cboProfesor.SelectedItem;
-            cur.Turno = (Turno)cboTurno.SelectedItem;
+            cur.Turno = (Turnos)cboTurno.SelectedItem;
             if (rbuDistancia.Checked)
             {
                 cur.modalidad = Modalidad.Distancia;
