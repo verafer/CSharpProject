@@ -78,32 +78,6 @@ namespace InterfazInscripcion
             txtTituloObtenido.Text = "";
         }
 
-        private void DesbloquearFormularios()
-        {
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            dtpFechaNacimiento.Enabled = true;
-            txtDireccion.Enabled = true;
-            cboCiudad.Enabled = true;
-            txtEmail.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtNroDocumento.Enabled = true;
-            cboTipoDocumento.Enabled = true;
-
-            txtNroMatricula.Enabled = true;
-            dtpFechaIngreso.Enabled = true;
-            txtTituloObtenido.Enabled = true;
-
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
-            btnLimpiar.Enabled = true;
-
-            lstProfesor.Enabled = false;
-            btnAgregar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnEditar.Enabled = false;
-        }
-
         private void ActualizarListaProfesores()
         {
             lstProfesor.DataSource = null;

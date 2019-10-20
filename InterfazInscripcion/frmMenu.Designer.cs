@@ -32,11 +32,12 @@
             this.mantenimientoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alumnoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profesorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.materiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.procesosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inscripciónACursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inscripciónAExamenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cursoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.materiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ciudadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,8 @@
             this.alumnoToolStripMenuItem,
             this.profesorToolStripMenuItem,
             this.cursoToolStripMenuItem,
-            this.materiaToolStripMenuItem});
+            this.materiaToolStripMenuItem,
+            this.ciudadToolStripMenuItem});
             this.mantenimientoToolStripMenuItem.Name = "mantenimientoToolStripMenuItem";
             this.mantenimientoToolStripMenuItem.Size = new System.Drawing.Size(101, 20);
             this.mantenimientoToolStripMenuItem.Text = "Mantenimiento";
@@ -75,6 +77,18 @@
             this.profesorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profesorToolStripMenuItem.Text = "Profesor";
             this.profesorToolStripMenuItem.Click += new System.EventHandler(this.profesorToolStripMenuItem_Click);
+            // 
+            // cursoToolStripMenuItem
+            // 
+            this.cursoToolStripMenuItem.Name = "cursoToolStripMenuItem";
+            this.cursoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cursoToolStripMenuItem.Text = "Curso";
+            // 
+            // materiaToolStripMenuItem
+            // 
+            this.materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
+            this.materiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.materiaToolStripMenuItem.Text = "Materia";
             // 
             // procesosToolStripMenuItem
             // 
@@ -99,17 +113,12 @@
             this.inscripciónAExamenToolStripMenuItem.Text = "Inscripción a Examen Extraordinario";
             this.inscripciónAExamenToolStripMenuItem.Click += new System.EventHandler(this.inscripciónAExamenToolStripMenuItem_Click);
             // 
-            // cursoToolStripMenuItem
+            // ciudadToolStripMenuItem
             // 
-            this.cursoToolStripMenuItem.Name = "cursoToolStripMenuItem";
-            this.cursoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.cursoToolStripMenuItem.Text = "Curso";
-            // 
-            // materiaToolStripMenuItem
-            // 
-            this.materiaToolStripMenuItem.Name = "materiaToolStripMenuItem";
-            this.materiaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.materiaToolStripMenuItem.Text = "Materia";
+            this.ciudadToolStripMenuItem.Name = "ciudadToolStripMenuItem";
+            this.ciudadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ciudadToolStripMenuItem.Text = "Ciudad";
+            this.ciudadToolStripMenuItem.Click += new System.EventHandler(this.ciudadToolStripMenuItem_Click);
             // 
             // frmMenu
             // 
@@ -141,5 +150,6 @@
         private System.Windows.Forms.ToolStripMenuItem inscripciónAExamenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cursoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem materiaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ciudadToolStripMenuItem;
     }
 }

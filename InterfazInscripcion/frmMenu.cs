@@ -40,5 +40,11 @@ namespace InterfazInscripcion
             frmInscripcionExamenExt frmInscripcionExamenExt = new frmInscripcionExamenExt();
             frmInscripcionExamenExt.Show();
         }
+
+        private void ciudadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCiudad frmCiudad = new frmCiudad();
+            frmCiudad.Show();
+        }
     }
 }
