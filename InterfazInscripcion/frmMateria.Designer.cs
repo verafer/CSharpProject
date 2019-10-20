@@ -55,6 +55,7 @@
             this.btnLimpiar.TabIndex = 73;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
             // btnCancelar
             // 
@@ -64,6 +65,7 @@
             this.btnCancelar.TabIndex = 72;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // btnGuardar
             // 
@@ -73,6 +75,7 @@
             this.btnGuardar.TabIndex = 71;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.BtnGuardar_Click);
             // 
             // btnEliminar
             // 
@@ -84,6 +87,7 @@
             this.btnEliminar.TabIndex = 70;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.BtnEliminar_Click);
             // 
             // btnEditar
             // 
@@ -95,6 +99,7 @@
             this.btnEditar.TabIndex = 69;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.BtnEditar_Click);
             // 
             // btnAgregar
             // 
@@ -106,6 +111,7 @@
             this.btnAgregar.TabIndex = 68;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // lstMateria
             // 
@@ -114,6 +120,7 @@
             this.lstMateria.Name = "lstMateria";
             this.lstMateria.Size = new System.Drawing.Size(233, 251);
             this.lstMateria.TabIndex = 67;
+            this.lstMateria.Click += new System.EventHandler(this.LstMateria_Click);
             // 
             // cboProfesor
             // 
@@ -204,6 +211,7 @@
             this.Controls.Add(this.lstMateria);
             this.Name = "frmMateria";
             this.Text = "Materia";
+            this.Load += new System.EventHandler(this.FrmMateria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudCreditoClase)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudCreditoParcial)).EndInit();
             this.ResumeLayout(false);

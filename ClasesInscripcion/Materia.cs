@@ -12,6 +12,7 @@ namespace ClasesInscripcion
         public int creditosPractica { get; set; }
         public static List<Materia> listaMateria = new List<Materia>();
 
+        public Materia() { }
         public Materia(int id,string descripcion, Profesor profesor ) {
             this.Id = id;
             this.Descripcion = descripcion;
