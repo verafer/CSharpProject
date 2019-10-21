@@ -35,7 +35,7 @@ namespace ClasesInscripcion
         }
         public static void EditarInscrpcion(Curso c, int indice)
         {
-            Inscripcion.listaCurso[indice] = c;
+           // Inscripcion.listaCurso[indice] = c;
 
         }
 
