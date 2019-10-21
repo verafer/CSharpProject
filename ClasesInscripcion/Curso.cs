@@ -24,7 +24,7 @@ namespace ClasesInscripcion
         public Modalidad modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-        public List<Alumno> listaAlumnos = new List<Alumno>();
+        public List<InscripcionCurso> listaInscriptos = new List<InscripcionCurso>();
 
         public static List<Curso> listaCurso = new List<Curso>();
 

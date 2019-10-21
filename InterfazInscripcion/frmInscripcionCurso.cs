@@ -99,8 +99,6 @@ namespace InterfazInscripcion
             txtMateria.Text = "";
             txtProfesor.Text = "";
             txtTurno.Text = "";
-            rbuDistancia.Checked = false;
-            rbuPresencial.Checked = false;
             dtpFechaInicio.Value = DateTime.Now;
             dtpFechaFin.Value = DateTime.Now;
             DeshabilitarBotones();
@@ -115,7 +113,8 @@ namespace InterfazInscripcion
             }
             if (modo == Modo.AGREGAR)
             {
-                InscripcionCurso.AgregarInscripto((Alumno)cboAlumno.SelectedItem, (Curso)cboCurso.SelectedItem);
+                InscripcionCurso ic = new InscripcionCurso((Alumno)cboAlumno.SelectedItem, (Curso)cboCurso.SelectedItem);
+                InscripcionCurso.AgregarInscripto(ic, (Curso)cboCurso.SelectedItem);
             }
             else if (modo == Modo.EDITAR)
             {
@@ -192,7 +191,7 @@ namespace InterfazInscripcion
             }
             else
             {
-                InscripcionCurso.RemoverInscripto((Alumno)cboAlumno.SelectedItem, (Curso)lstCursos.SelectedItem);;
+                InscripcionCurso.RemoverInscripto((InscripcionCurso)lstCursos.SelectedItem, (Curso)cboCurso.SelectedItem);
                 ActualizarListaCursos();
                 LimpiarFormulario();
                 HabilitarBotones();
@@ -203,7 +202,8 @@ namespace InterfazInscripcion
         {
             if (lstCursos.SelectedItem != null)
             {
-            cboCurso.SelectedItem = lstCursos.SelectedItem;
+                InscripcionCurso ic= (InscripcionCurso)lstCursos.SelectedItem;
+                cboCurso.SelectedItem = ic.Curso;
                 
             }
         }

@@ -40,20 +40,19 @@
             this.cboCurso = new System.Windows.Forms.ComboBox();
             this.lblCurso = new System.Windows.Forms.Label();
             this.gbxDetallesC = new System.Windows.Forms.GroupBox();
+            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.txtProfesor = new System.Windows.Forms.TextBox();
+            this.txtMateria = new System.Windows.Forms.TextBox();
             this.dtpFechaFin = new System.Windows.Forms.DateTimePicker();
             this.dtpFechaInicio = new System.Windows.Forms.DateTimePicker();
             this.lblFechaFin = new System.Windows.Forms.Label();
             this.lblFechaInicio = new System.Windows.Forms.Label();
-            this.rbuDistancia = new System.Windows.Forms.RadioButton();
-            this.rbuPresencial = new System.Windows.Forms.RadioButton();
-            this.lblModalidad = new System.Windows.Forms.Label();
             this.lblTurno = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lblProfesor = new System.Windows.Forms.Label();
-            this.lstExamenes = new System.Windows.Forms.ListBox();
-            this.txtMateria = new System.Windows.Forms.TextBox();
-            this.txtProfesor = new System.Windows.Forms.TextBox();
-            this.txtTurno = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnAgregarExamen = new System.Windows.Forms.Button();
+            this.btnEliminarExamen = new System.Windows.Forms.Button();
             this.gbxDetallesC.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -192,24 +191,42 @@
             this.gbxDetallesC.Controls.Add(this.dtpFechaInicio);
             this.gbxDetallesC.Controls.Add(this.lblFechaFin);
             this.gbxDetallesC.Controls.Add(this.lblFechaInicio);
-            this.gbxDetallesC.Controls.Add(this.rbuDistancia);
-            this.gbxDetallesC.Controls.Add(this.rbuPresencial);
-            this.gbxDetallesC.Controls.Add(this.lblModalidad);
             this.gbxDetallesC.Controls.Add(this.lblTurno);
             this.gbxDetallesC.Controls.Add(this.label1);
             this.gbxDetallesC.Controls.Add(this.lblProfesor);
             this.gbxDetallesC.Enabled = false;
             this.gbxDetallesC.Location = new System.Drawing.Point(418, 97);
             this.gbxDetallesC.Name = "gbxDetallesC";
-            this.gbxDetallesC.Size = new System.Drawing.Size(370, 301);
+            this.gbxDetallesC.Size = new System.Drawing.Size(370, 244);
             this.gbxDetallesC.TabIndex = 98;
             this.gbxDetallesC.TabStop = false;
             this.gbxDetallesC.Text = "Detalles del curso";
             // 
+            // txtTurno
+            // 
+            this.txtTurno.Location = new System.Drawing.Point(140, 125);
+            this.txtTurno.Name = "txtTurno";
+            this.txtTurno.Size = new System.Drawing.Size(211, 22);
+            this.txtTurno.TabIndex = 97;
+            // 
+            // txtProfesor
+            // 
+            this.txtProfesor.Location = new System.Drawing.Point(140, 79);
+            this.txtProfesor.Name = "txtProfesor";
+            this.txtProfesor.Size = new System.Drawing.Size(211, 22);
+            this.txtProfesor.TabIndex = 96;
+            // 
+            // txtMateria
+            // 
+            this.txtMateria.Location = new System.Drawing.Point(140, 35);
+            this.txtMateria.Name = "txtMateria";
+            this.txtMateria.Size = new System.Drawing.Size(211, 22);
+            this.txtMateria.TabIndex = 95;
+            // 
             // dtpFechaFin
             // 
             this.dtpFechaFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaFin.Location = new System.Drawing.Point(140, 259);
+            this.dtpFechaFin.Location = new System.Drawing.Point(140, 206);
             this.dtpFechaFin.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaFin.Name = "dtpFechaFin";
             this.dtpFechaFin.Size = new System.Drawing.Size(140, 22);
@@ -218,7 +235,7 @@
             // dtpFechaInicio
             // 
             this.dtpFechaInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFechaInicio.Location = new System.Drawing.Point(140, 216);
+            this.dtpFechaInicio.Location = new System.Drawing.Point(140, 163);
             this.dtpFechaInicio.Margin = new System.Windows.Forms.Padding(4);
             this.dtpFechaInicio.Name = "dtpFechaInicio";
             this.dtpFechaInicio.Size = new System.Drawing.Size(140, 22);
@@ -227,7 +244,7 @@
             // lblFechaFin
             // 
             this.lblFechaFin.AutoSize = true;
-            this.lblFechaFin.Location = new System.Drawing.Point(12, 259);
+            this.lblFechaFin.Location = new System.Drawing.Point(12, 206);
             this.lblFechaFin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaFin.Name = "lblFechaFin";
             this.lblFechaFin.Size = new System.Drawing.Size(70, 17);
@@ -237,46 +254,12 @@
             // lblFechaInicio
             // 
             this.lblFechaInicio.AutoSize = true;
-            this.lblFechaInicio.Location = new System.Drawing.Point(11, 216);
+            this.lblFechaInicio.Location = new System.Drawing.Point(11, 163);
             this.lblFechaInicio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFechaInicio.Name = "lblFechaInicio";
             this.lblFechaInicio.Size = new System.Drawing.Size(103, 17);
             this.lblFechaInicio.TabIndex = 91;
             this.lblFechaInicio.Text = "Fecha de Inicio";
-            // 
-            // rbuDistancia
-            // 
-            this.rbuDistancia.AutoSize = true;
-            this.rbuDistancia.Location = new System.Drawing.Point(232, 170);
-            this.rbuDistancia.Margin = new System.Windows.Forms.Padding(4);
-            this.rbuDistancia.Name = "rbuDistancia";
-            this.rbuDistancia.Size = new System.Drawing.Size(100, 21);
-            this.rbuDistancia.TabIndex = 90;
-            this.rbuDistancia.TabStop = true;
-            this.rbuDistancia.Text = "A Distancia";
-            this.rbuDistancia.UseVisualStyleBackColor = true;
-            // 
-            // rbuPresencial
-            // 
-            this.rbuPresencial.AutoSize = true;
-            this.rbuPresencial.Location = new System.Drawing.Point(126, 170);
-            this.rbuPresencial.Margin = new System.Windows.Forms.Padding(4);
-            this.rbuPresencial.Name = "rbuPresencial";
-            this.rbuPresencial.Size = new System.Drawing.Size(95, 21);
-            this.rbuPresencial.TabIndex = 89;
-            this.rbuPresencial.TabStop = true;
-            this.rbuPresencial.Text = "Presencial";
-            this.rbuPresencial.UseVisualStyleBackColor = true;
-            // 
-            // lblModalidad
-            // 
-            this.lblModalidad.AutoSize = true;
-            this.lblModalidad.Location = new System.Drawing.Point(12, 170);
-            this.lblModalidad.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblModalidad.Name = "lblModalidad";
-            this.lblModalidad.Size = new System.Drawing.Size(73, 17);
-            this.lblModalidad.TabIndex = 85;
-            this.lblModalidad.Text = "Modalidad";
             // 
             // lblTurno
             // 
@@ -308,43 +291,49 @@
             this.lblProfesor.TabIndex = 82;
             this.lblProfesor.Text = "Profesor ";
             // 
-            // lstExamenes
+            // listBox1
             // 
-            this.lstExamenes.FormattingEnabled = true;
-            this.lstExamenes.ItemHeight = 16;
-            this.lstExamenes.Location = new System.Drawing.Point(418, 439);
-            this.lstExamenes.Margin = new System.Windows.Forms.Padding(4);
-            this.lstExamenes.Name = "lstExamenes";
-            this.lstExamenes.Size = new System.Drawing.Size(370, 84);
-            this.lstExamenes.TabIndex = 99;
+            this.listBox1.Enabled = false;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 16;
+            this.listBox1.Location = new System.Drawing.Point(418, 391);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(179, 132);
+            this.listBox1.TabIndex = 99;
             // 
-            // txtMateria
+            // btnAgregarExamen
             // 
-            this.txtMateria.Location = new System.Drawing.Point(140, 35);
-            this.txtMateria.Name = "txtMateria";
-            this.txtMateria.Size = new System.Drawing.Size(211, 22);
-            this.txtMateria.TabIndex = 95;
+            this.btnAgregarExamen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarExamen.ForeColor = System.Drawing.Color.Black;
+            this.btnAgregarExamen.Location = new System.Drawing.Point(418, 531);
+            this.btnAgregarExamen.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregarExamen.Name = "btnAgregarExamen";
+            this.btnAgregarExamen.Size = new System.Drawing.Size(49, 43);
+            this.btnAgregarExamen.TabIndex = 100;
+            this.btnAgregarExamen.Text = "+";
+            this.btnAgregarExamen.UseVisualStyleBackColor = true;
             // 
-            // txtProfesor
+            // btnEliminarExamen
             // 
-            this.txtProfesor.Location = new System.Drawing.Point(140, 79);
-            this.txtProfesor.Name = "txtProfesor";
-            this.txtProfesor.Size = new System.Drawing.Size(211, 22);
-            this.txtProfesor.TabIndex = 96;
-            // 
-            // txtTurno
-            // 
-            this.txtTurno.Location = new System.Drawing.Point(140, 125);
-            this.txtTurno.Name = "txtTurno";
-            this.txtTurno.Size = new System.Drawing.Size(211, 22);
-            this.txtTurno.TabIndex = 97;
+            this.btnEliminarExamen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminarExamen.ForeColor = System.Drawing.Color.Black;
+            this.btnEliminarExamen.Location = new System.Drawing.Point(475, 531);
+            this.btnEliminarExamen.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEliminarExamen.Name = "btnEliminarExamen";
+            this.btnEliminarExamen.Size = new System.Drawing.Size(49, 43);
+            this.btnEliminarExamen.TabIndex = 101;
+            this.btnEliminarExamen.Text = "-";
+            this.btnEliminarExamen.UseVisualStyleBackColor = true;
             // 
             // frmInscripcionCurso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 704);
-            this.Controls.Add(this.lstExamenes);
+            this.Controls.Add(this.btnEliminarExamen);
+            this.Controls.Add(this.btnAgregarExamen);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.gbxDetallesC);
             this.Controls.Add(this.cboCurso);
             this.Controls.Add(this.lblCurso);
@@ -384,15 +373,14 @@
         private System.Windows.Forms.DateTimePicker dtpFechaInicio;
         private System.Windows.Forms.Label lblFechaFin;
         private System.Windows.Forms.Label lblFechaInicio;
-        private System.Windows.Forms.RadioButton rbuDistancia;
-        private System.Windows.Forms.RadioButton rbuPresencial;
-        private System.Windows.Forms.Label lblModalidad;
         private System.Windows.Forms.Label lblTurno;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblProfesor;
-        private System.Windows.Forms.ListBox lstExamenes;
         private System.Windows.Forms.TextBox txtTurno;
         private System.Windows.Forms.TextBox txtProfesor;
         private System.Windows.Forms.TextBox txtMateria;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnAgregarExamen;
+        private System.Windows.Forms.Button btnEliminarExamen;
     }
 }

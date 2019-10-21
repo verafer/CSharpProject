@@ -8,30 +8,38 @@ namespace ClasesInscripcion
     {
 
         public Alumno Alumno { get; set; }
-        public Curso curso { get; set; }
+        public Curso Curso { get; set; }
         public int[] examenes { get; set; }
 
         public InscripcionCurso() { }
 
-        public static List<Curso> ObtenerCursosDeAlumno(Alumno alumno)
+        public InscripcionCurso(Alumno a,Curso c) {
+            this.Alumno = a;
+            this.Curso = c;
+        }
+
+        public static List<InscripcionCurso> ObtenerCursosDeAlumno(Alumno alumno)
         {
-            List<Curso> listaCursosDelAlumno = new List<Curso>();
+            List<InscripcionCurso> listaCursosDelAlumno = new List<InscripcionCurso>();
             foreach (Curso c in Curso.ObtenerCursos())
             {
-                if (c.listaAlumnos.Contains(alumno))
+                foreach (InscripcionCurso ic in c.listaInscriptos)
                 {
-                    listaCursosDelAlumno.Add(c);
+                    if (alumno == ic.Alumno)
+                    {
+                        listaCursosDelAlumno.Add(ic);
+                    }
                 }
             }
             return listaCursosDelAlumno;
         }
-        public static void AgregarInscripto(Alumno alumno, Curso Curso)
+        public static void AgregarInscripto(InscripcionCurso i, Curso Curso)
         {
-            Curso.listaAlumnos.Add(alumno);
+            Curso.listaInscriptos.Add(i);
         }
-        public static void RemoverInscripto(Alumno alumno, Curso Curso)
+        public static void RemoverInscripto(InscripcionCurso i, Curso Curso)
         {
-            Curso.listaAlumnos.Remove(alumno);
+            Curso.listaInscriptos.Remove(i);
         }
         public static void EditarInscrpcion(Curso c, int indice)
         {
@@ -39,5 +47,16 @@ namespace ClasesInscripcion
 
         }
 
+        public override string ToString()
+        {
+            if(Curso.Materia != null)
+            {
+                return $"{Curso.numeroCurso} - { Curso.Materia}";
+            }
+            else
+            {
+                return $"{Curso.numeroCurso}";
+            }
+        }
     }
 }
