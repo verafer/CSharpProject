@@ -124,6 +124,12 @@
     <EmbeddedResource Include="frmCurso.resx">
       <DependentUpon>frmCurso.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmInscripcionCurso.resx">
+      <DependentUpon>frmInscripcionCurso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInscripcionExamenExt.resx">
+      <DependentUpon>frmInscripcionExamenExt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMateria.resx">
       <DependentUpon>frmMateria.cs</DependentUpon>
     </EmbeddedResource>

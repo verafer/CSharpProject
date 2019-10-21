@@ -44,7 +44,14 @@ namespace InterfazInscripcion
             Profesor profesor = new Profesor();
 
             profesor.NroDocumento = txtNroDocumento.Text;
-            profesor.TipoDocumento = (TipoDocumento)cboTipoDocumento.SelectedItem;
+            if (cboTipoDocumento.SelectedItem != null)
+            {
+                profesor.TipoDocumento = (TipoDocumento)cboTipoDocumento.SelectedItem;
+            }
+            else
+            {
+                profesor.TipoDocumento = TipoDocumento.CI;
+            }
             profesor.Nombre = txtNombre.Text;
             profesor.Apellido = txtApellido.Text;
             profesor.FechaNacimiento = dtpFechaNacimiento.Value;

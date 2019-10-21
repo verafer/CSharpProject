@@ -56,7 +56,13 @@ namespace InterfazInscripcion
             Alumno alumno = new Alumno();
 
             alumno.NroDocumento = txtNroDocumento.Text;
-            alumno.TipoDocumento = (TipoDocumento)cboTipoDocumento.SelectedItem;
+            if(cboTipoDocumento.SelectedItem != null)
+            {
+                alumno.TipoDocumento = (TipoDocumento)cboTipoDocumento.SelectedItem;
+            }
+            else {
+                alumno.TipoDocumento = TipoDocumento.CI;
+                    }
             alumno.Nombre = txtNombre.Text;
             alumno.Apellido = txtApellido.Text;
             alumno.FechaNacimiento = dtpFechaNacimiento.Value;

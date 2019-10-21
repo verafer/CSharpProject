@@ -24,6 +24,8 @@ namespace ClasesInscripcion
         public Modalidad modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
+        public List<Alumno> listaAlumnos = new List<Alumno>();
+
         public static List<Curso> listaCurso = new List<Curso>();
 
 
@@ -37,6 +39,7 @@ namespace ClasesInscripcion
         {
             return numeroCurso;
         }
+
         public static void AgregarCurso(Curso c)
         {
             listaCurso.Add(c);
