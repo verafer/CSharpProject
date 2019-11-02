@@ -4,18 +4,24 @@ using System.Text;
 
 namespace ClasesInscripcion
 {
+    public enum EstadoInscripcion
+    {
+        Pendiente,
+        Confirmada
+    }
     public class InscripcionCurso
     {
 
         public Alumno Alumno { get; set; }
         public Curso Curso { get; set; }
-        public int[] examenes { get; set; }
+        public EstadoInscripcion Estado { get; set; }
 
         public InscripcionCurso() { }
 
         public InscripcionCurso(Alumno a,Curso c) {
             this.Alumno = a;
             this.Curso = c;
+            this.Estado = EstadoInscripcion.Pendiente;
         }
 
         public static List<InscripcionCurso> ObtenerCursosDeAlumno(Alumno alumno)
@@ -37,9 +43,9 @@ namespace ClasesInscripcion
         {
             Curso.listaInscriptos.Add(i);
         }
-        public static void RemoverInscripto(InscripcionCurso i, Curso Curso)
+        public static void RemoverInscripto(InscripcionCurso i)
         {
-            Curso.listaInscriptos.Remove(i);
+            i.Curso.listaInscriptos.Remove(i);
         }
         public static void EditarInscrpcion(Curso c, int indice)
         {
@@ -49,14 +55,18 @@ namespace ClasesInscripcion
 
         public override string ToString()
         {
+            string texto = "";
             if(Curso.Materia != null)
             {
-                return $"{Curso.numeroCurso} - { Curso.Materia}";
+                texto += $"{Curso.NumeroCurso} - { Curso.Materia} , Dia: { Curso.Dia }";
             }
             else
             {
-                return $"{Curso.numeroCurso}";
+                texto += $"{Curso.NumeroCurso}";
             }
+            if (Estado == EstadoInscripcion.Pendiente)
+                texto += "  (Inscripсión Pendiente)";
+            return texto;
         }
     }
 }

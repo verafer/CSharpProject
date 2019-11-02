@@ -132,17 +132,17 @@ namespace InterfazInscripcion
         private Curso ObtenerCursoFormulario()
         {
             Curso cur = new Curso();
-            cur.numeroCurso = txtNumeroCurso.Text;
+            cur.NumeroCurso = txtNumeroCurso.Text;
             cur.Materia = (Materia)cboMateria.SelectedItem;
             cur.Profesor = (Profesor)cboProfesor.SelectedItem;
             cur.Turno = (Turnos)cboTurno.SelectedItem;
             if (rbuDistancia.Checked)
             {
-                cur.modalidad = Modalidad.Distancia;
+                cur.Modalidad = modalidad.Distancia;
             }
             else if (rbuPresencial.Checked)
             {
-                cur.modalidad = Modalidad.Presencial;
+                cur.Modalidad = modalidad.Presencial;
             }
             cur.FechaInicio = dtpFechaInicio.Value.Date;
             cur.FechaFin = dtpFechaFin.Value.Date;
@@ -182,16 +182,16 @@ namespace InterfazInscripcion
 
             if (curso != null)
             {
-                txtNumeroCurso.Text = curso.numeroCurso;
+                txtNumeroCurso.Text = curso.NumeroCurso;
 
                 cboMateria.SelectedItem = curso.Materia;
                 cboProfesor.SelectedItem = curso.Profesor;
                 cboTurno.SelectedItem = curso.Turno;
-                if (curso.modalidad == Modalidad.Distancia)
+                if (curso.Modalidad == modalidad.Distancia)
                 {
                     rbuDistancia.Checked = true;
                 }
-                else if (curso.modalidad == Modalidad.Presencial)
+                else if (curso.Modalidad == modalidad.Presencial)
                 {
                     rbuPresencial.Checked = true;
                 }

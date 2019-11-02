@@ -13,13 +13,14 @@ namespace ClasesInscripcion
 
         public Profesor() { }
 
-        public Profesor(string nroDocumento, TipoDocumento tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido)
+        public Profesor(string nroDocumento, TipoDocumento tipoDocumento, DateTime fechaNacimiento, string nombre, string apellido, DateTime fechaIngreso)
         {
             this.NroDocumento = nroDocumento;
             this.TipoDocumento = tipoDocumento;
             this.FechaNacimiento = fechaNacimiento;
             this.Nombre = nombre;
             this.Apellido = apellido;
+            this.FechaIngreso = fechaIngreso;
         }
 
         public static void AgregarProfesor(Profesor p)

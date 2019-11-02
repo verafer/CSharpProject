@@ -32,101 +32,87 @@ namespace InterfazInscripcion
 
             cboAlumno.DataSource = Alumno.ObtenerAlumno();
             cboAlumno.SelectedItem = null;
-            cboCurso.DataSource = Curso.ObtenerCursos();
-            cboCurso.SelectedItem = null;
-            BloquearFormulario();
-            DeshabilitarBotones();
+            lstCursosDisponibles.DataSource = Curso.ObtenerCursos();
+            lstCursosDisponibles.SelectedItem = null;
+            BloquearDisponibles();
+            btnGuardarCambios.Enabled = false;
+            //BloquearFormulario();
+            //DeshabilitarBotones();
         }
 
         private void cboAlumno_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboAlumno.SelectedItem != null)
             {
-                lstCursos.DataSource = null;
-                lstCursos.DataSource = InscripcionCurso.ObtenerCursosDeAlumno((Alumno)cboAlumno.SelectedItem);
-                lstCursos.Enabled = true;
-                HabilitarBotones();
+                lstCursosInscripto.DataSource = null;
+                lstCursosInscripto.DataSource = InscripcionCurso.ObtenerCursosDeAlumno((Alumno)cboAlumno.SelectedItem);
+                lstCursosInscripto.Enabled = true;
+                DesbloquearDisponibles();
             }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             modo = Modo.AGREGAR;
-            // LimpiarFormulario();
             DesbloquearFormulario();
-            DeshabilitarBotones();
         }
 
-        private void HabilitarBotones()
-        {
-            btnAgregar.Enabled = true;
-            btnEditar.Enabled = true;
-            btnEliminar.Enabled = true;
-        }
 
-        private void DeshabilitarBotones()
+        private void BloquearDisponibles()
         {
-            btnAgregar.Enabled = false;
-            btnEditar.Enabled = false;
-            btnEliminar.Enabled = false;
+            lstCursosDisponibles.Enabled = false;
+            btnInscribir.Enabled = false;
+            btnDesinscribir.Enabled = false;
+            btnCancelarPendiente.Enabled = false;
+            lstCursosInscripto.Enabled = false;
+            lblCD.Enabled = false;
+            lblCA.Enabled = false;
+        }
+        private void DesbloquearDisponibles()
+        {
+            lstCursosDisponibles.Enabled = true;
+            btnInscribir.Enabled = true;
+            btnDesinscribir.Enabled = true;
+            btnCancelarPendiente.Enabled = false;
+            lstCursosInscripto.Enabled = true;
+            lblCD.Enabled = true;
+            lblCA.Enabled = true;
         }
 
         private void BloquearFormulario()
         {
-            cboCurso.Enabled = false;
             cboAlumno.Enabled = true;
-            lstCursos.Enabled = true;
-
-            btnGuardar.Enabled = false;
-            btnCancelar.Enabled = false;
-            btnLimpiar.Enabled = false;
+            lstCursosDisponibles.Enabled = true;
         }
 
         private void DesbloquearFormulario()
         {
-            cboCurso.Enabled = true;
             cboAlumno.Enabled = false;
-            lstCursos.Enabled = false;
-
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
-            btnLimpiar.Enabled = true;
-        }
-
-        private void LimpiarFormulario()
-        {
-            cboCurso.SelectedIndex = -1;
-            txtMateria.Text = "";
-            txtProfesor.Text = "";
-            txtTurno.Text = "";
-            dtpFechaInicio.Value = DateTime.Now;
-            dtpFechaFin.Value = DateTime.Now;
-            DeshabilitarBotones();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (cboCurso.SelectedItem == null)
+            if (lstCursosDisponibles.SelectedItem == null)
             {
                 MessageBox.Show("Seleccione un curso");
                 return;
             }
             if (modo == Modo.AGREGAR)
             {
-                InscripcionCurso ic = new InscripcionCurso((Alumno)cboAlumno.SelectedItem, (Curso)cboCurso.SelectedItem);
-                InscripcionCurso.AgregarInscripto(ic, (Curso)cboCurso.SelectedItem);
+                InscripcionCurso ic = new InscripcionCurso((Alumno)cboAlumno.SelectedItem, (Curso)lstCursosDisponibles.SelectedItem);
+                InscripcionCurso.AgregarInscripto(ic, (Curso)lstCursosDisponibles.SelectedItem);
             }
             else if (modo == Modo.EDITAR)
             {
 
-                if (this.lstCursos.SelectedItems.Count == 0)
+                if (this.lstCursosDisponibles.SelectedItems.Count == 0)
                 {
                     MessageBox.Show("Favor seleccione una fila");
                 }
 
                 else
                 {
-                    int indice = lstCursos.SelectedIndex;
+                    int indice = lstCursosDisponibles.SelectedIndex;
                    // Curso.EditarCurso(, indice);
                     ActualizarListaCursos();
                 }
@@ -134,10 +120,8 @@ namespace InterfazInscripcion
 
             }
 
-            LimpiarFormulario();
             ActualizarListaCursos();
             BloquearFormulario();
-            HabilitarBotones();
         }
 
 
@@ -145,73 +129,167 @@ namespace InterfazInscripcion
 
         private void ActualizarListaCursos()
         {
-            lstCursos.DataSource = null;
-            lstCursos.DataSource = InscripcionCurso.ObtenerCursosDeAlumno((Alumno)cboAlumno.SelectedItem);
-            lstCursos.SelectedIndex = -1;
-        }
-
-        private void ObtenerDatosCurso()
-        {
-            Curso c = (Curso)cboCurso.SelectedItem;
-            if(cboCurso.SelectedItem != null)
-            {
-                if (c.Materia != null) txtMateria.Text = c.Materia.Descripcion;
-                if(c.Profesor!=null)txtProfesor.Text = c.Profesor.Nombre + " " + c.Profesor.Apellido;
-                txtTurno.Text = c.Turno.ToString();
-                dtpFechaInicio.Value = c.FechaInicio;
-                dtpFechaFin.Value = c.FechaFin;
-            }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
-            BloquearFormulario();
-            HabilitarBotones();
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
-        }
-
-        private void cboCurso_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cboCurso.SelectedItem != null)
-            {
-                ObtenerDatosCurso();
-            }
+            lstCursosInscripto.DataSource = null;
+            lstCursosInscripto.DataSource = InscripcionCurso.ObtenerCursosDeAlumno((Alumno)cboAlumno.SelectedItem);
+            lstCursosInscripto.SelectedIndex = -1;
+            calcularTotal();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (lstCursos.SelectedItem == null)
+            if (lstCursosDisponibles.SelectedItem == null)
             {
                 MessageBox.Show("Seleccione un curso");
             }
             else
             {
-                InscripcionCurso.RemoverInscripto((InscripcionCurso)lstCursos.SelectedItem, (Curso)cboCurso.SelectedItem);
+                InscripcionCurso.RemoverInscripto((InscripcionCurso)lstCursosDisponibles.SelectedItem);
                 ActualizarListaCursos();
-                LimpiarFormulario();
-                HabilitarBotones();
             }
         }
 
-        private void lstCursos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lstCursos.SelectedItem != null)
-            {
-                InscripcionCurso ic= (InscripcionCurso)lstCursos.SelectedItem;
-                cboCurso.SelectedItem = ic.Curso;
+        //private void lstCursos_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (lstCursosDisponibles.SelectedItem != null)
+        //    {
+        //        InscripcionCurso ic= (InscripcionCurso)lstCursosDisponibles.SelectedItem;
+        //        lstCursosDisponibles.SelectedItem = ic.Curso;
                 
-            }
-        }
+        //    }
+        //}
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
             modo = Modo.EDITAR;
             DesbloquearFormulario();
+        }
+
+        private void btnInscribir_Click(object sender, EventArgs e)
+        {
+            if (lstCursosDisponibles.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un curso");
+                return;
+            }
+            Alumno a = (Alumno)cboAlumno.SelectedItem;
+            Curso c = (Curso)lstCursosDisponibles.SelectedItem;
+            foreach (InscripcionCurso icc in lstCursosInscripto.Items)
+            {
+                if(icc.Curso == c)
+                {
+                    MessageBox.Show("El alumno ya se encuentra inscripto a este curso");
+                    return;
+                }
+            }
+            InscripcionCurso ic = new InscripcionCurso(a, (Curso)lstCursosDisponibles.SelectedItem);
+            InscripcionCurso.AgregarInscripto(ic, (Curso)lstCursosDisponibles.SelectedItem);
+            ActualizarListaCursos();
+            lstCursosInscripto.SelectedItem = ic;
+        }
+
+        private void lstCursosDisponibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstCursosInscripto.SelectedIndex = -1;
+            if(lstCursosDisponibles.SelectedItem != null)
+            {
+                btnInscribir.Enabled = true;
+                btnDesinscribir.Enabled = false;
+                btnCancelarPendiente.Enabled = false;
+            }
+        }
+
+        private void lstCursosInscripto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lstCursosDisponibles.SelectedIndex = -1;
+            if (lstCursosInscripto.SelectedItem != null)
+            {
+
+                btnGuardarCambios.Enabled = true;
+
+                btnInscribir.Enabled = false;
+                btnDesinscribir.Enabled = true;
+                btnCancelarPendiente.Enabled = true;
+            }
+            else
+            {
+                btnGuardarCambios.Enabled = false;
+            }
+        }
+
+        private void calcularTotal()
+        {
+            int total = 0;
+            for (int i = 0; i < lstCursosInscripto.Items.Count; i++)
+            {
+                InscripcionCurso ic = (InscripcionCurso)lstCursosInscripto.Items[i];
+                total += ic.Curso.MontoTotal;
+            }
+            nudTotal.Value = total;
+        }
+
+        private void btnDesinscribir_Click(object sender, EventArgs e)
+        {
+            if (lstCursosInscripto.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un curso");
+                return;
+            }
+            else
+            {
+                InscripcionCurso ic = (InscripcionCurso)lstCursosInscripto.SelectedItem;
+                if(ic.Estado == EstadoInscripcion.Pendiente)
+                {
+                    MessageBox.Show("La inscripción aún no fue confirmada. Utilice la opción 'Cancelar Inscripción Pendiente'");
+                    return;
+                }
+                InscripcionCurso.RemoverInscripto(ic);
+                ActualizarListaCursos();
+            }
+        }
+
+        private void btnCancelarPendientes_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lstCursosInscripto.Items.Count; i++)
+            {
+                InscripcionCurso ic = (InscripcionCurso)lstCursosInscripto.Items[i];
+                if (ic.Estado == EstadoInscripcion.Pendiente)
+                {
+                    InscripcionCurso.RemoverInscripto(ic);
+                }
+            }
+            ActualizarListaCursos();
+        }
+
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lstCursosInscripto.Items.Count; i++)
+            {
+                InscripcionCurso ic = (InscripcionCurso)lstCursosInscripto.Items[i];
+                if (ic.Estado == EstadoInscripcion.Pendiente)
+                {
+                    ic.Estado = EstadoInscripcion.Confirmada;
+                }
+            }
+            ActualizarListaCursos();
+        }
+
+        private void btnCancelarPendiente_Click(object sender, EventArgs e)
+        {
+            if (lstCursosInscripto.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un curso");
+                return;
+            }
+            InscripcionCurso ic = (InscripcionCurso)lstCursosInscripto.SelectedItem;
+            if(ic.Estado == EstadoInscripcion.Confirmada)
+            {
+                MessageBox.Show("La inscripción ya fue confirmada. Utilice la opción 'Baja Curso'");
+                return;
+            }
+            else {
+                    InscripcionCurso.RemoverInscripto(ic);
+                ActualizarListaCursos();
+            }
         }
     }
     }
