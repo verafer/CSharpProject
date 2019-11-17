@@ -37,9 +37,11 @@ namespace InterfazInscripcion
             }
             else if (modo == "EDITAR")
             {
-                int index = lstCiudad.SelectedIndex;
+                Ciudad ciudad = (Ciudad)lstCiudad.SelectedItem;
+                int index = ciudad.Id;
 
-                Ciudad.listaCiudades[index] = ObtenerDatosFormulario();
+                Ciudad nueva_ciudad = ObtenerDatosFormulario();
+                Ciudad.EditarCiudad(nueva_ciudad,index);
             }
 
             ActualizarListaCiudades();
@@ -52,7 +54,7 @@ namespace InterfazInscripcion
             Ciudad ciudad = new Ciudad();
 
             ciudad.Nombre = txtNombre.Text;
-            ciudad.Departamento = (Departamento)cboDepartamento.SelectedItem;
+            // ciudad.Departamento = (Departamento)cboDepartamento.SelectedItem;
 
             return ciudad;
         }
@@ -61,6 +63,7 @@ namespace InterfazInscripcion
         {
             txtNombre.Text = "";
             cboDepartamento.SelectedItem = null;
+            lstCiudad.SelectedItem = null;
         }
 
         private void DesbloquearFormulario()
@@ -80,7 +83,7 @@ namespace InterfazInscripcion
         private void ActualizarListaCiudades()
         {
             lstCiudad.DataSource = null;
-            lstCiudad.DataSource = Ciudad.ObtenerCiudad();
+            lstCiudad.DataSource = Ciudad.ObtenerCiudades();
         }
 
         private void BloquearFormulario()
@@ -128,7 +131,7 @@ namespace InterfazInscripcion
             if (lstCiudad.SelectedItems.Count > 0)
             {
                 Ciudad ciudad = (Ciudad)lstCiudad.SelectedItem;
-                Ciudad.listaCiudades.Remove(ciudad);
+                Ciudad.EliminarCiudad(ciudad);
                 ActualizarListaCiudades();
                 LimpiarFormulario();
             }
@@ -138,7 +141,7 @@ namespace InterfazInscripcion
             }
         }
 
-        private void lstCiudad_Click(object sender, EventArgs e)
+        private void lstCiudad_SelectedIndexChanged(object sender, EventArgs e)
         {
             Ciudad ciudad = (Ciudad)lstCiudad.SelectedItem;
 
