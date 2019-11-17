@@ -55,6 +55,7 @@
     <Compile Include="Funcionario.cs" />
     <Compile Include="Inscripcion.cs" />
     <Compile Include="InscripcionCurso.cs" />
+    <Compile Include="InscripcionCursoDetalle.cs" />
     <Compile Include="Materia.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Persona.cs" />

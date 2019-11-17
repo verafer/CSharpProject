@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace ClasesInscripcion
@@ -33,9 +34,57 @@ namespace ClasesInscripcion
             listaMateria.Remove(materia);
         }
 
-        public static List<Materia> ObtenerMateria()
+        public static List<Materia> ObtenerMaterias()
         {
-            return listaMateria;
+
+            Materia materia;
+            listaMateria.Clear();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string textoCMD = "Select * from Materia";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    materia = new Materia();
+                    materia.Id = elLectorDeDatos.GetInt32(0);
+                    materia.Descripcion = elLectorDeDatos.GetString(1);
+                    materia.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(2));
+                    materia.creditosClases = elLectorDeDatos.GetInt32(3);
+                    materia.creditosPractica = elLectorDeDatos.GetInt32(4);
+
+                    listaMateria.Add(materia);
+                }
+
+                return listaMateria;
+
+            }
+        }
+
+        public static Materia ObtenerMateria(int id)
+        {
+            Materia materia = null;
+
+            if (listaMateria.Count == 0)
+            {
+                Materia.ObtenerMaterias();
+            }
+
+            foreach (Materia m in listaMateria)
+            {
+                if (m.Id == id)
+                {
+                    materia = m;
+                    break;
+                }
+            }
+
+            return materia;
         }
 
         public override string ToString()

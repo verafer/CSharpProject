@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace ClasesInscripcion
 {
-    public enum modalidad
+    public enum Modalidad
     {
         Presencial, 
         Distancia
@@ -24,7 +25,7 @@ namespace ClasesInscripcion
         public DiasSemana Dia { get; set; }
         public Turnos Turno { get; set; }
         public Profesor Profesor { get; set; }
-        public modalidad Modalidad { get; set; }
+        public Modalidad Modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public int MontoTotal { get; set; }
@@ -36,7 +37,7 @@ namespace ClasesInscripcion
         public Curso() {
         }
 
-        public Curso(string numeroCurso, Materia materia,DiasSemana dia, Turnos turno, Profesor profesor, modalidad Modalidad,
+        public Curso(string numeroCurso, Materia materia,DiasSemana dia, Turnos turno, Profesor profesor, Modalidad Modalidad,
           DateTime fechaInicio, DateTime fechaFin)
         {
             this.NumeroCurso = numeroCurso;
@@ -76,7 +77,36 @@ namespace ClasesInscripcion
 
         public static List<Curso> ObtenerCursos()
         {
-            return listaCurso;
+            //return listaCurso;
+            Curso curso;
+            listaCurso.Clear();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string textoCMD = "Select * from Curso";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    curso = new Curso();
+                    curso.Id = elLectorDeDatos.GetInt32(0);
+                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(1));
+                    curso.Dia = (DiasSemana)elLectorDeDatos.GetInt32(2);
+                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(3));
+                    curso.Modalidad = (Modalidad)elLectorDeDatos.GetInt32(4);
+                    curso.FechaInicio = elLectorDeDatos.GetDateTime(5);
+                    curso.FechaFin = elLectorDeDatos.GetDateTime(6);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(7);
+
+                    listaCurso.Add(curso);
+                }
+
+                return listaCurso;
+            }
         }
         public void BajaCurso() { }
     }
