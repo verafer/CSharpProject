@@ -60,6 +60,8 @@
             this.chkSegundoParcial = new System.Windows.Forms.CheckBox();
             this.chkTercerParcial = new System.Windows.Forms.CheckBox();
             this.chkFinal = new System.Windows.Forms.CheckBox();
+            this.cboTipoDocumento = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.gbxDatosCliente.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDetalleDelivery)).BeginInit();
             this.gbxCurso.SuspendLayout();
@@ -255,20 +257,20 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(28, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 13);
+            this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 32;
-            this.label1.Text = "Nº Documento Alumno:";
+            this.label1.Text = "Nº Doc Alumno:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(152, 6);
+            this.textBox1.Location = new System.Drawing.Point(117, 6);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(83, 20);
             this.textBox1.TabIndex = 48;
             // 
             // btnBuscarAlumno
             // 
-            this.btnBuscarAlumno.Location = new System.Drawing.Point(241, 4);
+            this.btnBuscarAlumno.Location = new System.Drawing.Point(428, 6);
             this.btnBuscarAlumno.Name = "btnBuscarAlumno";
             this.btnBuscarAlumno.Size = new System.Drawing.Size(51, 23);
             this.btnBuscarAlumno.TabIndex = 49;
@@ -374,11 +376,30 @@
             this.chkFinal.Text = "Final";
             this.chkFinal.UseVisualStyleBackColor = true;
             // 
+            // cboTipoDocumento
+            // 
+            this.cboTipoDocumento.FormattingEnabled = true;
+            this.cboTipoDocumento.Location = new System.Drawing.Point(308, 5);
+            this.cboTipoDocumento.Name = "cboTipoDocumento";
+            this.cboTipoDocumento.Size = new System.Drawing.Size(114, 21);
+            this.cboTipoDocumento.TabIndex = 53;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(216, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(86, 13);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "Tipo Documento";
+            // 
             // frmInscripcionCurso2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 501);
+            this.Controls.Add(this.cboTipoDocumento);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.gbxCurso);
             this.Controls.Add(this.btnBuscarCurso);
             this.Controls.Add(this.btnBuscarAlumno);
@@ -441,5 +462,7 @@
         private System.Windows.Forms.CheckBox chkTercerParcial;
         private System.Windows.Forms.CheckBox chkSegundoParcial;
         private System.Windows.Forms.CheckBox chkPrimerParcial;
+        private System.Windows.Forms.ComboBox cboTipoDocumento;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -164,6 +164,27 @@ namespace ClasesInscripcion
             }
         }
 
+        public static Alumno ObtenerAlumnoPorNroDoc(string nroDocumento, TipoDocumento tipoDocumento)
+        {
+            Alumno alumno = null;
+
+            if (listaAlumno.Count == 0)
+            {
+                Alumno.ObtenerAlumnos();
+            }
+
+            foreach (Alumno a in listaAlumno)
+            {
+                if (a.NroDocumento == nroDocumento && a.TipoDocumento == tipoDocumento)
+                {
+                    alumno = a;
+                    break;
+                }
+            }
+
+            return alumno;
+        }
+
         public override string ToString()
         {
             return this.Nombre + " " + this.Apellido;
