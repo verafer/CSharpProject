@@ -30,7 +30,7 @@ namespace InterfazInscripcion
         private void frmInscripcionCurso_Load(object sender, EventArgs e)
         {
 
-            cboAlumno.DataSource = Alumno.ObtenerAlumno();
+            cboAlumno.DataSource = Alumno.ObtenerAlumnos();
             cboAlumno.SelectedItem = null;
             lstCursosDisponibles.DataSource = Curso.ObtenerCursos();
             lstCursosDisponibles.SelectedItem = null;

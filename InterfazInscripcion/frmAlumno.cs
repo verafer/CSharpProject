@@ -78,7 +78,7 @@ namespace InterfazInscripcion
         private void ActualizarListaAlumnos()
         {
             lstAlumno.DataSource = null;
-            lstAlumno.DataSource = Alumno.ObtenerAlumno();
+            lstAlumno.DataSource = Alumno.ObtenerAlumnos();
         }
 
         private void BloquearFormulario()
