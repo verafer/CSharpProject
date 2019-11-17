@@ -88,7 +88,7 @@ namespace InterfazInscripcion
         private void ActualizarListaProfesores()
         {
             lstProfesor.DataSource = null;
-            lstProfesor.DataSource = Profesor.ObtenerProfesor();
+            lstProfesor.DataSource = Profesor.ObtenerProfesores();
         }
 
         private void BloquearFormulario()

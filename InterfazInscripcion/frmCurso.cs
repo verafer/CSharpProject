@@ -74,8 +74,8 @@ namespace InterfazInscripcion
         private void FrmCurso_Load(object sender, EventArgs e)
         {
             ActualizarListaCurso();
-            cboMateria.DataSource = Materia.ObtenerMateria();
-            cboProfesor.DataSource = Profesor.ObtenerProfesor();
+            cboMateria.DataSource = Materia.ObtenerMaterias();
+            cboProfesor.DataSource = Profesor.ObtenerProfesores();
             cboTurno.DataSource = Enum.GetValues(typeof(Turnos));
             cboMateria.SelectedItem = null;
             cboProfesor.SelectedItem = null;
@@ -138,11 +138,11 @@ namespace InterfazInscripcion
             cur.Turno = (Turnos)cboTurno.SelectedItem;
             if (rbuDistancia.Checked)
             {
-                cur.Modalidad = modalidad.Distancia;
+                cur.Modalidad = Modalidad.Distancia;
             }
             else if (rbuPresencial.Checked)
             {
-                cur.Modalidad = modalidad.Presencial;
+                cur.Modalidad = Modalidad.Presencial;
             }
             cur.FechaInicio = dtpFechaInicio.Value.Date;
             cur.FechaFin = dtpFechaFin.Value.Date;
@@ -187,11 +187,11 @@ namespace InterfazInscripcion
                 cboMateria.SelectedItem = curso.Materia;
                 cboProfesor.SelectedItem = curso.Profesor;
                 cboTurno.SelectedItem = curso.Turno;
-                if (curso.Modalidad == modalidad.Distancia)
+                if (curso.Modalidad ==  Modalidad.Distancia)
                 {
                     rbuDistancia.Checked = true;
                 }
-                else if (curso.Modalidad == modalidad.Presencial)
+                else if (curso.Modalidad == Modalidad.Presencial)
                 {
                     rbuPresencial.Checked = true;
                 }
