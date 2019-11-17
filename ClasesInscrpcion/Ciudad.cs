@@ -26,17 +26,20 @@ namespace ClasesInscripcion
 
             {
                 con.Open(); //Abrimos la conex con la BD
-                string textoCmd = "insert into Ciudad (descripcion) VALUES (@nombre)";
+                string textoCmd = "insert into Ciudad (descripcion, departamento) VALUES (@nombre,@departamento)";
                 SqlCommand cmd = new SqlCommand(textoCmd, con);
 
                 //PARAMETROS
                 SqlParameter p1 = new SqlParameter("@nombre", c.Nombre);
+                SqlParameter p2 = new SqlParameter("@departamento", c.Departamento);
 
                 //Le decimos a los parametros de que tipo de datos son
                 p1.SqlDbType = SqlDbType.VarChar;
+                p2.SqlDbType = SqlDbType.Int;
 
                 //Agregamos los parametros al command
                 cmd.Parameters.Add(p1);
+                cmd.Parameters.Add(p2);
 
                 cmd.ExecuteNonQuery();
 
@@ -48,21 +51,24 @@ namespace ClasesInscripcion
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
                 con.Open();
-                string textoCMD = "UPDATE Ciudad SET descripcion = @nombre where ciudad_id = @Id";
+                string textoCMD = "UPDATE Ciudad SET descripcion = @nombre, departamento = @departamento where ciudad_id = @Id";
 
                 SqlCommand cmd = new SqlCommand(textoCMD, con);
 
                 //PARAMETROS
                 SqlParameter p1 = new SqlParameter("@nombre", c.Nombre);
-                SqlParameter p2 = new SqlParameter("@Id", indice);
+                SqlParameter p2 = new SqlParameter("@departamento", c.Departamento);
+                SqlParameter p3 = new SqlParameter("@Id", indice);
 
                 //Le decimos a los parametros de que tipo de datos son
                 p1.SqlDbType = SqlDbType.VarChar;
                 p2.SqlDbType = SqlDbType.Int;
+                p3.SqlDbType = SqlDbType.Int;
 
                 //Agregamos los parametros al command
                 cmd.Parameters.Add(p1);
                 cmd.Parameters.Add(p2);
+                cmd.Parameters.Add(p3);
 
                 cmd.ExecuteNonQuery();
             }
@@ -103,6 +109,7 @@ namespace ClasesInscripcion
                         ciudad = new Ciudad();
                         ciudad.Id = elLectorDeDatos.GetInt32(0);
                         ciudad.Nombre = elLectorDeDatos.GetString(1);
+                        ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
                         listaCiudades.Add(ciudad);
                     }
                     return listaCiudades;

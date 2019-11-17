@@ -39,8 +39,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnEliminar
@@ -85,7 +83,7 @@
             // cboDepartamento
             // 
             this.cboDepartamento.FormattingEnabled = true;
-            this.cboDepartamento.Location = new System.Drawing.Point(173, 127);
+            this.cboDepartamento.Location = new System.Drawing.Point(173, 106);
             this.cboDepartamento.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboDepartamento.Name = "cboDepartamento";
             this.cboDepartamento.Size = new System.Drawing.Size(248, 28);
@@ -138,7 +136,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(59, 131);
+            this.label4.Location = new System.Drawing.Point(59, 110);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(112, 20);
@@ -148,7 +146,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(59, 77);
+            this.label3.Location = new System.Drawing.Point(59, 56);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
@@ -157,38 +155,17 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(173, 73);
+            this.txtNombre.Location = new System.Drawing.Point(173, 52);
             this.txtNombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(248, 26);
             this.txtNombre.TabIndex = 62;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 32);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 20);
-            this.label1.TabIndex = 87;
-            this.label1.Text = "Nombre";
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(173, 28);
-            this.txtId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(248, 26);
-            this.txtId.TabIndex = 86;
             // 
             // frmCiudad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 692);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtId);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAgregar);
@@ -222,7 +199,5 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNombre;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtId;
     }
 }
