@@ -109,7 +109,7 @@ namespace ClasesInscripcion
                         ciudad = new Ciudad();
                         ciudad.Id = elLectorDeDatos.GetInt32(0);
                         ciudad.Nombre = elLectorDeDatos.GetString(1);
-                        ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
+                        //ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
                         listaCiudades.Add(ciudad);
                     }
                     return listaCiudades;

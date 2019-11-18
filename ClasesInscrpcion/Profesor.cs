@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace ClasesInscripcion
 {
@@ -34,13 +33,13 @@ namespace ClasesInscripcion
                 con.Open(); //Abrimos la conex con la BD
                 string textoCmd = "insert into Profesor (nro_documento, tipo_documento,nombre," +
                     "apellido,fecha_nacimiento, direccion,ciudad,email," +
-                    "telefono,nro_matricula,titulo_obtenido)" +
+                    "telefono,nro_madricula,titulo_obtenido)" +
                     " VALUES (@nro_documento, @tipo_documento,@nombre,@apellido,@fecha_nacimiento, @direccion,@ciudad,@email,@telefono,@nro_matricula,@titulo_obtenido)";
                 SqlCommand cmd = new SqlCommand(textoCmd, con);
 
                 //PARAMETROS
                 SqlParameter p1 = new SqlParameter("@nro_documento", p.NroDocumento);
-                SqlParameter p2 = new SqlParameter("@tipo_documenton", p.TipoDocumento);
+                SqlParameter p2 = new SqlParameter("@tipo_documento", p.TipoDocumento);
                 SqlParameter p3 = new SqlParameter("@nombre", p.Nombre);
                 SqlParameter p4 = new SqlParameter("@apellido", p.Apellido);
                 SqlParameter p5 = new SqlParameter("@fecha_nacimiento", p.FechaNacimiento);
@@ -94,7 +93,7 @@ namespace ClasesInscripcion
 
             {
                 con.Open();
-                string SENTENCIA_SQL = "delete from Profesor where Id = @profesor_id";
+                string SENTENCIA_SQL = "delete from Profesor where profesor_id = @profesor_id";
 
                 SqlCommand cmd = new SqlCommand(SENTENCIA_SQL, con);
                 SqlParameter p12 = new SqlParameter("@profesor_id", p.Id);

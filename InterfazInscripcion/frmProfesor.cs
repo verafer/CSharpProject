@@ -30,8 +30,8 @@ namespace InterfazInscripcion
             else if (modo == "EDITAR")
             {
                 int index = lstProfesor.SelectedIndex;
-
-                Profesor.listaProfesor[index] = ObtenerDatosFormulario();
+                Profesor p = ObtenerDatosFormulario();
+                Profesor.EditarProfesor(index, p);
             }
 
             ActualizarListaProfesores();
@@ -61,7 +61,7 @@ namespace InterfazInscripcion
             profesor.Telefono = txtTelefono.Text;
 
             profesor.NroMatricula = txtNroMatricula.Text;
-            profesor.FechaIngreso = dtpFechaIngreso.Value;
+            //profesor.FechaIngreso = dtpFechaIngreso.Value;
             profesor.TituloObtenido = txtTituloObtenido.Text;
 
             return profesor;
@@ -180,7 +180,7 @@ namespace InterfazInscripcion
             if (lstProfesor.SelectedItems.Count > 0)
             {
                 Profesor profesor = (Profesor)lstProfesor.SelectedItem;
-                Profesor.listaProfesor.Remove(profesor);
+                Profesor.EliminarProfesor(profesor);
                 ActualizarListaProfesores();
                 LimpiarFormulario();
             }
@@ -208,7 +208,7 @@ namespace InterfazInscripcion
                 txtTelefono.Text = profesor.Telefono;
 
                 txtNroMatricula.Text = profesor.NroMatricula;
-                dtpFechaIngreso.Value = profesor.FechaIngreso;
+                //dtpFechaIngreso.Value = profesor.FechaIngreso;
                 txtTituloObtenido.Text = profesor.TituloObtenido;
 
             }

@@ -117,7 +117,7 @@ namespace InterfazInscripcion
                 else
                 {
                     int indice = lstCurso.SelectedIndex;
-                    Curso.EditarCurso(c, indice);
+                    Curso.EditarCurso(indice, c);
                     ActualizarListaCurso();
                 }
 

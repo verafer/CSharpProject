@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
 using System.Data;
-using System.Data.SqlClient;
+
 namespace ClasesInscripcion
 {
     public enum Modalidad
@@ -97,18 +97,18 @@ namespace ClasesInscripcion
             }
         }
 
-
         public static List<Curso> ObtenerCursos()
         {
+            //return listaCurso;
             Curso curso;
-
             listaCurso.Clear();
-
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
             {
                 con.Open();
-                string tectoCMD = "select * from Curso";
-                SqlCommand cmd = new SqlCommand(tectoCMD, con);
+                string textoCMD = "Select * from Curso";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
 
                 SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
 
@@ -117,24 +117,21 @@ namespace ClasesInscripcion
                     curso = new Curso();
                     curso.Id = elLectorDeDatos.GetInt32(0);
                     curso.NumeroCurso = elLectorDeDatos.GetString(1);
-                    curso.Materia =  Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
-                    curso.Dia =(DiasSemana)elLectorDeDatos.GetInt32(3);
-                    curso.Turno = (Turnos) elLectorDeDatos.GetInt32(4);
+                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
+                    curso.Dia = (DiasSemana)(Convert.ToInt32(elLectorDeDatos.GetString(3)));
+                    curso.Turno = (Turnos)elLectorDeDatos.GetInt32(4);
                     curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(5));
-                    curso.Modalidad = (modalidad)elLectorDeDatos.GetInt32(6);
+                    curso.Modalidad = (Modalidad)(Convert.ToInt32(elLectorDeDatos.GetString(6)));
                     curso.FechaInicio = elLectorDeDatos.GetDateTime(7);
                     curso.FechaFin = elLectorDeDatos.GetDateTime(8);
-                    curso.MontoTotal = elLectorDeDatos.GetInt32(7);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(9);
+
                     listaCurso.Add(curso);
-
                 }
+
+                return listaCurso;
             }
-
-            return listaCurso;
         }
-
-
-
 
         private SqlCommand ObtenerParametros(SqlCommand cmd, Boolean id = false)
 
@@ -178,7 +175,10 @@ namespace ClasesInscripcion
       
         private SqlCommand ObtenerParametrosId(SqlCommand cmd)
         {
-            return listaCurso;
+            SqlParameter p10 = new SqlParameter("@id", this.Id);
+            p10.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(p10);
+            return cmd;
         }
         public void BajaCurso() { }
     }
