@@ -22,10 +22,12 @@ namespace InterfazInscripcion
 
         private void frmCiudad_Load(object sender, EventArgs e)
         {
-            ActualizarListaCiudades();
             cboDepartamento.DataSource = Enum.GetValues(typeof(Departamento));
             cboDepartamento.SelectedItem = null;
+            ActualizarListaCiudades();
             BloquearFormulario();
+            LimpiarFormulario();
+            lstCiudad.SelectedItem = null;
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -33,7 +35,8 @@ namespace InterfazInscripcion
             if (modo == "AGREGAR")
             {
                 Ciudad ciudad = ObtenerDatosFormulario();
-                Ciudad.AgregarCiudad(ciudad);
+                if (ciudad != null)
+                    Ciudad.AgregarCiudad(ciudad);
             }
             else if (modo == "EDITAR")
             {
@@ -41,7 +44,8 @@ namespace InterfazInscripcion
                 int index = ciudad.Id;
 
                 Ciudad nueva_ciudad = ObtenerDatosFormulario();
-                Ciudad.EditarCiudad(nueva_ciudad,index);
+                if( nueva_ciudad != null)
+                Ciudad.EditarCiudad(nueva_ciudad, index);
             }
 
             ActualizarListaCiudades();
@@ -51,10 +55,16 @@ namespace InterfazInscripcion
 
         private Ciudad ObtenerDatosFormulario()
         {
+            if (txtNombre.Text == "" || cboDepartamento.SelectedItem == null)
+            {
+                MessageBox.Show("Favor completar todos los campos");
+                return null;
+            }
+
             Ciudad ciudad = new Ciudad();
 
             ciudad.Nombre = txtNombre.Text;
-            // ciudad.Departamento = (Departamento)cboDepartamento.SelectedItem;
+            ciudad.Departamento = (Departamento)cboDepartamento.SelectedItem;
 
             return ciudad;
         }
@@ -63,7 +73,6 @@ namespace InterfazInscripcion
         {
             txtNombre.Text = "";
             cboDepartamento.SelectedItem = null;
-            lstCiudad.SelectedItem = null;
         }
 
         private void DesbloquearFormulario()
@@ -121,9 +130,17 @@ namespace InterfazInscripcion
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            modo = "EDITAR";
-            DesbloquearFormulario();
-            txtNombre.Focus();
+            if (lstCiudad.SelectedItems.Count > 0)
+            {
+
+                modo = "EDITAR";
+                DesbloquearFormulario();
+                txtNombre.Focus();
+            }
+            else
+            {
+                MessageBox.Show("Favor seleccionar de la lista para editar");
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

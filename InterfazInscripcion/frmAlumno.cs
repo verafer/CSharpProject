@@ -189,7 +189,7 @@ namespace InterfazInscripcion
             cboCiudad.SelectedItem = null;
             ActualizarListaAlumnos();
             BloquearFormulario();
-            lstAlumno.SelectedItem = null;
+            LimpiarFormulario();
         }
 
         private void lstAlumno_SelectedIndexChanged(object sender, EventArgs e)
