@@ -94,13 +94,15 @@ namespace ClasesInscripcion
                 {
                     curso = new Curso();
                     curso.Id = elLectorDeDatos.GetInt32(0);
-                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(1));
-                    curso.Dia = (DiasSemana)elLectorDeDatos.GetInt32(2);
-                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(3));
-                    curso.Modalidad = (Modalidad)elLectorDeDatos.GetInt32(4);
-                    curso.FechaInicio = elLectorDeDatos.GetDateTime(5);
-                    curso.FechaFin = elLectorDeDatos.GetDateTime(6);
-                    curso.MontoTotal = elLectorDeDatos.GetInt32(7);
+                    curso.NumeroCurso = elLectorDeDatos.GetString(1);
+                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
+                    curso.Dia = (DiasSemana)(Convert.ToInt32(elLectorDeDatos.GetString(3)));
+                    curso.Turno = (Turnos)elLectorDeDatos.GetInt32(4);
+                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(5));
+                    curso.Modalidad = (Modalidad)(Convert.ToInt32(elLectorDeDatos.GetString(6)));
+                    curso.FechaInicio = elLectorDeDatos.GetDateTime(7);
+                    curso.FechaFin = elLectorDeDatos.GetDateTime(8);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(9);
 
                     listaCurso.Add(curso);
                 }

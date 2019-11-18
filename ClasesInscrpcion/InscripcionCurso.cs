@@ -22,14 +22,13 @@ namespace ClasesInscripcion
 
         public static List<InscripcionCurso> listaInscripciones = new List<InscripcionCurso>();
 
-        /*public InscripcionCurso() { }
+        public InscripcionCurso() { }
 
-        public InscripcionCurso(Alumno a,Curso c) {
+        /*public InscripcionCurso(Alumno a) {
             this.Alumno = a;
-            this.Curso = c;
             this.Estado = EstadoInscripcion.Pendiente;
-        }
-        */
+        }*/
+        
 
         public static void Agregar(InscripcionCurso i)
         {
@@ -37,17 +36,20 @@ namespace ClasesInscripcion
             {
                 con.Open();
                 //cabecera
-                string textoCMD = "INSERT INTO Inscripcion_Curso (alumno, estado) output INSERTED.id VALUES (@alumno, @estado)";
+                string textoCMD = "INSERT INTO Inscripcion_Curso (alumno, estado, fecha_inscripcion) output INSERTED.id VALUES (@alumno, @estado, @fecha_inscripcion)";
                 SqlCommand cmd = new SqlCommand(textoCMD, con);
 
                 //parametros
                 SqlParameter i1 = new SqlParameter("@alumno", i.Alumno.Id);
                 SqlParameter i2 = new SqlParameter("@estado", i.Estado);
+                SqlParameter i3 = new SqlParameter("@fecha_inscripcion", DateTime.Now);
 
                 i1.SqlDbType = System.Data.SqlDbType.Int;
-                i2.SqlDbType = System.Data.SqlDbType.VarChar;
+                i2.SqlDbType = System.Data.SqlDbType.Int;
+                i3.SqlDbType = System.Data.SqlDbType.DateTime;
                 cmd.Parameters.Add(i1);
                 cmd.Parameters.Add(i2);
+                cmd.Parameters.Add(i3);
 
                 int id_inscripcion_curso = (int)cmd.ExecuteScalar();
 
@@ -61,13 +63,13 @@ namespace ClasesInscripcion
 
                     //Pasamos los parametros
 
-                    SqlParameter i3 = new SqlParameter("@curso_id", dic.Curso.Id);
-                    SqlParameter i4 = new SqlParameter("@precio", dic.Precio);
-                    SqlParameter i5 = new SqlParameter("@inscripcion_curso_id", id_inscripcion_curso);
+                    SqlParameter i4 = new SqlParameter("@curso_id", dic.Curso.Id);
+                    SqlParameter i5 = new SqlParameter("@precio", dic.Precio);
+                    SqlParameter i6 = new SqlParameter("@inscripcion_curso_id", id_inscripcion_curso);
 
-                    cmd2.Parameters.Add(i3);
                     cmd2.Parameters.Add(i4);
                     cmd2.Parameters.Add(i5);
+                    cmd2.Parameters.Add(i6);
 
                     cmd2.ExecuteNonQuery();
                 }
