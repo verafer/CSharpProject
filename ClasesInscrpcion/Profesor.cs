@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
@@ -157,6 +158,61 @@ namespace ClasesInscripcion
                 cmd.Parameters.Add(p12);
                 cmd.ExecuteNonQuery();
             }
+        }
+        public static List<Profesor> ObtenerProfesores()
+        {
+            Profesor profesor;
+            listaProfesor.Clear();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string textoCMD = "Select * from Profesor";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    profesor = new Profesor();
+                    profesor.Id = elLectorDeDatos.GetInt32(0);
+                    profesor.NroDocumento = elLectorDeDatos.GetString(1);
+                    profesor.TipoDocumento = (TipoDocumento)elLectorDeDatos.GetInt32(2);
+                    profesor.Nombre = elLectorDeDatos.GetString(3);
+                    profesor.Apellido = elLectorDeDatos.GetString(4);
+                    profesor.FechaNacimiento = elLectorDeDatos.GetDateTime(5);
+                    profesor.Direccion = elLectorDeDatos.GetString(6);
+                    profesor.Ciudad = Ciudad.ObtenerCiudad(elLectorDeDatos.GetInt32(7));
+                    profesor.Email = elLectorDeDatos.GetString(8);
+                    profesor.Telefono = elLectorDeDatos.GetString(9);
+                    profesor.NroMatricula = elLectorDeDatos.GetString(10);
+                    profesor.TituloObtenido = elLectorDeDatos.GetString(10);
+                    listaProfesor.Add(profesor);
+                }
+                return listaProfesor;
+            }
+        }
+
+        public static Profesor ObtenerProfesor(int id)
+        {
+            Profesor profesor = null;
+
+            if (listaProfesor.Count == 0)
+            {
+                Profesor.ObtenerProfesores();
+            }
+
+            foreach (Profesor p in listaProfesor)
+            {
+                if (p.Id == id)
+                {
+                    profesor = p;
+                    break;
+                }
+            }
+
+            return profesor;
         }
 
        

@@ -38,8 +38,10 @@ namespace InterfazInscripcion
 
                 else
                 {
-                    int indice = lstAlumno.SelectedIndex;
-                    Alumno.EditarAlumno(a, indice);
+                    Alumno alumno = (Alumno)lstAlumno.SelectedItem;
+                    int index = alumno.Id;
+
+                    Alumno.EditarAlumno(a, index);
                     ActualizarListaAlumnos();
                 }
 
@@ -68,6 +70,7 @@ namespace InterfazInscripcion
             alumno.FechaNacimiento = dtpFechaNacimiento.Value;
             alumno.Direccion = txtDireccion.Text;
             alumno.Ciudad = (Ciudad)cboCiudad.SelectedItem;
+
             alumno.Email = txtEmail.Text;
             alumno.Telefono = txtTelefono.Text;
 
@@ -79,6 +82,7 @@ namespace InterfazInscripcion
         {
             lstAlumno.DataSource = null;
             lstAlumno.DataSource = Alumno.ObtenerAlumnos();
+            lstAlumno.SelectedItem = null;
         }
 
         private void BloquearFormulario()
@@ -132,29 +136,10 @@ namespace InterfazInscripcion
             txtTelefono.Text = "";
             txtNroDocumento.Text = "";
             cboTipoDocumento.SelectedItem = null;
+
+            lstAlumno.SelectedItem = null;
         }
 
-        private void DesbloquearFormularios()
-        {
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            dtpFechaNacimiento.Enabled = true;
-            txtDireccion.Enabled = true;
-            cboCiudad.Enabled = true;
-            txtEmail.Enabled = true;
-            txtTelefono.Enabled = true;
-            txtNroDocumento.Enabled = true;
-            cboTipoDocumento.Enabled = true;
-
-            btnGuardar.Enabled = true;
-            btnCancelar.Enabled = true;
-            btnLimpiar.Enabled = true;
-
-            lstAlumno.Enabled = false;
-            btnAgregar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnEditar.Enabled = false;
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -187,7 +172,7 @@ namespace InterfazInscripcion
             if (lstAlumno.SelectedItems.Count > 0)
             {
                 Alumno alumno = (Alumno)lstAlumno.SelectedItem;
-                Alumno.listaAlumno.Remove(alumno);
+                Alumno.EliminarAlumno(alumno);
                 ActualizarListaAlumnos();
                 LimpiarFormulario();
             }
@@ -196,13 +181,24 @@ namespace InterfazInscripcion
                 MessageBox.Show("Favor seleccionar de la lista para eliminar");
             }
         }
-
-        private void lstAlumno_Click(object sender, EventArgs e)
+        private void frmAlumno_Load(object sender, EventArgs e)
         {
-            Alumno alumno = (Alumno)lstAlumno.SelectedItem;
+            cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
+            cboCiudad.DataSource = Ciudad.ObtenerCiudades();
+            cboTipoDocumento.SelectedItem = null;
+            cboCiudad.SelectedItem = null;
+            ActualizarListaAlumnos();
+            BloquearFormulario();
+            LimpiarFormulario();
+        }
 
-            if (alumno != null)
+        private void lstAlumno_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            if (lstAlumno.SelectedItem != null)
             {
+                Alumno alumno = (Alumno)lstAlumno.SelectedItem;
+
                 txtNroDocumento.Text = alumno.NroDocumento;
                 cboTipoDocumento.SelectedItem = alumno.TipoDocumento;
                 txtNombre.Text = alumno.Nombre;
@@ -214,16 +210,6 @@ namespace InterfazInscripcion
                 txtEmail.Text = alumno.Email;
                 txtTelefono.Text = alumno.Telefono;
             }
-        }
-
-        private void frmAlumno_Load(object sender, EventArgs e)
-        {
-            ActualizarListaAlumnos();
-            cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
-            cboCiudad.DataSource = Ciudad.ObtenerCiudad();
-            cboTipoDocumento.SelectedItem = null;
-            cboCiudad.SelectedItem = null;
-            BloquearFormulario();
         }
     }
 }

@@ -88,7 +88,7 @@ namespace InterfazInscripcion
         private void ActualizarListaProfesores()
         {
             lstProfesor.DataSource = null;
-            lstProfesor.DataSource = Profesor.ObtenerProfesor();
+            lstProfesor.DataSource = Profesor.ObtenerProfesores();
         }
 
         private void BloquearFormulario()
@@ -143,7 +143,7 @@ namespace InterfazInscripcion
         {
             ActualizarListaProfesores();
             cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
-            cboCiudad.DataSource = Ciudad.ObtenerCiudad();
+            cboCiudad.DataSource = Ciudad.ObtenerCiudades();
             cboTipoDocumento.SelectedItem = null;
             cboCiudad.SelectedItem = null;
             BloquearFormulario();

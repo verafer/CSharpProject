@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 namespace ClasesInscripcion
 {
-    public enum modalidad
+    public enum Modalidad
     {
         Presencial, 
         Distancia
@@ -25,7 +26,7 @@ namespace ClasesInscripcion
         public DiasSemana Dia { get; set; }
         public Turnos Turno { get; set; }
         public Profesor Profesor { get; set; }
-        public modalidad Modalidad { get; set; }
+        public Modalidad Modalidad { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public int MontoTotal { get; set; }
@@ -37,7 +38,7 @@ namespace ClasesInscripcion
         public Curso() {
         }
 
-        public Curso(string numeroCurso, Materia materia,DiasSemana dia, Turnos turno, Profesor profesor, modalidad Modalidad,
+        public Curso(string numeroCurso, Materia materia,DiasSemana dia, Turnos turno, Profesor profesor, Modalidad Modalidad,
           DateTime fechaInicio, DateTime fechaFin)
         {
             this.NumeroCurso = numeroCurso;
@@ -177,13 +178,8 @@ namespace ClasesInscripcion
       
         private SqlCommand ObtenerParametrosId(SqlCommand cmd)
         {
-
-            SqlParameter p10 = new SqlParameter("@curso_id", this.Id);
-            p10.SqlDbType = SqlDbType.Int;
-            cmd.Parameters.Add(p10);
-            return cmd;
+            return listaCurso;
         }
-       
-        
+        public void BajaCurso() { }
     }
 }

@@ -63,7 +63,7 @@ namespace InterfazInscripcion
         private void ActualizarListaMateria()
         {
             lstMateria.DataSource = null;
-            lstMateria.DataSource = Materia.ObtenerMateria();
+            lstMateria.DataSource = Materia.ObtenerMaterias();
         }
 
         private void LblNumeroCurso_Click(object sender, EventArgs e)
@@ -84,7 +84,7 @@ namespace InterfazInscripcion
         private void FrmMateria_Load(object sender, EventArgs e)
         {
             ActualizarListaMateria();
-            cboProfesor.DataSource = Profesor.ObtenerProfesor();
+            cboProfesor.DataSource = Profesor.ObtenerProfesores();
             cboProfesor.SelectedItem = null;
             BloquearFormulario();
         }
