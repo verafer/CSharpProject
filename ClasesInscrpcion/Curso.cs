@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Data;
+using System.Data.SqlClient;
 namespace ClasesInscripcion
 {
     public enum modalidad
@@ -49,35 +50,140 @@ namespace ClasesInscripcion
             this.FechaFin = fechaFin;
             this.MontoTotal = 1500000;
         }
-
-        public override string ToString()
-        {
-            return this.NumeroCurso + " " + this.Materia + ", Dia: " + Dia.ToString(); 
-        }
-        public string ObtenerDatosCurso()
-        {
-            return NumeroCurso;
-        }
-
         public static void AgregarCurso(Curso c)
         {
-            listaCurso.Add(c);
-        }
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
 
-        public static void EditarCurso(Curso c, int indice)
-        {
-            Curso.listaCurso[indice] = c;
-
+            {
+                con.Open();
+                string textoCmd = "INSERT INTO Curso (numero_curso, materia, dia, turno, profesor, modalidad, fecha_inicio, fecha_fin,monto_total)VALUES (@numero_curso, @materia, @dia, @turno, @profesor, @modalidad, @fecha_inicio, @fecha_fin,@monto_total)";
+                SqlCommand cmd = new SqlCommand(textoCmd, con);
+                cmd = c.ObtenerParametros(cmd);
+                cmd.ExecuteNonQuery();
+            }
         }
         public static void EliminarCurso(Curso curso)
         {
-            listaCurso.Remove(curso);
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string SENTENCIA_SQL = "delete from Curso where Id = @curso_id";
+
+                SqlCommand cmd = new SqlCommand(SENTENCIA_SQL, con);
+                SqlParameter p1 = new SqlParameter("@curso_id", curso.Id);
+                p1.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(p1);
+
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
         }
+
+
+        public static void EditarCurso(int index, Curso c)
+        {
+
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+            {
+                con.Open();
+                string textoCMD = "UPDATE Curso SET numero_curso = @numero_curso,materia= @materia,dia= @dia,turno= @turno,profesor= @profesor,modalidad=@modalidad, fecha_inicio= @fecha_inicio, fecha_fin= @fecha_fin,monto_total@monto_total where Id = @curso_id";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+                cmd = c.ObtenerParametros(cmd, true);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
 
         public static List<Curso> ObtenerCursos()
         {
+            Curso curso;
+
+            listaCurso.Clear();
+
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+            {
+                con.Open();
+                string tectoCMD = "select * from Curso";
+                SqlCommand cmd = new SqlCommand(tectoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    curso = new Curso();
+                    curso.Id = elLectorDeDatos.GetInt32(0);
+                    curso.NumeroCurso = elLectorDeDatos.GetString(1);
+                    curso.Materia =  Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
+                    curso.Dia =(DiasSemana)elLectorDeDatos.GetInt32(3);
+                    curso.Turno = (Turnos) elLectorDeDatos.GetInt32(4);
+                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(5));
+                    curso.Modalidad = (modalidad)elLectorDeDatos.GetInt32(6);
+                    curso.FechaInicio = elLectorDeDatos.GetDateTime(7);
+                    curso.FechaFin = elLectorDeDatos.GetDateTime(8);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(7);
+                    listaCurso.Add(curso);
+
+                }
+            }
+
             return listaCurso;
         }
-        public void BajaCurso() { }
+
+
+
+
+        private SqlCommand ObtenerParametros(SqlCommand cmd, Boolean id = false)
+
+        {
+            SqlParameter p1 = new SqlParameter("@numero_curso", this.NumeroCurso);
+            SqlParameter p2 = new SqlParameter("@materia", this.Materia.Id);
+            SqlParameter p3 = new SqlParameter("@dia", this.Dia);
+            SqlParameter p4 = new SqlParameter("@turno", this.Turno);
+            SqlParameter p5 = new SqlParameter("@profesor", this.Profesor.Id);
+            SqlParameter p6 = new SqlParameter("@modalidad", this.Modalidad); //es el id del proveedor para obtener dicho valor
+            SqlParameter p7 = new SqlParameter("@fecha_inicio", this.FechaInicio);
+            SqlParameter p8 = new SqlParameter("@fecha_fin", this.FechaFin);
+            SqlParameter p9 = new SqlParameter("@monto_total", this.MontoTotal);
+            p1.SqlDbType = SqlDbType.VarChar;
+            p2.SqlDbType = SqlDbType.Int;
+            p3.SqlDbType = SqlDbType.VarChar;
+            p4.SqlDbType = SqlDbType.VarChar;
+            p5.SqlDbType = SqlDbType.Int;
+            p6.SqlDbType = SqlDbType.VarChar;
+            p7.SqlDbType = SqlDbType.DateTime;
+            p8.SqlDbType = SqlDbType.DateTime;
+            p9.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(p1);
+            cmd.Parameters.Add(p2);
+            cmd.Parameters.Add(p3);
+            cmd.Parameters.Add(p4);
+            cmd.Parameters.Add(p5);
+            cmd.Parameters.Add(p6);
+            cmd.Parameters.Add(p7);
+            cmd.Parameters.Add(p8);
+            cmd.Parameters.Add(p9);
+            if (id == true)
+            {
+                cmd = ObtenerParametrosId(cmd);
+            }
+            return cmd;
+
+        }
+
+        //Obtenemos los dias de entrega separador por coma ","
+      
+        private SqlCommand ObtenerParametrosId(SqlCommand cmd)
+        {
+
+            SqlParameter p10 = new SqlParameter("@curso_id", this.Id);
+            p10.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(p10);
+            return cmd;
+        }
+       
+        
     }
 }
