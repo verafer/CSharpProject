@@ -15,4 +15,5 @@ namespace ClasesInscripcion
         public EstadoInscripcion estado { get; set; }
         public DateTime FechaInscripcion  { get; set; }
     }
-}
+   
+    }

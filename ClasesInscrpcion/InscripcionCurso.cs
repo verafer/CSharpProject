@@ -87,24 +87,20 @@ namespace ClasesInscripcion
 
                 SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
 
-                while (elLectorDeDatos.Read())
-                {
+                    cmd2.Parameters.Add(i4);
+                    cmd2.Parameters.Add(i5);
+                    cmd2.Parameters.Add(i6);
 
-                    MessageBox.Show(elLectorDeDatos.GetInt32(1).ToString());
-                    icd = new InscripcionCursoDetalle();
-                    icd.Id = elLectorDeDatos.GetInt32(0);
-                    icd.Curso = Curso.ObtenerCurso(elLectorDeDatos.GetInt32(1));
-                    //icd.Precio = elLectorDeDatos.GetFloat(2);
-                    icd.alumno = Alumno.ObtenerAlumno(elLectorDeDatos.GetInt32(3));
-                    icd.estado = (EstadoInscripcion)elLectorDeDatos.GetInt32(4);
-                    icd.FechaInscripcion = elLectorDeDatos.GetDateTime(5);
+                    cmd2.ExecuteNonQuery();
+                }
+            }
+        }
 
                     //ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
                     dicc.Add(icd);
                 }
-                con.Close();
-                return dicc;
             }
+            return listaCursosDelAlumno;
         }
         /*public static void AgregarInscripto(InscripcionCurso i, Curso Curso)
         {

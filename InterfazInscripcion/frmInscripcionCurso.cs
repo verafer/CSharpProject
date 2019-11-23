@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace InterfazInscripcion
 {
+  
     public partial class frmInscripcionCurso : Form
     {
 
@@ -68,14 +69,10 @@ namespace InterfazInscripcion
                 gbxDatosAlumno.Enabled = true;
 
                 inscripcionCurso.Alumno = a;
-
-                //MessageBox.Show(InscripcionCurso.ObtenerCursosDeAlumno(a).ToString());
-                dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
-
-                ActualizarDataGrid();
+               
             }
             else
-            {
+ {
                 MessageBox.Show("No se encontró un alumno que coincida con los datos ingresados");
             }
             
@@ -96,17 +93,7 @@ namespace InterfazInscripcion
 
         private void LimpiarFormulario()
         {
-            lblNombre.Text = "";
-            lblFechaNac.Text = "";
-            lblDireccion.Text = "";
-            lblCiudad.Text = "";
-            lblEmail.Text = "";
-            lblTelefono.Text = "";
-            gbxDatosAlumno.Enabled = false;
-            txtNroDocumento.Text = "";
-            cboTipoDocumento.SelectedItem = null;
-            dtgDetalleInscripcionCurso.DataSource = null;
-
+            throw new NotImplementedException();
         }
 
         /*public void CursoSeleccionado(Curso c)
