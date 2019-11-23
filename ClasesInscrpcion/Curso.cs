@@ -97,6 +97,26 @@ namespace ClasesInscripcion
             }
         }
 
+        public static Curso ObtenerCurso(int id)
+        {
+            Curso curso = null;
+
+            if (listaCurso.Count == 0)
+            {
+                Curso.ObtenerCursos();
+            }
+
+            foreach (Curso c in listaCurso)
+            {
+                if (c.Id == id)
+                {
+                    curso = c;
+                    break;
+                }
+            }
+
+            return curso;
+        }
         public static List<Curso> ObtenerCursos()
         {
             //return listaCurso;

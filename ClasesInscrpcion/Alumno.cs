@@ -185,6 +185,27 @@ namespace ClasesInscripcion
             return alumno;
         }
 
+        public static Alumno ObtenerAlumno(int id)
+        {
+            Alumno alumno = null;
+
+            if (listaAlumno.Count == 0)
+            {
+                Alumno.ObtenerAlumnos();
+            }
+
+            foreach (Alumno a in listaAlumno)
+            {
+                if (a.Id == id)
+                {
+                    alumno = a;
+                    break;
+                }
+            }
+
+            return alumno;
+        }
+
         public override string ToString()
         {
             return this.Nombre + " " + this.Apellido;

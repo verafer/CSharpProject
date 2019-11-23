@@ -68,6 +68,11 @@ namespace InterfazInscripcion
                 gbxDatosAlumno.Enabled = true;
 
                 inscripcionCurso.Alumno = a;
+
+                //MessageBox.Show(InscripcionCurso.ObtenerCursosDeAlumno(a).ToString());
+                dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+
+                ActualizarDataGrid();
             }
             else
             {
@@ -91,7 +96,17 @@ namespace InterfazInscripcion
 
         private void LimpiarFormulario()
         {
-            throw new NotImplementedException();
+            lblNombre.Text = "";
+            lblFechaNac.Text = "";
+            lblDireccion.Text = "";
+            lblCiudad.Text = "";
+            lblEmail.Text = "";
+            lblTelefono.Text = "";
+            gbxDatosAlumno.Enabled = false;
+            txtNroDocumento.Text = "";
+            cboTipoDocumento.SelectedItem = null;
+            dtgDetalleInscripcionCurso.DataSource = null;
+
         }
 
         /*public void CursoSeleccionado(Curso c)

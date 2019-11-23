@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ClasesInscripcion
 {
@@ -35,61 +37,74 @@ namespace ClasesInscripcion
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
                 con.Open();
-                //cabecera
-                string textoCMD = "INSERT INTO Inscripcion_Curso (alumno, estado, fecha_inscripcion) output INSERTED.id VALUES (@alumno, @estado, @fecha_inscripcion)";
-                SqlCommand cmd = new SqlCommand(textoCMD, con);
-
-                //parametros
-                SqlParameter i1 = new SqlParameter("@alumno", i.Alumno.Id);
-                SqlParameter i2 = new SqlParameter("@estado", i.Estado);
-                SqlParameter i3 = new SqlParameter("@fecha_inscripcion", DateTime.Now);
-
-                i1.SqlDbType = System.Data.SqlDbType.Int;
-                i2.SqlDbType = System.Data.SqlDbType.Int;
-                i3.SqlDbType = System.Data.SqlDbType.DateTime;
-                cmd.Parameters.Add(i1);
-                cmd.Parameters.Add(i2);
-                cmd.Parameters.Add(i3);
-
-                int id_inscripcion_curso = (int)cmd.ExecuteScalar();
-
-
                 //DETALLE
                 foreach (InscripcionCursoDetalle dic in i.detalle_inscripcion_cursos)
                 {
-                    //insert para el detalle
-                    string textoCMD2 = "INSERT INTO Inscripcion_Curso_Detalle(curso_id, precio, inscripcion_curso_id) VALUES (@curso_id, @precio, @inscripcion_curso_id)";
-                    SqlCommand cmd2 = new SqlCommand(textoCMD2, con);
+           
+                    //cabecera
+                    string textoCMD = "INSERT INTO Inscripcion_Curso_Detalle (curso_id, precio,alumno, estado, fecha_inscripcion) VALUES (@curso_id, @precio, @alumno, @estado, @fecha_inscripcion)";
+                    SqlCommand cmd = new SqlCommand(textoCMD, con);
 
-                    //Pasamos los parametros
+                    //parametros
+                    SqlParameter i1 = new SqlParameter("@curso_id", dic.Curso.Id);
+                    SqlParameter i2 = new SqlParameter("@precio", dic.Precio);
+                    SqlParameter i3 = new SqlParameter("@alumno", i.Alumno.Id);
+                    SqlParameter i4 = new SqlParameter("@estado", i.Estado);
+                    SqlParameter i5 = new SqlParameter("@fecha_inscripcion", DateTime.Now);
 
-                    SqlParameter i4 = new SqlParameter("@curso_id", dic.Curso.Id);
-                    SqlParameter i5 = new SqlParameter("@precio", dic.Precio);
-                    SqlParameter i6 = new SqlParameter("@inscripcion_curso_id", id_inscripcion_curso);
+                    i1.SqlDbType = System.Data.SqlDbType.Int;
+                    i2.SqlDbType = System.Data.SqlDbType.Float;
+                    i3.SqlDbType = System.Data.SqlDbType.Int;
+                    i4.SqlDbType = System.Data.SqlDbType.Int;
+                    i5.SqlDbType = System.Data.SqlDbType.DateTime; 
 
-                    cmd2.Parameters.Add(i4);
-                    cmd2.Parameters.Add(i5);
-                    cmd2.Parameters.Add(i6);
+                    cmd.Parameters.Add(i1);
+                    cmd.Parameters.Add(i2);
+                    cmd.Parameters.Add(i3);
+                    cmd.Parameters.Add(i4);
+                    cmd.Parameters.Add(i5);
 
-                    cmd2.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                    //int id_inscripcion_curso = (int)cmd.ExecuteScalar();
                 }
             }
         }
 
-        public static List<InscripcionCurso> ObtenerCursosDeAlumno(Alumno alumno)
+        public static List<InscripcionCursoDetalle> ObtenerCursosDeAlumno(Alumno alumno)
         {
-            List<InscripcionCurso> listaCursosDelAlumno = new List<InscripcionCurso>();
-            foreach (Curso c in Curso.ObtenerCursos())
+            InscripcionCursoDetalle icd;
+            List<InscripcionCursoDetalle> dicc = new List<InscripcionCursoDetalle>();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
-                foreach (InscripcionCurso ic in c.listaInscriptos)
+                con.Open();
+                string textoCMD = "SELECT * FROM Inscripcion_Curso_Detalle Where alumno = @id ";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlParameter p1 = new SqlParameter("@id", alumno.Id);
+                p1.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(p1);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
                 {
-                    if (alumno == ic.Alumno)
-                    {
-                        listaCursosDelAlumno.Add(ic);
-                    }
+
+                    MessageBox.Show(elLectorDeDatos.GetInt32(1).ToString());
+                    icd = new InscripcionCursoDetalle();
+                    icd.Id = elLectorDeDatos.GetInt32(0);
+                    icd.Curso = Curso.ObtenerCurso(elLectorDeDatos.GetInt32(1));
+                    //icd.Precio = elLectorDeDatos.GetFloat(2);
+                    icd.alumno = Alumno.ObtenerAlumno(elLectorDeDatos.GetInt32(3));
+                    icd.estado = (EstadoInscripcion)elLectorDeDatos.GetInt32(4);
+                    icd.FechaInscripcion = elLectorDeDatos.GetDateTime(5);
+
+                    //ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
+                    dicc.Add(icd);
                 }
+                con.Close();
+                return dicc;
             }
-            return listaCursosDelAlumno;
         }
         /*public static void AgregarInscripto(InscripcionCurso i, Curso Curso)
         {
