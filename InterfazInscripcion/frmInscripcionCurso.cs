@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 namespace InterfazInscripcion
 {
+  
     public partial class frmInscripcionCurso : Form
     {
 
@@ -68,9 +69,10 @@ namespace InterfazInscripcion
                 gbxDatosAlumno.Enabled = true;
 
                 inscripcionCurso.Alumno = a;
+               
             }
             else
-            {
+ {
                 MessageBox.Show("No se encontró un alumno que coincida con los datos ingresados");
             }
             

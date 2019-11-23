@@ -11,4 +11,5 @@ namespace ClasesInscripcion
         public Curso Curso { get; set; }
         public double Precio { get; set; }
     }
-}
+   
+    }

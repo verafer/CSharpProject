@@ -76,20 +76,24 @@ namespace ClasesInscripcion
             }
         }
 
-        public static List<InscripcionCurso> ObtenerCursosDeAlumno(Alumno alumno)
+        public static List<Curso> ObtenerCursosDeAlumno(Alumno alumno)
         {
-            List<InscripcionCurso> listaCursosDelAlumno = new List<InscripcionCurso>();
+            
+            List<Curso> listaCursos = new List<Curso>();
             foreach (Curso c in Curso.ObtenerCursos())
             {
                 foreach (InscripcionCurso ic in c.listaInscriptos)
                 {
                     if (alumno == ic.Alumno)
                     {
-                        listaCursosDelAlumno.Add(ic);
+                    
+                            listaCursos.Add(c);
+                        
+                        
                     }
                 }
             }
-            return listaCursosDelAlumno;
+            return listaCursos;
         }
         /*public static void AgregarInscripto(InscripcionCurso i, Curso Curso)
         {

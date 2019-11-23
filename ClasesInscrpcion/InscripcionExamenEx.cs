@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ClasesInscripcion
 {
-    class Inscripcion
+    public class InscripcionExamenEx
     {
         public Alumno Alumno { get; set; }
 
@@ -12,9 +14,9 @@ namespace ClasesInscripcion
 
         public DateTime FechaInscripcion { get; set; }
 
-        public Inscripcion() { }
+        public InscripcionExamenEx() { }
 
-        public Inscripcion(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
+        public InscripcionExamenEx(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
         {
             this.Alumno = alumno;
             this.Carrera = carrera;
