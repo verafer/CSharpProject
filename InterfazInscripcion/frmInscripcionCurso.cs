@@ -11,7 +11,6 @@ using System.Windows.Forms;
 
 namespace InterfazInscripcion
 {
-  
     public partial class frmInscripcionCurso : Form
     {
 
@@ -41,7 +40,7 @@ namespace InterfazInscripcion
         private void btnBuscarAlumno_Click(object sender, EventArgs e)
         {
             string nroDoc = txtNroDocumento.Text;
-            
+
             if (nroDoc == "0" || nroDoc == "")
             {
                 MessageBox.Show("Debe ingresar un numero de documento");
@@ -69,13 +68,18 @@ namespace InterfazInscripcion
                 gbxDatosAlumno.Enabled = true;
 
                 inscripcionCurso.Alumno = a;
-               
+
+                //MessageBox.Show(InscripcionCurso.ObtenerCursosDeAlumno(a).ToString());
+                dtgDetalleInscripcionCurso.DataSource = null;
+                dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+
+                ActualizarDataGrid();
             }
             else
- {
+            {
                 MessageBox.Show("No se encontró un alumno que coincida con los datos ingresados");
             }
-            
+
 
         }
 
@@ -93,7 +97,17 @@ namespace InterfazInscripcion
 
         private void LimpiarFormulario()
         {
-            throw new NotImplementedException();
+            lblNombre.Text = "";
+            lblFechaNac.Text = "";
+            lblDireccion.Text = "";
+            lblCiudad.Text = "";
+            lblEmail.Text = "";
+            lblTelefono.Text = "";
+            gbxDatosAlumno.Enabled = false;
+            txtNroDocumento.Text = "";
+            cboTipoDocumento.SelectedItem = null;
+            dtgDetalleInscripcionCurso.DataSource = null;
+
         }
 
         /*public void CursoSeleccionado(Curso c)
@@ -101,7 +115,7 @@ namespace InterfazInscripcion
             txtNroCurso.Text = c.NumeroCurso;
             lblDescripcionCurso.Text = Convert.ToString(c.Materia);
         }*/
-        
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
