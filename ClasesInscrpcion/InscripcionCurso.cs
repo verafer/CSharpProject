@@ -20,7 +20,7 @@ namespace ClasesInscripcion
         //public Curso Curso { get; set; }
         public EstadoInscripcion Estado { get; set; }
 
-        public List<InscripcionCursoDetalle> detalle_inscripcion_cursos = new List<InscripcionCursoDetalle>();
+        public static List<InscripcionCursoDetalle> listaDic = new List<InscripcionCursoDetalle>();
 
         public static List<InscripcionCurso> listaInscripciones = new List<InscripcionCurso>();
 
@@ -38,7 +38,7 @@ namespace ClasesInscripcion
             {
                 con.Open();
                 //DETALLE
-                foreach (InscripcionCursoDetalle dic in i.detalle_inscripcion_cursos)
+                foreach (InscripcionCursoDetalle dic in InscripcionCurso.listaDic)
                 {
 
                     //cabecera
@@ -73,7 +73,6 @@ namespace ClasesInscripcion
         public static List<InscripcionCursoDetalle> ObtenerCursosDeAlumno(Alumno alumno)
         {
             InscripcionCursoDetalle icd;
-            List<InscripcionCursoDetalle> dicc = new List<InscripcionCursoDetalle>();
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
                 con.Open();
@@ -99,11 +98,11 @@ namespace ClasesInscripcion
                     icd.FechaInscripcion = elLectorDeDatos.GetDateTime(5);
 
                     //ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
-                    dicc.Add(icd);
+                    listaDic.Add(icd);
                     MessageBox.Show(icd.ToString());
                 }
                 con.Close();
-                return dicc;
+                return listaDic;
             }
         }
         /*public static void AgregarInscripto(InscripcionCurso i, Curso Curso)

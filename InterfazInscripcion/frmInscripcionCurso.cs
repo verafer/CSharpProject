@@ -23,7 +23,7 @@ namespace InterfazInscripcion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (inscripcionCurso.detalle_inscripcion_cursos.Count != 0)
+            if (InscripcionCurso.listaDic.Count != 0)
             {
                 inscripcionCurso.Estado = EstadoInscripcion.Confirmada;
                 InscripcionCurso.Agregar(inscripcionCurso);
@@ -122,7 +122,7 @@ namespace InterfazInscripcion
             InscripcionCursoDetalle icd = new InscripcionCursoDetalle();
             icd.Curso = c;
             icd.Precio = c.MontoTotal;
-            inscripcionCurso.detalle_inscripcion_cursos.Add(icd);
+            InscripcionCurso.listaDic.Add(icd);
 
             ActualizarDataGrid();
         }
@@ -130,7 +130,7 @@ namespace InterfazInscripcion
         private void ActualizarDataGrid()
         {
             dtgDetalleInscripcionCurso.DataSource = null;
-            dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.detalle_inscripcion_cursos;
+            dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.listaDic;
             CalcularTotal();
         }
 
@@ -138,7 +138,7 @@ namespace InterfazInscripcion
         {
             double total = 0;
 
-            foreach (InscripcionCursoDetalle icd in inscripcionCurso.detalle_inscripcion_cursos)
+            foreach (InscripcionCursoDetalle icd in InscripcionCurso.listaDic)
             {
                 total = total + icd.Precio;
             }
@@ -147,10 +147,10 @@ namespace InterfazInscripcion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (inscripcionCurso.detalle_inscripcion_cursos.Count != 0)
+            if (InscripcionCurso.listaDic.Count > 0)
             {
                 InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
-                inscripcionCurso.detalle_inscripcion_cursos.Remove(icd);
+                InscripcionCurso.listaDic.Remove(icd);
                 ActualizarDataGrid();
             }
             else
