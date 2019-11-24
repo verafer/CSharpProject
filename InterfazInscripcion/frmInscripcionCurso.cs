@@ -23,7 +23,13 @@ namespace InterfazInscripcion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (InscripcionCurso.listaDic.Count != 0)
+            string nroDoc = txtNroDocumento.Text;
+
+            if (ValidarDatos()) { return; }
+
+            TipoDocumento tipoDoc = (TipoDocumento)cboTipoDocumento.SelectedItem;
+
+            if (inscripcionCurso.listaDic.Count != 0)
             {
                 inscripcionCurso.Estado = EstadoInscripcion.Confirmada;
                 InscripcionCurso.Agregar(inscripcionCurso);
@@ -41,17 +47,7 @@ namespace InterfazInscripcion
         {
             string nroDoc = txtNroDocumento.Text;
 
-            if (nroDoc == "0" || nroDoc == "")
-            {
-                MessageBox.Show("Debe ingresar un numero de documento");
-                return;
-            }
-
-            if (cboTipoDocumento.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe seleccionar un tipo de documento");
-                return;
-            }
+            if (ValidarDatos()) { return; }
 
             TipoDocumento tipoDoc = (TipoDocumento)cboTipoDocumento.SelectedItem;
 
@@ -67,11 +63,14 @@ namespace InterfazInscripcion
                 lblTelefono.Text = a.Telefono;
                 gbxDatosAlumno.Enabled = true;
 
-                inscripcionCurso.Alumno = a;
-
                 //MessageBox.Show(InscripcionCurso.ObtenerCursosDeAlumno(a).ToString());
                 dtgDetalleInscripcionCurso.DataSource = null;
                 dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+                btnAgregar.Enabled = true;
+                btnEliminar.Enabled = true;
+                btnGuardar.Enabled = true;
+
+                inscripcionCurso.Alumno = a;
 
                 ActualizarDataGrid();
             }
@@ -83,7 +82,7 @@ namespace InterfazInscripcion
 
         }
 
-        private void frmInscripcionCurso_Load(object sender, EventArgs e)
+            private void frmInscripcionCurso_Load(object sender, EventArgs e)
         {
             dtgDetalleInscripcionCurso.AutoGenerateColumns = true;
             cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
@@ -91,7 +90,7 @@ namespace InterfazInscripcion
             dtgDetalleCurso.AutoGenerateColumns = true;
             dtgDetalleCurso.DataSource = null;
             dtgDetalleCurso.DataSource = Curso.ObtenerCursos();
-            //LimpiarFormulario();
+            LimpiarFormulario();
             inscripcionCurso = new InscripcionCurso();
         }
 
@@ -107,6 +106,10 @@ namespace InterfazInscripcion
             txtNroDocumento.Text = "";
             cboTipoDocumento.SelectedItem = null;
             dtgDetalleInscripcionCurso.DataSource = null;
+            lblTotal.Text = "";
+            btnAgregar.Enabled = false;
+            btnEliminar.Enabled = false;
+            btnGuardar.Enabled = false;
 
         }
 
@@ -119,18 +122,37 @@ namespace InterfazInscripcion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
-            InscripcionCursoDetalle icd = new InscripcionCursoDetalle();
+            InscripcionCurso icd = new InscripcionCurso();
             icd.Curso = c;
             icd.Precio = c.MontoTotal;
-            InscripcionCurso.listaDic.Add(icd);
+            icd.FechaInscripcion = DateTime.Now;
+            inscripcionCurso.listaDic.Add(icd);
 
             ActualizarDataGrid();
         }
 
-        private void ActualizarDataGrid()
+        private Boolean ValidarDatos()
+        {
+            string nroDoc = txtNroDocumento.Text;
+            Boolean validar = false;
+
+            if (nroDoc == "0" || nroDoc == "")
+            {
+                MessageBox.Show("Debe ingresar un numero de documento");
+                validar = true;
+            }else if (cboTipoDocumento.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un tipo de documento");
+                validar = true;
+            }
+
+            return validar;
+        }
+
+            private void ActualizarDataGrid()
         {
             dtgDetalleInscripcionCurso.DataSource = null;
-            dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.listaDic;
+            dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.listaDic;
             CalcularTotal();
         }
 
@@ -138,7 +160,7 @@ namespace InterfazInscripcion
         {
             double total = 0;
 
-            foreach (InscripcionCursoDetalle icd in InscripcionCurso.listaDic)
+            foreach (InscripcionCurso icd in inscripcionCurso.listaDic)
             {
                 total = total + icd.Precio;
             }
@@ -147,10 +169,10 @@ namespace InterfazInscripcion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (InscripcionCurso.listaDic.Count > 0)
+            if (inscripcionCurso.listaDic.Count != 0)
             {
-                InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
-                InscripcionCurso.listaDic.Remove(icd);
+                InscripcionCurso icd = (InscripcionCurso)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
+                inscripcionCurso.listaDic.Remove(icd);
                 ActualizarDataGrid();
             }
             else

@@ -14,6 +14,6 @@ namespace ClasesInscripcion
         public Alumno alumno { get; set; }
         public EstadoInscripcion estado { get; set; }
         public DateTime FechaInscripcion  { get; set; }
+
     }
-   
-    }
+}

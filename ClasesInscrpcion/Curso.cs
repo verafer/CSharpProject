@@ -200,6 +200,12 @@ namespace ClasesInscripcion
             cmd.Parameters.Add(p10);
             return cmd;
         }
+
         public void BajaCurso() { }
+
+        public override string ToString()
+        {
+            return this.NumeroCurso + " - " + this.Materia;
+        }
     }
 }
