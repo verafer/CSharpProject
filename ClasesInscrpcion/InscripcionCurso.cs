@@ -31,7 +31,7 @@ namespace ClasesInscripcion
 
         //public static List<InscripcionCurso> listaInscripciones = new List<InscripcionCurso>();
         public static List<InscripcionCurso> listaInscripciones = new List<InscripcionCurso>();
-
+        public static List<InscripcionCursoDetalle> listaInscripcionesD = new List<InscripcionCursoDetalle>();
         public InscripcionCurso() { }
 
         /*public InscripcionCurso(Alumno a) {
@@ -111,6 +111,58 @@ namespace ClasesInscripcion
                 }
                 con.Close();
                 return listaInscripciones;
+            }
+        }
+        public static InscripcionCursoDetalle ObtenerCurso(int id)
+        {
+            InscripcionCursoDetalle inscripcioncurso = null;
+
+            if (listaInscripcionesD.Count == 0)
+            {
+                InscripcionCurso.ObtenerCursos();
+            }
+
+            foreach (InscripcionCursoDetalle c in listaInscripcionesD)
+            {
+                if (c.Id == id)
+                {
+                    inscripcioncurso = c;
+                    break;
+                }
+            }
+
+            return inscripcioncurso;
+        }
+        public static List<InscripcionCursoDetalle> ObtenerCursos()
+        {
+            InscripcionCursoDetalle icd;
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+            {
+                con.Open();
+                string textoCMD = "SELECT * FROM Inscripcion_Curso_Detalle ";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+
+                while (elLectorDeDatos.Read())
+                {
+
+                    icd = new InscripcionCursoDetalle();
+                    icd.Id = elLectorDeDatos.GetInt32(0);
+                    icd.Curso = Curso.ObtenerCurso(elLectorDeDatos.GetInt32(1));
+                    //icd.Precio = elLectorDeDatos.GetFloat(2);
+                    icd.alumno= Alumno.ObtenerAlumno(elLectorDeDatos.GetInt32(3));
+                    icd.estado = (EstadoInscripcion)elLectorDeDatos.GetInt32(4);
+                    icd.FechaInscripcion = elLectorDeDatos.GetDateTime(5);
+
+                    //ciudad.Departamento = (Departamento)elLectorDeDatos.GetInt32(2);
+                    listaInscripcionesD.Add(icd);
+                    //MessageBox.Show(icd.ToString());
+                }
+                con.Close();
+                return listaInscripcionesD;
             }
         }
         /*public static void AgregarInscripto(InscripcionCurso i, Curso Curso)

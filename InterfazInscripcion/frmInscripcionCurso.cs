@@ -13,9 +13,9 @@ namespace InterfazInscripcion
 {
     public partial class frmInscripcionCurso : Form
     {
-
+       
         InscripcionCurso inscripcionCurso;
-
+        public int ban = 0;
         public frmInscripcionCurso()
         {
             InitializeComponent();
@@ -122,13 +122,30 @@ namespace InterfazInscripcion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
-            InscripcionCurso icd = new InscripcionCurso();
-            icd.Curso = c;
-            icd.Precio = c.MontoTotal;
-            icd.FechaInscripcion = DateTime.Now;
-            inscripcionCurso.listaDic.Add(icd);
+            foreach (InscripcionCurso ic in inscripcionCurso.listaDic)
+            {
+                if (c == ic.Curso)
+                {
+                    ban = 1;
+                }
+            }
+            if (ban==0)
+            {
+                InscripcionCurso icd = new InscripcionCurso();
+                icd.Curso = c;
 
-            ActualizarDataGrid();
+                icd.Precio = c.MontoTotal;
+                icd.FechaInscripcion = DateTime.Now;
+                inscripcionCurso.listaDic.Add(icd);
+
+                ActualizarDataGrid();
+            }
+            else if (ban==1)
+            {
+                MessageBox.Show("Usted ya esta inscripto en este curso ");
+            }
+            ban = 0;
+
         }
 
         private Boolean ValidarDatos()

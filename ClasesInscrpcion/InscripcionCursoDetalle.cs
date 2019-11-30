@@ -12,8 +12,10 @@ namespace ClasesInscripcion
         public Curso Curso { get; set; }
         public float Precio { get; set; }
         public Alumno alumno { get; set; }
+       
         public EstadoInscripcion estado { get; set; }
         public DateTime FechaInscripcion  { get; set; }
 
     }
+
 }

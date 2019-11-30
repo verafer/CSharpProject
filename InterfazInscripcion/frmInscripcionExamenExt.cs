@@ -29,9 +29,12 @@ namespace InterfazInscripcion
         private void FrmInscripcionExamenExt_Load(object sender, EventArgs e)
         {
             cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
-            cboMateria.DataSource = Materia.ObtenerMaterias();
+           // cboMateria.DataSource = Materia.ObtenerMaterias();
             cboTipoDocumento.SelectedItem = null;
-            cboMateria.SelectedItem = null;
+           // cboMateria.SelectedItem = null;
+            inscripcionExamenEx = new InscripcionExamenEx();
+
+            LimpiarFormulario();
         }
 
         private void BtnBuscarAlumno_Click_1(object sender, EventArgs e)
@@ -64,8 +67,11 @@ namespace InterfazInscripcion
                 lblTelefono.Text = a.Telefono;
                 gbxDatosAlumno.Enabled = true;
                 ActualizarDataGrid(a);
-               // inscripcionExamenEx.Alumno = a;
-                
+
+                inscripcionExamenEx.Alumno = a;
+
+                btnGuardar.Enabled = true;
+
             }
             else
             {
@@ -82,6 +88,124 @@ namespace InterfazInscripcion
         private void BtnBuscarMateria_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void BtnConsultar_Click(object sender, EventArgs e)
+        {
+            InscripcionCurso c = (InscripcionCurso)dtgCurso.CurrentRow.DataBoundItem;
+            InscripcionCursoDetalle icd= InscripcionCurso.ObtenerCurso(c.Id);
+            Examen ex = Examen.ObtenerExamen(icd.Id);
+
+            ValidarExamen(ex);
+
+            inscripcionExamenEx.Curso = c.Curso;
+        }
+
+        private void ValidarExamen(Examen ex)
+        {
+            if (rboPrimeraP.Checked == true)
+            {
+                if (ex.PrimerParcial == RindioParcial.Si)
+                {
+                    MessageBox.Show("No se puede inscribir. El estudiante ya rindió su primer parcial");
+                }
+                else if (ex.PrimerParcial == RindioParcial.No)
+                {
+                    MessageBox.Show("El estudiante está habilitado para rendir");
+                    inscripcionExamenEx.examen = "Primer Parcial";
+                }
+
+            }
+            else if (rboSegundaP.Checked == true)
+            {
+                if (ex.SegundoParcial == RindioParcial.Si)
+                {
+                    MessageBox.Show("No se puede inscribir. El estudiante ya rindió su segundo parcial");
+                }
+                else if (ex.PrimerParcial == RindioParcial.No)
+                {
+                    MessageBox.Show("El estudiante está habilitado para rendir");
+                    inscripcionExamenEx.examen = "Segundo Parcial";
+                }
+
+            }
+            else if (rboTerceraP.Checked == true)
+            {
+                if (ex.TercerParcial == RindioParcial.Si)
+                {
+                    MessageBox.Show("No se puede inscribir. El estudiante ya rindió su tercer parcial");
+                }
+                else if (ex.TercerParcial == RindioParcial.No)
+                {
+                    MessageBox.Show("El estudiante está habilitado para rendir");
+                    inscripcionExamenEx.examen = "Tercer Parcial";
+                }
+
+            }
+            else if (rboFinal.Checked == true)
+            {
+                if (ex.Final == RindioParcial.Si)
+                {
+                    MessageBox.Show("No se puede inscribir. El estudiante ya rindió su examen Final");
+                }
+                else if (ex.Final == RindioParcial.No)
+                {
+                    MessageBox.Show("El estudiante está habilitado para rendir");
+                    inscripcionExamenEx.examen = "Final";
+                }
+
+            }
+        }
+
+        private void BtnGuardar_Click(object sender, EventArgs e)
+        {
+            string nroDoc = txtNroDocumento.Text;
+
+            if (ValidarDatos()) { return; }
+
+            TipoDocumento tipoDoc = (TipoDocumento)cboTipoDocumento.SelectedItem;
+
+            InscripcionExamenEx.Agregar(inscripcionExamenEx);
+            MessageBox.Show("La inscripcion ha sido guardada con éxito");
+            LimpiarFormulario();
+            inscripcionExamenEx = new InscripcionExamenEx();
+            
+        }
+
+        private void LimpiarFormulario()
+        {
+            lblNombre.Text = "";
+            lblFechaNac.Text = "";
+            lblDireccion.Text = "";
+            lblCiudad.Text = "";
+            lblEmail.Text = "";
+            lblTelefono.Text = "";
+            gbxDatosAlumno.Enabled = false;
+            txtNroDocumento.Text = "";
+            cboTipoDocumento.SelectedItem = null;
+            //dtgCurso.DataSource = null;
+            //lblTotal.Text = "";
+            //btnGuardar.Enabled = false;
+
+        }
+
+        private Boolean ValidarDatos()
+        {
+            string nroDoc = txtNroDocumento.Text;
+            Boolean validar = false;
+
+            if (nroDoc == "0" || nroDoc == "")
+            {
+                MessageBox.Show("Debe ingresar un numero de documento");
+                validar = true;
+            }
+            else if (cboTipoDocumento.SelectedIndex == -1)
+            {
+                MessageBox.Show("Debe seleccionar un tipo de documento");
+                validar = true;
+            }
+
+            return validar;
         }
     }
 }
