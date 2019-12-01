@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClasesInscripcion
 {
-    public class InscripcionExamenEx
+    public class InscripcionExamen
     {
         public Alumno Alumno { get; set; }
         public Curso Curso { get; set; }
@@ -16,17 +16,17 @@ namespace ClasesInscripcion
 
         public DateTime FechaInscripcion { get; set; }
 
-        public List<InscripcionExamenEx> listaInsExamen = new List<InscripcionExamenEx>();
+        public List<InscripcionExamen> listaInsExamen = new List<InscripcionExamen>();
 
-        public InscripcionExamenEx() { }
+        public InscripcionExamen() { }
 
-        public InscripcionExamenEx(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
+        public InscripcionExamen(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
         {
             this.Alumno = alumno;
             
             this.FechaInscripcion = fechaInscripcion;
         }
-       public static void Agregar(InscripcionExamenEx i)
+       public static void Agregar(InscripcionExamen i)
         {
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {

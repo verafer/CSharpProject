@@ -126,7 +126,7 @@ namespace ClasesInscripcion
 
             {
                 con.Open();
-                string textoCMD = "Select * from Curso";
+                string textoCMD = "SELECT * FROM Curso";
 
                 SqlCommand cmd = new SqlCommand(textoCMD, con);
 

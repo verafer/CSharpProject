@@ -64,6 +64,7 @@ namespace ClasesInscripcion
         public static List<Examen> ObtenerExamenDeAlumno()
         {
             Examen ex;
+            InscripcionCursoDetalle icd;
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
                 con.Open();
@@ -78,12 +79,14 @@ namespace ClasesInscripcion
                 {
 
                     ex = new Examen();
+                    icd = new InscripcionCursoDetalle();
                     ex.Id = elLectorDeDatos.GetInt32(0);
                     ex.PrimerParcial = (RindioParcial)elLectorDeDatos.GetInt32(1);
                     ex.SegundoParcial = (RindioParcial)elLectorDeDatos.GetInt32(2);
                     ex.TercerParcial = (RindioParcial)elLectorDeDatos.GetInt32(3);
                     ex.Final = (RindioParcial)elLectorDeDatos.GetInt32(4);
-                    ex.InscripcionCursoDetalleId = InscripcionCurso.ObtenerCurso(elLectorDeDatos.GetInt32(5));
+                    ex.InscripcionCursoDetalleId = icd.ObtenerCursoAlumno(elLectorDeDatos.GetInt32(5));
+                    //ex.InscripcionCursoDetalleId = InscripcionCursoDetalle.ObtenerCurso(elLectorDeDatos.GetInt32(5));
 
                     listaExamen.Add(ex);
                 }

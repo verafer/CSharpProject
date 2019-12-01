@@ -14,7 +14,7 @@ namespace InterfazInscripcion
     public partial class frmInscripcionExamen : Form
     {
         public int id_alumno;
-        InscripcionExamenEx inscripcionExamenEx;
+        InscripcionExamen inscripcionExamenEx;
         public frmInscripcionExamen()
         {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace InterfazInscripcion
            // cboMateria.DataSource = Materia.ObtenerMaterias();
             cboTipoDocumento.SelectedItem = null;
            // cboMateria.SelectedItem = null;
-            inscripcionExamenEx = new InscripcionExamenEx();
+            inscripcionExamenEx = new InscripcionExamen();
 
             LimpiarFormulario();
         }
@@ -73,16 +73,17 @@ namespace InterfazInscripcion
 
         private void BtnConsultar_Click(object sender, EventArgs e)
         {
-            InscripcionCurso c = (InscripcionCurso)dtgCurso.CurrentRow.DataBoundItem;
-            InscripcionCursoDetalle icd= InscripcionCurso.ObtenerCurso(c.Id);
+            InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgCurso.CurrentRow.DataBoundItem;
+            //InscripcionCursoDetalle icd= new InscripcionCurso.Obtener(c.Id);
+            //icd.ObtenerCursoAlumno(c.Id);
             Examen ex = Examen.ObtenerExamen(icd.Id);
 
-            ValidarExamen(ex, c);
+            ValidarExamen(ex, icd);
 
-            inscripcionExamenEx.Curso = c.Curso;
+            inscripcionExamenEx.Curso = icd.Curso;
         }
 
-        private void ValidarExamen(Examen ex, InscripcionCurso c)
+        private void ValidarExamen(Examen ex, InscripcionCursoDetalle c)
         {
             if (rboPrimeraP.Checked == true)
             {
@@ -154,11 +155,11 @@ namespace InterfazInscripcion
 
             TipoDocumento tipoDoc = (TipoDocumento)cboTipoDocumento.SelectedItem;
 
-            InscripcionExamenEx.Agregar(inscripcionExamenEx);
+            InscripcionExamen.Agregar(inscripcionExamenEx);
             MessageBox.Show("La inscripcion ha sido guardada con éxito!");
             LimpiarFormulario();
             Limpiar();
-            inscripcionExamenEx = new InscripcionExamenEx();
+            inscripcionExamenEx = new InscripcionExamen();
             
         }
 
@@ -209,11 +210,11 @@ namespace InterfazInscripcion
             return validar;
         }
 
-        private void MostrarDatosCurso(InscripcionCurso c, string examen)
+        private void MostrarDatosCurso(InscripcionCursoDetalle icd, string examen)
         {
-            lblCurso.Text = c.Curso.ToString();
+            lblCurso.Text = icd.Curso.ToString();
             lblExamenARendir.Text = examen;
-            lblProfesor.Text = c.Curso.Profesor.ToString();
+            lblProfesor.Text = icd.Curso.Profesor.ToString();
             lblPrecio.Text = "85.000 gs";
 
             gbxDatosExamen.Enabled = true;
