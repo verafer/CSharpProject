@@ -57,12 +57,14 @@
     <Compile Include="InscripcionCurso.cs" />
     <Compile Include="InscripcionCursoDetalle.cs" />
     <Compile Include="InscripcionExamenEx.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Materia.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Profesor.cs" />
     <Compile Include="SqlServer.cs" />
     <Compile Include="Turno.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -78,6 +78,12 @@
     <Compile Include="frmCiudad.Designer.cs">
       <DependentUpon>frmCiudad.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCrearUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCrearUsuario.Designer.cs">
+      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCurso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,12 @@
     <Compile Include="frmProfesor.Designer.cs">
       <DependentUpon>frmProfesor.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUsuario.Designer.cs">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAlumno.resx">
@@ -121,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmCiudad.resx">
       <DependentUpon>frmCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCrearUsuario.resx">
+      <DependentUpon>frmCrearUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCurso.resx">
       <DependentUpon>frmCurso.cs</DependentUpon>
@@ -139,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProfesor.resx">
       <DependentUpon>frmProfesor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUsuario.resx">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
