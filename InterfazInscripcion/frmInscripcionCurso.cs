@@ -29,7 +29,7 @@ namespace InterfazInscripcion
 
             TipoDocumento tipoDoc = (TipoDocumento)cboTipoDocumento.SelectedItem;
 
-            if (inscripcionCurso.listaDic.Count != 0)
+            if (inscripcionCurso.listaInscripcionesD.Count != 0)
             {
                 inscripcionCurso.Estado = EstadoInscripcion.Confirmada;
                 InscripcionCurso.Agregar(inscripcionCurso);
@@ -65,7 +65,7 @@ namespace InterfazInscripcion
 
                 //MessageBox.Show(InscripcionCurso.ObtenerCursosDeAlumno(a).ToString());
                 dtgDetalleInscripcionCurso.DataSource = null;
-                dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+                //dtgDetalleInscripcionCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
                 btnAgregar.Enabled = true;
                 btnEliminar.Enabled = true;
                 btnGuardar.Enabled = true;
@@ -78,11 +78,9 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("No se encontró un alumno que coincida con los datos ingresados");
             }
-
-
         }
 
-            private void frmInscripcionCurso_Load(object sender, EventArgs e)
+        private void frmInscripcionCurso_Load(object sender, EventArgs e)
         {
             dtgDetalleInscripcionCurso.AutoGenerateColumns = true;
             cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
@@ -122,21 +120,20 @@ namespace InterfazInscripcion
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
-            foreach (InscripcionCurso ic in inscripcionCurso.listaDic)
+            foreach (InscripcionCursoDetalle icd in inscripcionCurso.listaInscripcionesD)
             {
-                if (c == ic.Curso)
+                if (c == icd.Curso)
                 {
                     ban = 1;
                 }
             }
             if (ban==0)
             {
-                InscripcionCurso icd = new InscripcionCurso();
+                InscripcionCursoDetalle icd = new InscripcionCursoDetalle();
+                icd.Id = 1;
                 icd.Curso = c;
-
                 icd.Precio = c.MontoTotal;
-                icd.FechaInscripcion = DateTime.Now;
-                inscripcionCurso.listaDic.Add(icd);
+                inscripcionCurso.listaInscripcionesD.Add(icd);
 
                 ActualizarDataGrid();
             }
@@ -166,10 +163,10 @@ namespace InterfazInscripcion
             return validar;
         }
 
-            private void ActualizarDataGrid()
+        private void ActualizarDataGrid()
         {
             dtgDetalleInscripcionCurso.DataSource = null;
-            dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.listaDic;
+            dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.listaInscripcionesD;
             CalcularTotal();
         }
 
@@ -177,7 +174,7 @@ namespace InterfazInscripcion
         {
             double total = 0;
 
-            foreach (InscripcionCurso icd in inscripcionCurso.listaDic)
+            foreach (InscripcionCursoDetalle icd in inscripcionCurso.listaInscripcionesD)
             {
                 total = total + icd.Precio;
             }
@@ -186,16 +183,21 @@ namespace InterfazInscripcion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (inscripcionCurso.listaDic.Count != 0)
+            if (inscripcionCurso.listaInscripcionesD.Count != 0)
             {
-                InscripcionCurso icd = (InscripcionCurso)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
-                inscripcionCurso.listaDic.Remove(icd);
+                InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
+                inscripcionCurso.listaInscripcionesD.Remove(icd);
                 ActualizarDataGrid();
             }
             else
             {
                 MessageBox.Show("No hay detalles por borrar");
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
         }
     }
 }
