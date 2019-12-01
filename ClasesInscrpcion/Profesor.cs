@@ -221,7 +221,7 @@ namespace ClasesInscripcion
         public override string ToString()
         {
             //return "R. Social: " + RazonSocial +"; " + "Direcc: " + Direccion + ";" + "Contacto: " + Contacto;
-            return Nombre;
+            return Nombre + " " + Apellido;
         }
     }
 }

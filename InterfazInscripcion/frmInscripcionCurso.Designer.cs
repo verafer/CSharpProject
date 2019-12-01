@@ -55,6 +55,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtgDetalleCurso = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.gbxDatosAlumno.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDetalleInscripcionCurso)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtgDetalleCurso)).BeginInit();
@@ -213,10 +214,10 @@
             // btnGuardar
             // 
             this.btnGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGuardar.Location = new System.Drawing.Point(390, 533);
+            this.btnGuardar.Location = new System.Drawing.Point(429, 532);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(2);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(122, 36);
+            this.btnGuardar.Size = new System.Drawing.Size(83, 36);
             this.btnGuardar.TabIndex = 43;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -319,11 +320,24 @@
             this.label3.TabIndex = 38;
             this.label3.Text = "Seleccionar curso/s:";
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelar.Location = new System.Drawing.Point(342, 532);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(83, 36);
+            this.btnCancelar.TabIndex = 55;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // frmInscripcionCurso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(540, 579);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dtgDetalleCurso);
             this.Controls.Add(this.cboTipoDocumento);
             this.Controls.Add(this.label5);
@@ -381,5 +395,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dtgDetalleCurso;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

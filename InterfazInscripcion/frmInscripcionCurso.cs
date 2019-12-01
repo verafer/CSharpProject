@@ -166,7 +166,7 @@ namespace InterfazInscripcion
             return validar;
         }
 
-            private void ActualizarDataGrid()
+        private void ActualizarDataGrid()
         {
             dtgDetalleInscripcionCurso.DataSource = null;
             dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.listaDic;
@@ -196,6 +196,11 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("No hay detalles por borrar");
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
         }
     }
 }

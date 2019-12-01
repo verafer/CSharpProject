@@ -37,7 +37,7 @@ namespace InterfazInscripcion
 
         private void inscripciónAExamenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmInscripcionExamenExt frmInscripcionExamenExt = new frmInscripcionExamenExt();
+            frmInscripcionExamen frmInscripcionExamenExt = new frmInscripcionExamen();
             frmInscripcionExamenExt.Show();
         }
 
