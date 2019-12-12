@@ -34,6 +34,7 @@ namespace InterfazInscripcion
                 inscripcionCurso.Estado = EstadoInscripcion.Confirmada;
                 InscripcionCurso.Agregar(inscripcionCurso);
                 MessageBox.Show("La inscripcion ha sido guardada con éxito");
+                EnviarCorreo(inscripcionCurso.Alumno.Email, inscripcionCurso.Alumno);
                 LimpiarFormulario();
                 inscripcionCurso = new InscripcionCurso();
             }
@@ -154,7 +155,9 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("Debe ingresar un numero de documento");
                 validar = true;
-            }else if (cboTipoDocumento.SelectedIndex == -1)
+            }
+
+            if (cboTipoDocumento.SelectedIndex == -1)
             {
                 MessageBox.Show("Debe seleccionar un tipo de documento");
                 validar = true;
@@ -198,6 +201,54 @@ namespace InterfazInscripcion
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
+        }
+
+        private void EnviarCorreo(String destinatario, Alumno alumno)
+        {
+            try
+            {
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                mmsg.To.Add(destinatario); //Destinatario
+                mmsg.Subject = "Inscripcion a curso"; //Asunto
+                mmsg.SubjectEncoding = System.Text.Encoding.UTF8;
+
+
+                //mmsg.Bcc.Add(""); //Para enviar copia de correo
+                string body = "";
+                body += "<p>Buenas noches,</p><p> A continuacion, la lista de cursos a los que se ha inscripto:</p><ul>";
+                
+                foreach (InscripcionCursoDetalle icd in InscripcionCurso.ObtenerCursosDeAlumno(alumno))
+                {
+                    body += "<li>" + icd.Curso + "</li>";
+                }
+
+                body += "</ul><p>Saludos cordiales</p>";
+
+                mmsg.Body = body;
+                mmsg.BodyEncoding = System.Text.Encoding.UTF8;
+                mmsg.IsBodyHtml = true;
+                mmsg.From = new System.Net.Mail.MailAddress("enviarcorreo.csharp@gmail.com"); //correo que envia
+
+                System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient("smtp.gmail.com");
+                //cliente.Credentials = new System.Net.NetworkCredential("verafer343@gmail.com", "siemprefuerte"); //credenciales
+
+                cliente.Port = 587;
+                cliente.EnableSsl = true;
+                //cliente.Host = "smtp.gmail.com";
+                cliente.UseDefaultCredentials = true;
+
+                cliente.Credentials = new System.Net.NetworkCredential("enviarcorreo.csharp@gmail.com", "enviarcorreodesdecsharp"); //credenciales
+
+
+                cliente.Send(mmsg);
+
+                cliente.Dispose();
+            }
+            catch (Exception)
+            {
+                //throw;
+                MessageBox.Show("Atencion", "Error al enviar correo!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
