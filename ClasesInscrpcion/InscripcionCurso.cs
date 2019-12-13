@@ -34,10 +34,11 @@ namespace ClasesInscripcion
         public List<InscripcionCursoDetalle> listaInscripcionesD = new List<InscripcionCursoDetalle>();
         public static List<InscripcionCursoDetalle> listaInscripcionesDe = new List<InscripcionCursoDetalle>();
         public static List<InscripcionCursoDetalle> listaCursosAlumno = new List<InscripcionCursoDetalle>();
+        public static List<InscripcionCursoDetalle> listaCursosDisponible = new List<InscripcionCursoDetalle>();
 
         public InscripcionCurso() { }
 
-        public static void Agregar(InscripcionCurso i)
+        public static int Agregar(InscripcionCurso i)
         {
             using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
             {
@@ -86,6 +87,8 @@ namespace ClasesInscripcion
 
                 InsertarExamenes(id_inscripcion_curso);
                 con.Close();
+
+                return id_inscripcion_curso;
             }
         }
         
@@ -157,33 +160,41 @@ namespace ClasesInscripcion
 
         public static List<InscripcionCursoDetalle> ObtenerCursosDeAlumno(Alumno alumno)
         {
-            InscripcionCursoDetalle icd;
-            listaCursosAlumno.Clear();
-
-            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+            try
             {
-                con.Open();
-                string textoCMD = "SELECT ins_curso_detalle_id, curso_id, precio FROM Inscripcion_Curso_Detalle icd JOIN Inscripcion_Curso ic ON icd.inscripcion_curso_id = ic.inscripcion_curso_id WHERE alumno_id = @id ";
+                InscripcionCursoDetalle icd;
+                listaCursosAlumno.Clear();
 
-                SqlCommand cmd = new SqlCommand(textoCMD, con);
-
-                SqlParameter p1 = new SqlParameter("@id", alumno.Id);
-                p1.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(p1);
-
-                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
-
-                while (elLectorDeDatos.Read())
+                using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
                 {
+                    con.Open();
+                    string textoCMD = "SELECT ins_curso_detalle_id, curso_id, precio FROM Inscripcion_Curso_Detalle icd JOIN Inscripcion_Curso ic ON icd.inscripcion_curso_id = ic.inscripcion_curso_id WHERE alumno_id = @id ";
 
-                    icd = new InscripcionCursoDetalle();
-                    icd.Id = elLectorDeDatos.GetInt32(0);
-                    icd.Curso = Curso.ObtenerCurso(elLectorDeDatos.GetInt32(1));
-                    icd.Precio = elLectorDeDatos.GetDouble(2);
+                    SqlCommand cmd = new SqlCommand(textoCMD, con);
 
-                    listaCursosAlumno.Add(icd);
+                    SqlParameter p1 = new SqlParameter("@id", alumno.Id);
+                    p1.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(p1);
+
+                    SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                    while (elLectorDeDatos.Read())
+                    {
+
+                        icd = new InscripcionCursoDetalle();
+                        icd.Id = elLectorDeDatos.GetInt32(0);
+                        icd.Curso = Curso.ObtenerCurso(elLectorDeDatos.GetInt32(1));
+                        icd.Precio = elLectorDeDatos.GetDouble(2);
+
+                        listaCursosAlumno.Add(icd);
+                    }
+                    con.Close();
+                    return listaCursosAlumno;
                 }
-                con.Close();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al ObtenerCursosDeAlumno!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return listaCursosAlumno;
             }
         }

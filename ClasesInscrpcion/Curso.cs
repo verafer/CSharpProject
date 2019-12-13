@@ -15,7 +15,7 @@ namespace ClasesInscripcion
     {
         Mañana,
         Tarde,
-       Noche
+        Noche
     }
     public enum DiasSemana
     {L,M,X,J,V,S}
@@ -33,6 +33,7 @@ namespace ClasesInscripcion
         public List<InscripcionCurso> listaInscriptos = new List<InscripcionCurso>();
 
         public static List<Curso> listaCurso = new List<Curso>();
+        public static List<Curso> listaCursosDisponibles = new List<Curso>();
 
 
         public Curso() {
@@ -153,15 +154,85 @@ namespace ClasesInscripcion
             }
         }
 
+        public static List<Curso> ObtenerCursosDisponibleAlumno(Alumno alumno)
+        {
+            Curso curso;
+            listaCursosDisponibles.Clear();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string textoCMD = "select * from curso where curso_id not in (select curso_id from Inscripcion_Curso_Detalle where inscripcion_curso_id in (select inscripcion_curso_id from Inscripcion_Curso where alumno_id = " + alumno.Id + "))";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    curso = new Curso();
+                    curso.Id = elLectorDeDatos.GetInt32(0);
+                    curso.NumeroCurso = elLectorDeDatos.GetString(1);
+                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
+                    curso.Dia = (DiasSemana)(Convert.ToInt32(elLectorDeDatos.GetString(3)));
+                    curso.Turno = (Turnos)elLectorDeDatos.GetInt32(4);
+                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(5));
+                    curso.Modalidad = (Modalidad)(Convert.ToInt32(elLectorDeDatos.GetString(6)));
+                    curso.FechaInicio = elLectorDeDatos.GetDateTime(7);
+                    curso.FechaFin = elLectorDeDatos.GetDateTime(8);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(9);
+
+                    listaCursosDisponibles.Add(curso);
+                }
+
+                return listaCursosDisponibles;
+            }
+        }
+
+        public static List<Curso> ObtenerCursosInscriptosAlumno(int id_inscripcion_curso)
+        {
+            Curso curso;
+            listaCursosDisponibles.Clear();
+            using (SqlConnection con = new SqlConnection(SqlServer.CADENA_CONEXION))
+
+            {
+                con.Open();
+                string textoCMD = "select * from curso where curso_id in (select curso_id from Inscripcion_Curso_Detalle where inscripcion_curso_id = "+ id_inscripcion_curso +")";
+
+                SqlCommand cmd = new SqlCommand(textoCMD, con);
+
+                SqlDataReader elLectorDeDatos = cmd.ExecuteReader();
+
+                while (elLectorDeDatos.Read())
+                {
+                    curso = new Curso();
+                    curso.Id = elLectorDeDatos.GetInt32(0);
+                    curso.NumeroCurso = elLectorDeDatos.GetString(1);
+                    curso.Materia = Materia.ObtenerMateria(elLectorDeDatos.GetInt32(2));
+                    curso.Dia = (DiasSemana)(Convert.ToInt32(elLectorDeDatos.GetString(3)));
+                    curso.Turno = (Turnos)elLectorDeDatos.GetInt32(4);
+                    curso.Profesor = Profesor.ObtenerProfesor(elLectorDeDatos.GetInt32(5));
+                    curso.Modalidad = (Modalidad)(Convert.ToInt32(elLectorDeDatos.GetString(6)));
+                    curso.FechaInicio = elLectorDeDatos.GetDateTime(7);
+                    curso.FechaFin = elLectorDeDatos.GetDateTime(8);
+                    curso.MontoTotal = elLectorDeDatos.GetInt32(9);
+
+                    listaCursosDisponibles.Add(curso);
+                }
+
+                return listaCursosDisponibles;
+            }
+        }
+
         private SqlCommand ObtenerParametros(SqlCommand cmd, Boolean id = false)
 
         {
             SqlParameter p1 = new SqlParameter("@numero_curso", this.NumeroCurso);
             SqlParameter p2 = new SqlParameter("@materia", this.Materia.Id);
-            SqlParameter p3 = new SqlParameter("@dia", this.Dia);
-            SqlParameter p4 = new SqlParameter("@turno", this.Turno);
+            SqlParameter p3 = new SqlParameter("@dia",Convert.ToInt32(this.Dia));
+            SqlParameter p4 = new SqlParameter("@turno", Convert.ToInt32(this.Turno));
             SqlParameter p5 = new SqlParameter("@profesor", this.Profesor.Id);
-            SqlParameter p6 = new SqlParameter("@modalidad", this.Modalidad); //es el id del proveedor para obtener dicho valor
+            SqlParameter p6 = new SqlParameter("@modalidad", Convert.ToInt32(this.Modalidad)); //es el id del proveedor para obtener dicho valor
             SqlParameter p7 = new SqlParameter("@fecha_inicio", this.FechaInicio);
             SqlParameter p8 = new SqlParameter("@fecha_fin", this.FechaFin);
             SqlParameter p9 = new SqlParameter("@monto_total", this.MontoTotal);
@@ -200,8 +271,7 @@ namespace ClasesInscripcion
             cmd.Parameters.Add(p10);
             return cmd;
         }
-
-        public void BajaCurso() { }
+        
 
         public override string ToString()
         {

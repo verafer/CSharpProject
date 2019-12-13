@@ -77,8 +77,8 @@ namespace InterfazInscripcion
             cboMateria.DataSource = Materia.ObtenerMaterias();
             cboProfesor.DataSource = Profesor.ObtenerProfesores();
             cboTurno.DataSource = Enum.GetValues(typeof(Turnos));
-            cboMateria.SelectedIndex = 1;
-            cboProfesor.SelectedIndex =1 ;
+            cboMateria.SelectedIndex = 0;
+            cboProfesor.SelectedIndex = 0;
             cboTurno.SelectedItem = null;
             BloquearFormulario();
 

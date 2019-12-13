@@ -20,7 +20,7 @@ namespace ClasesInscripcion
 
         public InscripcionExamen() { }
 
-        public InscripcionExamen(Alumno alumno, Carrera carrera, DateTime fechaInscripcion)
+        public InscripcionExamen(Alumno alumno, DateTime fechaInscripcion)
         {
             this.Alumno = alumno;
             

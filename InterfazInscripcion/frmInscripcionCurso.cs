@@ -32,9 +32,9 @@ namespace InterfazInscripcion
             if (inscripcionCurso.listaInscripcionesD.Count != 0)
             {
                 inscripcionCurso.Estado = EstadoInscripcion.Confirmada;
-                InscripcionCurso.Agregar(inscripcionCurso);
+                int id_inscripcion_curso = InscripcionCurso.Agregar(inscripcionCurso);
                 MessageBox.Show("La inscripcion ha sido guardada con éxito");
-                EnviarCorreo(inscripcionCurso.Alumno.Email, inscripcionCurso.Alumno);
+                EnviarCorreo(inscripcionCurso.Alumno.Email, inscripcionCurso.Alumno, id_inscripcion_curso);
                 LimpiarFormulario();
                 inscripcionCurso = new InscripcionCurso();
             }
@@ -70,8 +70,19 @@ namespace InterfazInscripcion
                 btnAgregar.Enabled = true;
                 btnEliminar.Enabled = true;
                 btnGuardar.Enabled = true;
+                
 
                 inscripcionCurso.Alumno = a;
+
+                if (Curso.ObtenerCursosDisponibleAlumno(a).Count > 0)
+                {
+                    dtgDetalleCurso.DataSource = Curso.ObtenerCursosDisponibleAlumno(a);
+                }
+                else
+                {
+                    MessageBox.Show("Atencion", "No cuenta con cursos disponibles para inscribirse", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
 
                 ActualizarDataGrid();
             }
@@ -88,7 +99,7 @@ namespace InterfazInscripcion
             cboTipoDocumento.SelectedItem = null;
             dtgDetalleCurso.AutoGenerateColumns = true;
             dtgDetalleCurso.DataSource = null;
-            dtgDetalleCurso.DataSource = Curso.ObtenerCursos();
+            //dtgDetalleCurso.DataSource = Curso.ObtenerCursosDisponibleAlumno();
             LimpiarFormulario();
             inscripcionCurso = new InscripcionCurso();
         }
@@ -140,7 +151,7 @@ namespace InterfazInscripcion
             }
             else if (ban==1)
             {
-                MessageBox.Show("Usted ya esta inscripto en este curso ");
+                MessageBox.Show("Usted ya ha seleccionado este curso");
             }
             ban = 0;
 
@@ -203,7 +214,7 @@ namespace InterfazInscripcion
             LimpiarFormulario();
         }
 
-        private void EnviarCorreo(String destinatario, Alumno alumno)
+        private void EnviarCorreo(String destinatario, Alumno alumno, int id_inscripcion_curso)
         {
             try
             {
@@ -216,10 +227,11 @@ namespace InterfazInscripcion
                 //mmsg.Bcc.Add(""); //Para enviar copia de correo
                 string body = "";
                 body += "<p>Buenas noches,</p><p> A continuacion, la lista de cursos a los que se ha inscripto:</p><ul>";
-                
-                foreach (InscripcionCursoDetalle icd in InscripcionCurso.ObtenerCursosDeAlumno(alumno))
+
+                //foreach (Curso c in InscripcionCurso.ObtenerCursosDeAlumno(alumno))
+                foreach (Curso c in Curso.ObtenerCursosInscriptosAlumno(id_inscripcion_curso))
                 {
-                    body += "<li>" + icd.Curso + "</li>";
+                    body += "<li>" + c.ToString() + "</li>";
                 }
 
                 body += "</ul><p>Saludos cordiales</p>";
@@ -230,8 +242,7 @@ namespace InterfazInscripcion
                 mmsg.From = new System.Net.Mail.MailAddress("enviarcorreo.csharp@gmail.com"); //correo que envia
 
                 System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient("smtp.gmail.com");
-                //cliente.Credentials = new System.Net.NetworkCredential("verafer343@gmail.com", "siemprefuerte"); //credenciales
-
+               
                 cliente.Port = 587;
                 cliente.EnableSsl = true;
                 //cliente.Host = "smtp.gmail.com";

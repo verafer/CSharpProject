@@ -46,14 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alumno.cs" />
-    <Compile Include="Carrera.cs" />
     <Compile Include="Ciudad.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Curso.cs" />
-    <Compile Include="Enfasis.cs" />
     <Compile Include="Examen.cs" />
-    <Compile Include="Facultad.cs" />
-    <Compile Include="Funcionario.cs" />
     <Compile Include="InscripcionCurso.cs" />
     <Compile Include="InscripcionCursoDetalle.cs" />
     <Compile Include="InscripcionExamen.cs" />
