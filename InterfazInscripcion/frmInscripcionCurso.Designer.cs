@@ -353,6 +353,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtgDetalleInscripcionCurso);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "frmInscripcionCurso";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inscripcion Curso";

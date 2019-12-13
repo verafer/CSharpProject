@@ -20,7 +20,10 @@ namespace InterfazInscripcion
         }
         private void LimpiarFormulario()
         {
-            txtNumeroCurso.Text = "";
+            try
+            {
+
+                txtNumeroCurso.Text = "";
             cboMateria.SelectedItem = 0;
             cboProfesor.SelectedItem = 0;
             cboTurno.SelectedItem = 0;
@@ -28,10 +31,17 @@ namespace InterfazInscripcion
             rbuPresencial.Checked = false;
             dtpFechaInicio.Value = DateTime.Now;
             dtpFechaFin.Value = DateTime.Now;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al limpiar formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void DesbloquearFormulario()
         {
-            txtNumeroCurso.Enabled = true;
+            try
+            {
+                txtNumeroCurso.Enabled = true;
             cboMateria.Enabled = true;
             cboProfesor.Enabled = true;
             cboTurno.Enabled = true;
@@ -47,10 +57,17 @@ namespace InterfazInscripcion
             btnAgregar.Enabled = false;
             btnEliminar.Enabled = false;
             btnEditar.Enabled = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al desbloquear el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void BloquearFormulario()
         {
-            txtNumeroCurso.Enabled = false;
+            try
+            {
+                txtNumeroCurso.Enabled = false;
             cboMateria.Enabled = false;
             cboProfesor.Enabled = false;
             cboTurno.Enabled = false;
@@ -65,6 +82,11 @@ namespace InterfazInscripcion
             btnAgregar.Enabled = true;
             btnEliminar.Enabled = true;
             btnEditar.Enabled = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al bloquear el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void LblNumeroCurso_Click(object sender, EventArgs e)
         {
@@ -73,7 +95,9 @@ namespace InterfazInscripcion
 
         private void FrmCurso_Load(object sender, EventArgs e)
         {
-            ActualizarListaCurso();
+            try
+            {
+                ActualizarListaCurso();
             cboMateria.DataSource = Materia.ObtenerMaterias();
             cboProfesor.DataSource = Profesor.ObtenerProfesores();
             cboTurno.DataSource = Enum.GetValues(typeof(Turnos));
@@ -81,6 +105,13 @@ namespace InterfazInscripcion
             cboProfesor.SelectedIndex = 0;
             cboTurno.SelectedItem = null;
             BloquearFormulario();
+                LimpiarFormulario();
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al cargar el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
         private void ActualizarListaCurso()
@@ -91,18 +122,27 @@ namespace InterfazInscripcion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            modo = "AGREGAR";
+            try
+            {
+                modo = "AGREGAR";
             LimpiarFormulario();
             DesbloquearFormulario();
             txtNumeroCurso.Focus();
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al agregar Curso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var c = ObtenerCursoFormulario();
-
-            if (modo == "AGREGAR")
+            try
+            {
+                var c = ObtenerCursoFormulario();
+                if (ValidarDatos())
+                {
+                    if (modo == "AGREGAR")
             {
                Curso.AgregarCurso(c);
             }
@@ -127,7 +167,12 @@ namespace InterfazInscripcion
             LimpiarFormulario();
             ActualizarListaCurso();
             BloquearFormulario();
-
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar!");
+            }
         }
         private Curso ObtenerCursoFormulario()
         {
@@ -151,14 +196,23 @@ namespace InterfazInscripcion
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            modo = "EDITAR";
+            try
+            {
+                modo = "EDITAR";
             DesbloquearFormulario();
             txtNumeroCurso.Focus();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al editar Curso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (lstCurso.SelectedItems.Count > 0)
+            try
+            {
+                if (lstCurso.SelectedItems.Count > 0)
             {
                 Curso curso = (Curso)lstCurso.SelectedItem;
                 Curso.listaCurso.Remove(curso);
@@ -169,6 +223,12 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("Favor seleccionar de la lista para eliminar");
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al eliminar curso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void LstCurso_SelectedIndexChanged(object sender, EventArgs e)
@@ -178,7 +238,9 @@ namespace InterfazInscripcion
 
         private void lstCurso_Click(object sender, EventArgs e)
         {
-            Curso curso = (Curso)lstCurso.SelectedItem;
+            try
+            {
+                Curso curso = (Curso)lstCurso.SelectedItem;
 
             if (curso != null)
             {
@@ -198,6 +260,11 @@ namespace InterfazInscripcion
                 dtpFechaInicio.Value = curso.FechaInicio;
                 dtpFechaFin.Value = curso.FechaFin;
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al obtener Curso!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnCancelar_Click(object sender, EventArgs e)
@@ -210,5 +277,57 @@ namespace InterfazInscripcion
         {
             LimpiarFormulario();
         }
+        private bool ValidarDatos()
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(txtNumeroCurso.Text))
+                {
+                    MessageBox.Show("El numero curso no puede estar vacío", "Error");
+                    txtNumeroCurso.Focus();
+                    return false;
+                }
+                if (cboMateria.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione una Materia", "Error");
+                    cboMateria.Focus();
+                    return false;
+                }
+                if (cboProfesor.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione un Profesor", "Error");
+                    cboProfesor.Focus();
+                    return false;
+                }
+                if (cboTurno.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione un turno", "Error");
+                    cboProfesor.Focus();
+                    return false;
+                }
+                var fechaIncorrecta = new DateTime(2100, 1, 1);
+
+                if (dtpFechaInicio.Value < DateTime.Now || dtpFechaInicio.Value > DateTime.Parse("01/01/2100") || dtpFechaInicio.Value > fechaIncorrecta)
+                {
+                    MessageBox.Show("Por favor ingrese una fecha Inicio correcta", "Error");
+                    dtpFechaInicio.Focus();
+                    return false;
+                }
+                if (dtpFechaFin.Value < DateTime.Now || dtpFechaFin.Value > DateTime.Parse("01/01/2100") || dtpFechaFin.Value > fechaIncorrecta)
+                {
+                    MessageBox.Show("Por favor ingrese una fecha de fin correcta", "Error");
+                    dtpFechaFin.Focus();
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al validar datos!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
     }
 }

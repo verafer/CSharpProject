@@ -22,17 +22,26 @@ namespace InterfazInscripcion
 
         private void FrmInscripcionExamenExt_Load(object sender, EventArgs e)
         {
-            cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
+            try
+            {
+                cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
            // cboMateria.DataSource = Materia.ObtenerMaterias();
             cboTipoDocumento.SelectedItem = null;
            // cboMateria.SelectedItem = null;
             inscripcionExamenEx = new InscripcionExamen();
 
             LimpiarFormulario();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al cargar el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnBuscarAlumno_Click_1(object sender, EventArgs e)
         {
+            try
+            {
             string nroDoc = txtNroDocumento.Text;
 
             if (ValidarDatos()) { return; }
@@ -63,17 +72,32 @@ namespace InterfazInscripcion
                 LimpiarFormulario();
                 Limpiar();
             }
-           
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "No se pudo obtener los datos del formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
         }
         private void ActualizarDataGrid(Alumno a)
         {
-            dtgCurso.DataSource = null;
-            dtgCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+            try
+            {
+                dtgCurso.DataSource = null;
+                dtgCurso.DataSource = InscripcionCurso.ObtenerCursosDeAlumno(a);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al actualizar lista !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnConsultar_Click(object sender, EventArgs e)
+
         {
-            InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgCurso.CurrentRow.DataBoundItem;
+            try
+            {
+                InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgCurso.CurrentRow.DataBoundItem;
             //InscripcionCursoDetalle icd= new InscripcionCurso.Obtener(c.Id);
             //icd.ObtenerCursoAlumno(c.Id);
             Examen ex = Examen.ObtenerExamen(icd.Id);
@@ -81,11 +105,18 @@ namespace InterfazInscripcion
             ValidarExamen(ex, icd);
 
             inscripcionExamenEx.Curso = icd.Curso;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al consultar  !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ValidarExamen(Examen ex, InscripcionCursoDetalle c)
         {
-            if (rboPrimeraP.Checked == true)
+            try
+            {
+                if (rboPrimeraP.Checked == true)
             {
                 if (ex.PrimerParcial == RindioParcial.Si)
                 {
@@ -145,11 +176,18 @@ namespace InterfazInscripcion
                 }
 
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al validar examen  !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)
         {
-            string nroDoc = txtNroDocumento.Text;
+            try
+            {
+                string nroDoc = txtNroDocumento.Text;
 
             if (ValidarDatos()) { return; }
 
@@ -160,23 +198,36 @@ namespace InterfazInscripcion
             LimpiarFormulario();
             Limpiar();
             inscripcionExamenEx = new InscripcionExamen();
-            
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar!");
+            }
         }
 
         private void Limpiar()
         {
-            lblCurso.Text = "";
+            try
+            {
+                lblCurso.Text = "";
             lblExamenARendir.Text = "";
             lblProfesor.Text = "";
             lblPrecio.Text = "";
 
             gbxDatosExamen.Enabled = false;
             btnGuardar.Enabled = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo limpiar!");
+            }
         }
 
         private void LimpiarFormulario()
         {
-            lblNombre.Text = "";
+            try
+            {
+                lblNombre.Text = "";
             lblFechaNac.Text = "";
             lblDireccion.Text = "";
             lblCiudad.Text = "";
@@ -189,10 +240,16 @@ namespace InterfazInscripcion
             cboTipoDocumento.SelectedItem = null;
             dtgCurso.DataSource = null;
             btnGuardar.Enabled = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al limpiar formulario!");
+            }
         }
 
         private Boolean ValidarDatos()
         {
+
             string nroDoc = txtNroDocumento.Text;
             Boolean validar = false;
 

@@ -209,7 +209,9 @@
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.lstMateria);
+            this.MaximizeBox = false;
             this.Name = "frmMateria";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Materia";
             this.Load += new System.EventHandler(this.FrmMateria_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudCreditoClase)).EndInit();

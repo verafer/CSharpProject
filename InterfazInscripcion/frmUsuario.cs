@@ -20,7 +20,8 @@ namespace InterfazInscripcion
 
         private void BtnAcceder_Click(object sender, EventArgs e)
         {
-            if (txtUsuario.Text.Trim().Equals(string.Empty))
+           
+                    if (txtUsuario.Text.Trim().Equals(string.Empty))
             {
                 MessageBox.Show("Favor Ingresa el Usuario");
                 return;

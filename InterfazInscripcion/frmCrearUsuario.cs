@@ -20,8 +20,15 @@ namespace InterfazInscripcion
 
         private void BtnCrear_Click(object sender, EventArgs e)
         {
-            Usuario.CrearUsuario(txtUsuario.Text, txtPassword.Text);
-            MessageBox.Show("Usuario creado exitosamente");
+            try
+            {
+                Usuario.CrearUsuario(txtUsuario.Text, txtPassword.Text);
+                MessageBox.Show("Usuario creado exitosamente");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error al Crear Usuario!");
+            }
         }
     }
 }

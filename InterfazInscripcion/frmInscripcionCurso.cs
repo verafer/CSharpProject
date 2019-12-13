@@ -23,7 +23,9 @@ namespace InterfazInscripcion
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string nroDoc = txtNroDocumento.Text;
+            try
+            {
+                string nroDoc = txtNroDocumento.Text;
 
             if (ValidarDatos()) { return; }
 
@@ -42,11 +44,18 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("Debe agregar detalles para guardar");
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar!");
+            }
         }
 
         private void btnBuscarAlumno_Click(object sender, EventArgs e)
         {
-            string nroDoc = txtNroDocumento.Text;
+            try
+            {
+                string nroDoc = txtNroDocumento.Text;
 
             if (ValidarDatos()) { return; }
 
@@ -90,11 +99,18 @@ namespace InterfazInscripcion
             {
                 MessageBox.Show("No se encontró un alumno que coincida con los datos ingresados");
             }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar!");
+            }
         }
 
         private void frmInscripcionCurso_Load(object sender, EventArgs e)
         {
-            dtgDetalleInscripcionCurso.AutoGenerateColumns = true;
+            try
+            {
+                dtgDetalleInscripcionCurso.AutoGenerateColumns = true;
             cboTipoDocumento.DataSource = Enum.GetValues(typeof(TipoDocumento));
             cboTipoDocumento.SelectedItem = null;
             dtgDetalleCurso.AutoGenerateColumns = true;
@@ -102,11 +118,19 @@ namespace InterfazInscripcion
             //dtgDetalleCurso.DataSource = Curso.ObtenerCursosDisponibleAlumno();
             LimpiarFormulario();
             inscripcionCurso = new InscripcionCurso();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al cargar el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LimpiarFormulario()
         {
-            lblNombre.Text = "";
+
+            try
+            {
+                lblNombre.Text = "";
             lblFechaNac.Text = "";
             lblDireccion.Text = "";
             lblCiudad.Text = "";
@@ -120,7 +144,11 @@ namespace InterfazInscripcion
             btnAgregar.Enabled = false;
             btnEliminar.Enabled = false;
             btnGuardar.Enabled = false;
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al limpiar formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /*public void CursoSeleccionado(Curso c)
@@ -131,7 +159,9 @@ namespace InterfazInscripcion
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
+            try
+            {
+                Curso c = (Curso)dtgDetalleCurso.CurrentRow.DataBoundItem;
             foreach (InscripcionCursoDetalle icd in inscripcionCurso.listaInscripcionesD)
             {
                 if (c == icd.Curso)
@@ -154,12 +184,17 @@ namespace InterfazInscripcion
                 MessageBox.Show("Usted ya ha seleccionado este curso");
             }
             ban = 0;
-
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al agregar !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private Boolean ValidarDatos()
         {
-            string nroDoc = txtNroDocumento.Text;
+           
+                string nroDoc = txtNroDocumento.Text;
             Boolean validar = false;
 
             if (nroDoc == "0" || nroDoc == "")
@@ -179,25 +214,41 @@ namespace InterfazInscripcion
 
         private void ActualizarDataGrid()
         {
-            dtgDetalleInscripcionCurso.DataSource = null;
+            try
+            {
+                dtgDetalleInscripcionCurso.DataSource = null;
             dtgDetalleInscripcionCurso.DataSource = inscripcionCurso.listaInscripcionesD;
             CalcularTotal();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al actualizar lista !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CalcularTotal()
         {
-            double total = 0;
+            try
+            {
+                double total = 0;
 
             foreach (InscripcionCursoDetalle icd in inscripcionCurso.listaInscripcionesD)
             {
                 total = total + icd.Precio;
             }
             lblTotal.Text = Convert.ToString(total) + " gs.";
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al Calcular total!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (inscripcionCurso.listaInscripcionesD.Count != 0)
+            try
+            {
+                if (inscripcionCurso.listaInscripcionesD.Count != 0)
             {
                 InscripcionCursoDetalle icd = (InscripcionCursoDetalle)dtgDetalleInscripcionCurso.CurrentRow.DataBoundItem;
                 inscripcionCurso.listaInscripcionesD.Remove(icd);
@@ -206,6 +257,11 @@ namespace InterfazInscripcion
             else
             {
                 MessageBox.Show("No hay detalles por borrar");
+            }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al eliminar profesor!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

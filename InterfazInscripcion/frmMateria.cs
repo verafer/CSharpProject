@@ -22,48 +22,76 @@ namespace InterfazInscripcion
 
         private void LimpiarFormulario()
         {
-            txtNombreM.Text = "";
-            cboProfesor.SelectedItem = 0;
-            nudCreditoClase.Value = 0;
-            nudCreditoParcial.Value = 0;
+            try
+            {
+                txtNombreM.Text = "";
+                cboProfesor.SelectedItem = 0;
+                nudCreditoClase.Value = 0;
+                nudCreditoParcial.Value = 0;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al limpiar formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
 
         private void DesbloquearFormulario()
         {
-            txtNombreM.Enabled = true;
-            cboProfesor.Enabled = true;
-            nudCreditoClase.Enabled = true;
-            nudCreditoParcial.Enabled = true;
-            btnCancelar.Enabled = true;
+            try
+            {
+                txtNombreM.Enabled = true;
+                cboProfesor.Enabled = true;
+                nudCreditoClase.Enabled = true;
+                nudCreditoParcial.Enabled = true;
+                btnCancelar.Enabled = true;
 
-            btnGuardar.Enabled = true;
-            btnLimpiar.Enabled = true;
+                btnGuardar.Enabled = true;
+                btnLimpiar.Enabled = true;
 
-            btnAgregar.Enabled = false;
-            btnEliminar.Enabled = false;
-            btnEditar.Enabled = false;
+                btnAgregar.Enabled = false;
+                btnEliminar.Enabled = false;
+                btnEditar.Enabled = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al desbloquear el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void BloquearFormulario()
         {
-            txtNombreM.Enabled = false;
-            cboProfesor.Enabled = false;
-            nudCreditoClase.Enabled = false;
-            nudCreditoParcial.Enabled = false;
-            btnCancelar.Enabled = false;
-            btnGuardar.Enabled = false;
-            btnLimpiar.Enabled = false;
+            try
+            {
+                txtNombreM.Enabled = false;
+                cboProfesor.Enabled = false;
+                nudCreditoClase.Enabled = false;
+                nudCreditoParcial.Enabled = false;
+                btnCancelar.Enabled = false;
+                btnGuardar.Enabled = false;
+                btnLimpiar.Enabled = false;
 
-            btnAgregar.Enabled = true;
-            btnEliminar.Enabled = true;
-            btnEditar.Enabled = true;
+                btnAgregar.Enabled = true;
+                btnEliminar.Enabled = true;
+                btnEditar.Enabled = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al bloquear el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ActualizarListaMateria()
         {
-            lstMateria.DataSource = null;
-            lstMateria.DataSource = Materia.ObtenerMaterias();
+            try
+            {
+                lstMateria.DataSource = null;
+                lstMateria.DataSource = Materia.ObtenerMaterias();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al actualizar lista de Materia!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LblNumeroCurso_Click(object sender, EventArgs e)
@@ -83,25 +111,46 @@ namespace InterfazInscripcion
 
         private void FrmMateria_Load(object sender, EventArgs e)
         {
-            ActualizarListaMateria();
-            cboProfesor.DataSource = Profesor.ObtenerProfesores();
-            cboProfesor.SelectedItem = null;
-            BloquearFormulario();
+            try
+            {
+                ActualizarListaMateria();
+                cboProfesor.DataSource = Profesor.ObtenerProfesores();
+                cboProfesor.SelectedItem = null;
+                BloquearFormulario();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al cargar el formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            modo = "AGREGAR";
-            LimpiarFormulario();
-            DesbloquearFormulario();
-            txtNombreM.Focus();
+            try
+            {
+                modo = "AGREGAR";
+                LimpiarFormulario();
+                DesbloquearFormulario();
+                txtNombreM.Focus();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al agregar Materia!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            modo = "EDITAR";
-            DesbloquearFormulario();
-            txtNombreM.Focus();
+            try
+            {
+                modo = "EDITAR";
+                DesbloquearFormulario();
+                txtNombreM.Focus();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al editar Materia!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -118,79 +167,142 @@ namespace InterfazInscripcion
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
-            if (lstMateria.SelectedItems.Count > 0)
+            try
             {
-                Materia materia = (Materia)lstMateria.SelectedItem;
-                Materia.listaMateria.Remove(materia);
-                ActualizarListaMateria();
-                LimpiarFormulario();
+                if (lstMateria.SelectedItems.Count > 0)
+                {
+                    Materia materia = (Materia)lstMateria.SelectedItem;
+                    Materia.listaMateria.Remove(materia);
+                    ActualizarListaMateria();
+                    LimpiarFormulario();
+                }
+                else
+                {
+                    MessageBox.Show("Favor seleccionar de la lista para eliminar");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Favor seleccionar de la lista para eliminar");
+                MessageBox.Show("Atencion", "Error al eliminar Materia!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            var m = ObtenerDatosFormulario();
-
-            if (modo == "AGREGAR")
+            try
             {
-                Materia.AgregarMateria(m);
-            }
-            else if (modo == "EDITAR")
-            {
-
-                if (this.lstMateria.SelectedItems.Count == 0)
+                if (ValidarDatos())
                 {
-                    MessageBox.Show("Favor seleccione una fila");
-                }
+                    var m = ObtenerDatosFormulario();
 
-                else
-                {
-                    int indice = lstMateria.SelectedIndex;
-                    Materia.EditarMateria(m, indice);
+                    if (modo == "AGREGAR")
+                    {
+                        Materia.AgregarMateria(m);
+                    }
+                    else if (modo == "EDITAR")
+                    {
+
+                        if (this.lstMateria.SelectedItems.Count == 0)
+                        {
+                            MessageBox.Show("Favor seleccione una fila");
+                        }
+
+                        else
+                        {
+                            int indice = lstMateria.SelectedIndex;
+                            Materia.EditarMateria(m, indice);
+                            ActualizarListaMateria();
+                        }
+
+
+                    }
+
+                    LimpiarFormulario();
                     ActualizarListaMateria();
+                    BloquearFormulario();
                 }
-
-
             }
-
-            LimpiarFormulario();
-            ActualizarListaMateria();
-            BloquearFormulario();
+            catch (Exception)
+            {
+                MessageBox.Show("No se pudo guardar!");
+            }
         }
         private Materia ObtenerDatosFormulario()
         {
-            Materia materia= new Materia();
+            try
+            {
+                Materia materia = new Materia();
 
-            materia.Descripcion = txtNombreM.Text;
-            materia.Profesor = (Profesor)cboProfesor.SelectedItem;
-            materia.creditosClases =(int) nudCreditoClase.Value;
-            materia.creditosPractica = (int)nudCreditoParcial.Value;
-            
+                materia.Descripcion = txtNombreM.Text;
+                materia.Profesor = (Profesor)cboProfesor.SelectedItem;
+                materia.creditosClases = (int)nudCreditoClase.Value;
+                materia.creditosPractica = (int)nudCreditoParcial.Value;
 
-            return materia;
 
+                return materia;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "No se pudo obtener los datos del formulario!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         private void LstMateria_Click(object sender, EventArgs e)
         {
-            Materia materia = (Materia)lstMateria.SelectedItem;
-            if (materia != null)
+            try
             {
-                txtNombreM.Text = materia.Descripcion;
-                cboProfesor.SelectedItem = materia.Profesor;
-                nudCreditoClase.Value = materia.creditosClases;
-                nudCreditoParcial.Value = materia.creditosPractica;
+                Materia materia = (Materia)lstMateria.SelectedItem;
+                if (materia != null)
+                {
+                    txtNombreM.Text = materia.Descripcion;
+                    cboProfesor.SelectedItem = materia.Profesor;
+                    nudCreditoClase.Value = materia.creditosClases;
+                    nudCreditoParcial.Value = materia.creditosPractica;
+                }
+
+
             }
-
-
-
-
-
+            catch (Exception)
+            {
+                MessageBox.Show("Atencion", "Error al obtener Materia!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-    }
-}
+        }
+            private bool ValidarDatos()
+            {
+                try
+                {
+                    if (String.IsNullOrWhiteSpace(txtNombreM.Text))
+                    {
+                        MessageBox.Show("El nombre no puede estar vacío", "Error");
+                        txtNombreM.Focus();
+                        return false;
+                    }
+                if (cboProfesor.SelectedItem == null)
+                {
+                    MessageBox.Show("Por favor seleccione una profesor", "Error");
+                    cboProfesor.Focus();
+                    return false;
+                }
+                if (nudCreditoClase.Value==0)
+                {
+                    MessageBox.Show(" credito de clase no puede estar vacío", "Error");
+                    txtNombreM.Focus();
+                    return false;
+                }
+                if (nudCreditoParcial.Value == 0)
+                {
+                    MessageBox.Show(" credito de parcial no puede estar vacío", "Error");
+                    txtNombreM.Focus();
+                    return false;
+                }
+                return true;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Atencion", "Error al validar datos!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+    } 

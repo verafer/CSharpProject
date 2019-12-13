@@ -379,7 +379,9 @@
             this.Controls.Add(this.txtApellido);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtNroDocumento);
+            this.MaximizeBox = false;
             this.Name = "frmProfesor";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profesor";
             this.Load += new System.EventHandler(this.frmProfesor_Load);
             this.groupBox1.ResumeLayout(false);
